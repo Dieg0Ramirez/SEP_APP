@@ -25,59 +25,41 @@
                 <!-- /.box-body -->
 
                 <div class=" box-footer ">
-                    <button type="submit " class="btn btn-success ">Guardar</button>
+                    <button type="submit " class="btn btn-success ">Crear</button>
                 </div>
             </form>
         </div>
 
-        <div class="box ">
-            <div class="box-header ">
-                <h3 class="box-title ">Listado de Programas de formación</h3>
-
-                <!--Buscador-->
-                <div class="box-tools ">
-                    <div class="input-group input-group-sm " style="width: 150px; ">
-                        <input type="text " name="table_searchProgramas" class="form-control pull-right " placeholder="Buscar programa ">
-
-                        <div class="input-group-btn ">
-                            <button type="submit " class="btn btn-default ">
-                                <i class="fa fa-search "></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body table-responsive no-padding ">
-                <table class="table table-hover ">
-                    <thead>
-                        <tr>
-                            <th>Nombre del Programa</th>
-                            <th>Nivel de Formación</th>
-                            <th>Editar</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let programa of listPrograma">
-                            <td>{{programa.nombrePrograma}}</td>
-                            <td>{{programa.nivelFormacion}}</td>
-                            <td>
-                                <button class="btn btn-primary " (click)="updatePrograma(programa)">
-                                    Editar
-                                </button>
-                            </td>
-                            <td>
-                                <button class="btn btn-basic " (click)="estadoPrograma(programa)">
-                                    Inactivar
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
+        <div class="container">
+                <h1>Listado de Cadenas</h1>
+    
+                <table class="table table-hover" cellspacing="0">
+                        <thead>
+                                <tr>
+                                    <th>Nombre del Programa</th>
+                                    <th>Nivel de Formación</th>
+                                    <th>Editar</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let programa of listPrograma">
+                                    <td>{{programa.nombrePrograma}}</td>
+                                    <td>{{programa.nivelFormacion}}</td>
+                                    <td>
+                                        <button class="btn btn-primary " (click)="updatePrograma(programa)">
+                                            Editar
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-basic " (click)="estadoPrograma(programa)">
+                                            Inactivar
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
                 </table>
             </div>
-            <!-- /.box-body -->
-        </div>
     </section>
 
 </div>

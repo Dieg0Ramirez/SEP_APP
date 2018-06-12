@@ -11,6 +11,7 @@ import { CreacionEstadoComponent } from './components/admin/pages/admin-creacion
 import { AdminRegistrarUsuarioComponent } from './components/admin/pages/admin-registrar-usuario/admin-registrar-usuario.component';
 import { LoginGuardGuard } from './services/services.index';
 import { AdminTipoDocumentoComponent } from './components/admin/pages/admin-tipo-documento/admin-tipo-documento.component';
+import { AdminActualizarComponent } from './components/admin/pages/admin-actualizar/admin-actualizar.component';
 const routes: Routes = [
   {
     path: '',
@@ -55,6 +56,10 @@ const routes: Routes = [
       {
         path: 'admin-documentos',
         component: AdminTipoDocumentoComponent
+      },
+      {
+        path: 'admin-actualizar',
+        component: AdminActualizarComponent
       }
     ]
   },

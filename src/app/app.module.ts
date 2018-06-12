@@ -22,6 +22,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ServicesModule } from './services/services.module';
 import { AdminTipoDocumentoComponent } from './components/admin/pages/admin-tipo-documento/admin-tipo-documento.component';
+import { AdminActualizarComponent } from './components/admin/pages/admin-actualizar/admin-actualizar.component';
+
 
 
 
@@ -41,7 +43,8 @@ import { AdminTipoDocumentoComponent } from './components/admin/pages/admin-tipo
     CadenasComponent,
     AdminRegistrarUsuarioComponent,
     LoginComponent,
-    AdminTipoDocumentoComponent
+    AdminTipoDocumentoComponent,
+    AdminActualizarComponent
   ],
   imports: [
     BrowserModule,

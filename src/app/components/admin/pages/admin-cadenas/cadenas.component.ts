@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { CadenaService } from '../../../../services/services.index';
 
 declare var AdminLTE: any;
 
@@ -8,7 +10,6 @@ declare var AdminLTE: any;
   styleUrls: ['./cadenas.component.css']
 })
 export class CadenasComponent implements OnInit {
-  listCadena = [];
 
   constructor() { }
 

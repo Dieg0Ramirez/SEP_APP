@@ -65,7 +65,7 @@ export class UsuarioService {
   }
   crearUsuario( usuario: Usuario) {
     let url = URL_API + '/usuario';
-    url += '/?token=' + this.token;
+    //url += '/?token=' + this.token;
     return this.http.post(url , usuario).pipe(
       map((resp: any) => {
       swal('Usuario creado', usuario.email, 'success' );
