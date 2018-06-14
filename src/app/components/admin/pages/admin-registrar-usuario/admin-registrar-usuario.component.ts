@@ -50,6 +50,7 @@ export class AdminRegistrarUsuarioComponent implements OnInit {
       email: new FormControl(null , [Validators.required , Validators.email]),
       password: new FormControl(null , Validators.required),
       password2: new FormControl(null , Validators.required),
+      rol: new FormControl(null),
       condiciones: new FormControl( false )
     }, { validators: this.sonIguales('password', 'password2') }  );
   }
@@ -69,7 +70,8 @@ export class AdminRegistrarUsuarioComponent implements OnInit {
     const usuario = new Usuario(
       this.forma.value.nombre,
       this.forma.value.email,
-      this.forma.value.password
+      this.forma.value.password,
+      this.forma.value.rol
     );
 
     this._usuarioServices.crearUsuario( usuario )
@@ -81,7 +83,8 @@ export class AdminRegistrarUsuarioComponent implements OnInit {
     const usuario = new Usuario(
       this.forma.value.nombre,
       this.forma.value.email,
-      this.forma.value.password
+      this.forma.value.password,
+      this.forma.value.rol
     );
 
     this._usuarioServices.crearUsuario( usuario )
