@@ -12,6 +12,7 @@ import { AdminRegistrarUsuarioComponent } from './components/admin/pages/admin-r
 import { LoginGuardGuard } from './services/services.index';
 import { AdminTipoDocumentoComponent } from './components/admin/pages/admin-tipo-documento/admin-tipo-documento.component';
 import { AdminActualizarComponent } from './components/admin/pages/admin-actualizar/admin-actualizar.component';
+import { AdminDatatablesComponent } from './components/admin/pages/admin-datatables/admin-datatables.component';
 const routes: Routes = [
   {
     path: '',
@@ -60,7 +61,12 @@ const routes: Routes = [
       {
         path: 'admin-actualizar',
         component: AdminActualizarComponent
+      },
+      {
+        path: 'admin-usuarios',
+        component: AdminDatatablesComponent
       }
+
     ]
   },
   { path: 'login', component: LoginComponent },

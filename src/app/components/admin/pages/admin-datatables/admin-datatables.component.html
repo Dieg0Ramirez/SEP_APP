@@ -1,0 +1,31 @@
+<div class="content-wrapper">
+    <section class="content">
+
+        <div class="container">
+            <h1>Clients list</h1>
+
+            <table class="table table-hover" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Rol</th>
+                        <th>Contraseña</th>
+                        <th>usuario</th>
+                        <th>email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let usuario of usuarios">
+                        <td>{{usuario.nombre}}</td>
+                        <td>{{usuario.apellido}}</td>
+                        <td>{{usuario.rol}}</td>
+                        <td>{{usuario.contrasena}}</td>
+                        <td>{{usuario.usuario}}</td>
+                        <td>{{usuario.email}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
