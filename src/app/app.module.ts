@@ -53,7 +53,6 @@ import { AdminDatatablesComponent } from './components/admin/pages/admin-datatab
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    // PagesModule,
     FormsModule,
     ServicesModule
 

@@ -62,7 +62,7 @@ export class AdminRegistrarUsuarioComponent implements OnInit {
     }
 
     if ( !this.forma.value.condiciones ) {
-      swal('Importante', 'Debe de aceptar las condiciones', 'warning');
+      swal('Importante', 'Debe de aceptar las terminos', 'warning');
       return;
     }
 
