@@ -19,17 +19,11 @@ declare var AdminLTE: any;
 export class AdminRegistrarUsuarioComponent implements OnInit {
 
   forma: FormGroup;
-  usuario: Usuario[] = [];
 
   constructor(
     public _usuarioServices: UsuarioService,
     public router: Router
   ) { }
-
-  cargarUsuarios() {
-
-  }
-
   sonIguales( campo1: string, campo2: string) {
 
     return (group: FormGroup ) => {
@@ -56,7 +50,6 @@ export class AdminRegistrarUsuarioComponent implements OnInit {
       email: new FormControl(null , [Validators.required , Validators.email]),
       password: new FormControl(null , Validators.required),
       password2: new FormControl(null , Validators.required),
-      rol: new FormControl(null, Validators.required),
       condiciones: new FormControl( false )
     }, { validators: this.sonIguales('password', 'password2') }  );
   }
@@ -68,7 +61,7 @@ export class AdminRegistrarUsuarioComponent implements OnInit {
     }
 
     if ( !this.forma.value.condiciones ) {
-      swal('Importante', 'Debe de aceptar los terminos para continuar', 'warning');
+      swal('Importante', 'Debe de aceptar las condiciones', 'warning');
       return;
     }
 
@@ -76,10 +69,9 @@ export class AdminRegistrarUsuarioComponent implements OnInit {
     const usuario = new Usuario(
       this.forma.value.nombre,
       this.forma.value.email,
-      this.forma.value.password,
-      this.forma.value.rol
+      this.forma.value.password
     );
-    console.log(usuario);
+
     this._usuarioServices.crearUsuario( usuario )
               .subscribe( resp => this.router.navigate(['/dashboard']) );
   }
@@ -89,8 +81,7 @@ export class AdminRegistrarUsuarioComponent implements OnInit {
     const usuario = new Usuario(
       this.forma.value.nombre,
       this.forma.value.email,
-      this.forma.value.password,
-      this.forma.value.rol
+      this.forma.value.password
     );
 
     this._usuarioServices.crearUsuario( usuario )

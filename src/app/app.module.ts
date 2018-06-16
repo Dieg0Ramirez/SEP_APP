@@ -23,7 +23,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { ServicesModule } from './services/services.module';
 import { AdminTipoDocumentoComponent } from './components/admin/pages/admin-tipo-documento/admin-tipo-documento.component';
 import { AdminActualizarComponent } from './components/admin/pages/admin-actualizar/admin-actualizar.component';
-import { AdminDatatablesComponent } from './components/admin/pages/admin-datatables/admin-datatables.component';
+import { AdminAprendicesComponent } from './components/admin/pages/admin-aprendices/admin-aprendices.component';
+import { AdminSeguimientoComponent } from './components/admin/pages/admin-seguimiento/admin-seguimiento.component';
+import { AdmiNivelFormacionComponent } from './components/admin/pages/admi-nivel-formacion/admi-nivel-formacion.component';
 
 
 
@@ -46,7 +48,9 @@ import { AdminDatatablesComponent } from './components/admin/pages/admin-datatab
     LoginComponent,
     AdminTipoDocumentoComponent,
     AdminActualizarComponent,
-    AdminDatatablesComponent
+    AdminAprendicesComponent,
+    AdminSeguimientoComponent,
+    AdmiNivelFormacionComponent
   ],
   imports: [
     BrowserModule,

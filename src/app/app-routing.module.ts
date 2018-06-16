@@ -7,12 +7,13 @@ import { AdminProgramsComponent } from './components/admin/pages/admin-programs/
 import { LoginComponent } from './components/login/login.component';
 import { CadenasComponent } from './components/admin/pages/admin-cadenas/cadenas.component';
 import { CreacionEstadoComponent } from './components/admin/pages/admin-creacion-estado/creacion-estado.component';
-// import { AdminRegistrarComponent} from './components/admin/pages/admin-registrar/admin-registrar.component';
 import { AdminRegistrarUsuarioComponent } from './components/admin/pages/admin-registrar-usuario/admin-registrar-usuario.component';
 import { LoginGuardGuard } from './services/services.index';
 import { AdminTipoDocumentoComponent } from './components/admin/pages/admin-tipo-documento/admin-tipo-documento.component';
 import { AdminActualizarComponent } from './components/admin/pages/admin-actualizar/admin-actualizar.component';
-import { AdminDatatablesComponent } from './components/admin/pages/admin-datatables/admin-datatables.component';
+import { AdminAprendicesComponent } from './components/admin/pages/admin-aprendices/admin-aprendices.component';
+import { AdminSeguimientoComponent } from './components/admin/pages/admin-seguimiento/admin-seguimiento.component';
+import { AdmiNivelFormacionComponent } from './components/admin/pages/admi-nivel-formacion/admi-nivel-formacion.component';
 const routes: Routes = [
   {
     path: '',
@@ -61,12 +62,20 @@ const routes: Routes = [
       {
         path: 'admin-actualizar',
         component: AdminActualizarComponent
+      }
+      ,
+      {
+        path: 'admin-aprendices',
+        component: AdminAprendicesComponent
       },
       {
-        path: 'admin-usuarios',
-        component: AdminDatatablesComponent
+        path: 'admin-seguimiento',
+        component: AdminSeguimientoComponent
+      },
+      {
+        path: 'admin-nivelFormacion',
+        component: AdmiNivelFormacionComponent
       }
-
     ]
   },
   { path: 'login', component: LoginComponent },
