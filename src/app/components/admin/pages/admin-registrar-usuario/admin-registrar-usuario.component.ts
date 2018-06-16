@@ -19,11 +19,16 @@ declare var AdminLTE: any;
 export class AdminRegistrarUsuarioComponent implements OnInit {
 
   forma: FormGroup;
+  usuario: Usuario[] = [];
 
   constructor(
     public _usuarioServices: UsuarioService,
     public router: Router
   ) { }
+
+  cargarUsuarios() {
+
+  }
 
   sonIguales( campo1: string, campo2: string) {
 
