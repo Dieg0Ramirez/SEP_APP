@@ -63,6 +63,7 @@ export class UsuarioService {
               return true;
               }));
   }
+
   crearUsuario( usuario: Usuario) {
     let url = URL_API + '/usuario';
     url += '/?token=' + this.token;
@@ -72,6 +73,7 @@ export class UsuarioService {
       return resp.Usuario;
     }));
   }
+
   actualizarUsuario( usuario: Usuario ) {
     let url = URL_API + '/usuario' + usuario._id;
     url += '?token=' + this.token;
