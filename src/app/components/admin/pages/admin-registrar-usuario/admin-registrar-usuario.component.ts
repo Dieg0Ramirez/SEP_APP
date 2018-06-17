@@ -19,11 +19,38 @@ declare var AdminLTE: any;
 export class AdminRegistrarUsuarioComponent implements OnInit {
 
   forma: FormGroup;
+  usuario: Usuario[] = [];
+  desde = 0;
 
   constructor(
     public _usuarioServices: UsuarioService,
     public router: Router
   ) { }
+
+  ngOnInit() {
+    AdminLTE.init();
+
+    this.cargarUsuarios();
+
+    this.forma = new FormGroup({
+      nombre: new FormControl(null , Validators.required ),
+      email: new FormControl(null , [Validators.required , Validators.email]),
+      password: new FormControl(null , Validators.required),
+      password2: new FormControl(null , Validators.required),
+      rol: new FormControl(null, Validators.required),
+      condiciones: new FormControl( false )
+    }, { validators: this.sonIguales('password', 'password2') }  );
+  }
+
+  cargarUsuarios() {
+    this._usuarioServices.listarUsuario(this.desde).subscribe((res: any) => {
+
+      console.log(res);
+      this.usuario = res.usuarios;
+
+    });
+  }
+
   sonIguales( campo1: string, campo2: string) {
 
     return (group: FormGroup ) => {
@@ -42,17 +69,6 @@ export class AdminRegistrarUsuarioComponent implements OnInit {
     };
   }
 
-  ngOnInit() {
-    AdminLTE.init();
-
-    this.forma = new FormGroup({
-      nombre: new FormControl(null , Validators.required ),
-      email: new FormControl(null , [Validators.required , Validators.email]),
-      password: new FormControl(null , Validators.required),
-      password2: new FormControl(null , Validators.required),
-      condiciones: new FormControl( false )
-    }, { validators: this.sonIguales('password', 'password2') }  );
-  }
 
   registrarUsuario() {
 
