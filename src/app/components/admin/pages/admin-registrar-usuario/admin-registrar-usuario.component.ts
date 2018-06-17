@@ -21,6 +21,7 @@ export class AdminRegistrarUsuarioComponent implements OnInit {
   forma: FormGroup;
   usuario: Usuario[] = [];
   desde = 0;
+  totalUsuarios = 0;
 
   constructor(
     public _usuarioServices: UsuarioService,
@@ -46,9 +47,25 @@ export class AdminRegistrarUsuarioComponent implements OnInit {
     this._usuarioServices.listarUsuario(this.desde).subscribe((res: any) => {
 
       console.log(res);
+      this.totalUsuarios = res.total;
       this.usuario = res.usuarios;
 
     });
+  }
+
+  cambiarDesde(valor: number) {
+
+    let desd = 0;
+    desd = this.desde + valor;
+    if ( desd >= this.totalUsuarios ) {
+      return;
+    }
+    if ( desd < 0 ) {
+      return;
+    }
+    this.desde += valor;
+    this.cargarUsuarios();
+
   }
 
   sonIguales( campo1: string, campo2: string) {

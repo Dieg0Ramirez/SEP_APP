@@ -83,9 +83,10 @@ export class UsuarioService {
       return resp.Usuario;
       }));
   }
-  listarUsuario() {
-  let url = URL_API + '/usuario';
-  url += '?token=' + this.token;
+
+  listarUsuario(desde: number) {
+  let url = URL_API + '/usuario?desde=' + desde;
+  url += '&token=' + this.token;
   return this.http.get(url);
 
   }
