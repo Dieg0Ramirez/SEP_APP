@@ -1,5 +1,8 @@
 <div class="content-wrapper">
     <section class="content">
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.17/css/jquery.dataTables.css">
+  
+            <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.17/js/jquery.dataTables.js"></script>
 
         <div class="box box-primary">
             <div class="box-header with-border">
@@ -9,6 +12,9 @@
             <!-- form start -->
             <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registarCadena()" class="form-horizontal form-material" id="loginform" action="index.html">
                 <div class="box-body">
+                    <label for="">
+                        <h4> Crear cadena </h4>
+                    </label>
                     <div class="form-group">
                         <label>Ingrese nombre de la cadena:</label>
                         <input formControlName="nombrecadena" name="nombrecadena" type="text" class="form-control" id="nombrecadena" style="width: 350px" required>
@@ -22,5 +28,34 @@
             </form>
         </div>
 
+<<<<<<< HEAD
+=======
+        <div class="container">
+            <h1>Lista de cadenas</h1>
+            <table id="table_id" class="display">
+                <thead>
+                    <tr>
+                        <th>Nombre de la cadena</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- *ngFor="let cadena of listCadena"-->
+                    <tr>
+                        <td>cadena.nombreCadena</td>
+                        <td>
+                            <button class="btn btn-primary " (click)="updateCadena(cadena)">
+                                Editar
+                            </button>
+                            <button style="margin-left: 20px;" class="btn btn-basic" (click)="estadoCadena(cadena)">
+                                Inactivar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+>>>>>>> 1dadde60fa582b72b7777744b09c803fc441cc33
     </section>
 </div>
