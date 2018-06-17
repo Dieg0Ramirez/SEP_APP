@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const usuario = new Usuario( null, forma.value.email, forma.value.password );
+    const usuario = new Usuario( null, forma.value.email, forma.value.password);
     this._usuarioServices.login( usuario )
                   .subscribe(resp => this.router.navigate(['/admin']));
 
