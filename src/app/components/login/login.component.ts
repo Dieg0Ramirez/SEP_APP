@@ -44,14 +44,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       return;
     }
 
-<<<<<<< HEAD
     const usuario = new Usuario( null, forma.value.email, forma.value.password);
-=======
-    const usuario = new Usuario( null, forma.value.email, forma.value.password );
->>>>>>> 1dadde60fa582b72b7777744b09c803fc441cc33
     this._usuarioServices.login( usuario )
                   .subscribe(resp => this.router.navigate(['/admin']));
 
   }
-
 }
+

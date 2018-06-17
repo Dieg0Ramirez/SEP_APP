@@ -6,8 +6,7 @@
                 <h3 class="box-title">Usuarios</h3>
             </div>
 
-            <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registrarUsuario()" class="form-horizontal form-material" id="loginform"
-                action="index.html">
+            <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registrarUsuario()" class="form-horizontal form-material" id="loginform" action="index.html">
                 <div class="row" style="margin-left: 20px">
                     <h4 class="box-title m-t-40 m-b-0">Crear usuario</h4>
                     <br>
@@ -45,19 +44,12 @@
                     </div>
                 </div>
 
-<<<<<<< HEAD
-                    <div class="form-group" *ngIf="forma.errors?.sonIguales  && !forma.pristine">
-                        <p class="text-danger">
-                            Las contraseñas deben de ser iguales
-                        </p>
-                    </div>
-=======
-                <div class="form-group" style="margin-left: 20px" *ngIf="forma.errors?.sonIguales && !forma.pristine">
+                <div class="form-group" *ngIf="forma.errors?.sonIguales  && !forma.pristine">
                     <p class="text-danger">
-                        Las contraseñas deben de se iguales
+                        Las contraseñas deben de ser iguales
                     </p>
                 </div>
->>>>>>> 1dadde60fa582b72b7777744b09c803fc441cc33
+
 
 
                 <div class="row" style="margin-left: 30px">
