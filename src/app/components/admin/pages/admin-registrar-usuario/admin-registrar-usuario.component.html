@@ -76,9 +76,20 @@
 
         </div>
 
+        <br>
         <h1>Usuarios</h1>
         <div class="box">
             <div class="box-header">
+                <label>Busqueda de usuarios</label>
+                <br>
+                <div class="input-group">
+                    <input #input (keyup)="buscarUsuario(input.value)" type="text" class="form-control" placeholder="buscar usuarios">
+                    <span class="input-group-addon">
+                        <i class="fa fa-search"></i>
+                    </span>
+                </div>
+
+                <br>
                 <h3 class="box-title">Total usuarios registrados {{totalUsuarios}}</h3>
             </div>
 

@@ -91,6 +91,10 @@ export class UsuarioService {
 
   }
 
+  buscarUsuarios(termino: string) {
+
+  }
+
 }
 
 
