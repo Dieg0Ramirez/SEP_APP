@@ -102,7 +102,8 @@ export class AdminRegistrarUsuarioComponent implements OnInit {
     const usuario = new Usuario(
       this.forma.value.nombre,
       this.forma.value.email,
-      this.forma.value.password
+      this.forma.value.password,
+      this.forma.value.rol
     );
 
     this._usuarioServices.crearUsuario( usuario )
@@ -114,11 +115,16 @@ export class AdminRegistrarUsuarioComponent implements OnInit {
     const usuario = new Usuario(
       this.forma.value.nombre,
       this.forma.value.email,
-      this.forma.value.password
+      this.forma.value.password,
+      this.forma.value.rol
     );
 
     this._usuarioServices.crearUsuario( usuario )
               .subscribe( resp => this.router.navigate(['/dashboard']) );
+  }
+
+  buscarUsuario(termino: string) {
+    console.log(termino);
   }
 }
 
