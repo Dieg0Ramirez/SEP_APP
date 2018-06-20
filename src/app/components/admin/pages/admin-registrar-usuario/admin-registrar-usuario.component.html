@@ -81,7 +81,7 @@
 
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Listado de personas</h3>
+                <h3 class="box-title">Listado de usuarios</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -92,6 +92,7 @@
                             <th>Nombre</th>
                             <th>Correo</th>
                             <th>Rol</th>
+                            <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -99,6 +100,19 @@
                             <td>{{ usuario.nombre }}</td>
                             <td>{{ usuario.email }}</td>
                             <td>{{ usuario.rol }}</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                            <button type="button" class="btn btn-info btn-block">Editar</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                            <button type="button" class="btn btn-default btn-block">Actival-Inactivar</button>
+                                    </div>
+                                </div>
+                                
+                            
+                                
+                            </td>
                         </tr>
                     </tbody>
                 </table>
