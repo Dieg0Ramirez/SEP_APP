@@ -4,13 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { URL_API } from '../../config/config';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { DataTablesResponse } from '../../models/tablaModels';
 
-class DataTablesResponse {
-  data: any[];
-  draw: number;
-  recordsFiltered: number;
-  recordsTotal: number;
-}
 
 @Injectable({
   providedIn: 'root'

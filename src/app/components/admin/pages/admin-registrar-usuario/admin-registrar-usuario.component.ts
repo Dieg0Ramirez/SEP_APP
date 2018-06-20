@@ -28,9 +28,6 @@ export class AdminRegistrarUsuarioComponent implements OnInit, OnDestroy {
 
   dtTrigger: Subject<any> = new Subject();
 
-  desde = 0;
-  totalUsuarios = 0;
-
   constructor(
     public _usuarioServices: UsuarioService,
     public router: Router
@@ -81,7 +78,6 @@ export class AdminRegistrarUsuarioComponent implements OnInit, OnDestroy {
     this._usuarioServices.listarUsuario().subscribe((res: any) => {
 
       console.log(res);
-      this.totalUsuarios = res.total;
       this.usuario = res.usuarios;
 
     });
