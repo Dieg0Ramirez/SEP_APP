@@ -75,31 +75,43 @@
                 clear: both;">
 
             <div class="box-header">
-                <h3 class="box-title">Listado de personas</h3>
+                <h3 class="box-title">Listado de usuarios</h3>
             </div>
-            <table class="table table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Correo</th>
-                        <th>Rol</th>
-                        <th>Disponibilidad</th>
-                        <th>Opciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let usuario of usuario">
-                        <td>{{ usuario.nombre }}</td>
-                        <td>{{ usuario.email }}</td>
-                        <td>{{ usuario.rol }}</td>
-                        <td>
-                            <label *ngIf="usuario.disponible" class="label label-info">Activado</label>
-                            <label *ngIf="!usuario.disponible" class="label label-danger">Desactivado</label>
-                        </td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+                <table class="table table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Rol</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let usuario of usuario">
+                            <td>{{ usuario.nombre }}</td>
+                            <td>{{ usuario.email }}</td>
+                            <td>{{ usuario.rol }}</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-info btn-block">Editar</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-default btn-block">Actival-Inactivar</button>
+                                    </div>
+                                </div>
+
+
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
         </div>
 
     </section>
