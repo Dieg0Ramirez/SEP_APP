@@ -2,6 +2,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { DataTablesModule } from 'angular-datatables';
 
 import { AppComponent } from './app.component';
 import { AdminComponent } from './components/admin/admin.component';
@@ -58,8 +59,8 @@ import { AdmiNivelFormacionComponent } from './components/admin/pages/admi-nivel
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    ServicesModule
-
+    ServicesModule,
+    DataTablesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

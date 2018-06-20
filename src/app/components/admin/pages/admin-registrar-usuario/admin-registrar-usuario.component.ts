@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {FormGroup, FormControl, Validators, FormControlName} from '@angular/forms';
 
+import { Subject } from 'rxjs';
+import { spanish } from '../../../../interfaces/dataTables.es';
 
 import swal from 'sweetalert';
 
 import { UsuarioService } from '../../../../services/services.index';
 import { Usuario } from '../../../../models/usuario.model';
 import { Router } from '@angular/router';
-
 
 declare var AdminLTE: any;
 
@@ -16,10 +17,17 @@ declare var AdminLTE: any;
   templateUrl: './admin-registrar-usuario.component.html',
   styleUrls: ['./admin-registrar-usuario.component.css']
 })
-export class AdminRegistrarUsuarioComponent implements OnInit {
+export class AdminRegistrarUsuarioComponent implements OnInit, OnDestroy {
+
+  dtOptions: any = {};
+
+  dtLanguage: any = spanish;
 
   forma: FormGroup;
   usuario: Usuario[] = [];
+
+  dtTrigger: Subject<any> = new Subject();
+
   desde = 0;
   totalUsuarios = 0;
 
@@ -30,6 +38,32 @@ export class AdminRegistrarUsuarioComponent implements OnInit {
 
   ngOnInit() {
     AdminLTE.init();
+
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10,
+      language: this.dtLanguage,
+      // Declare the use of the extension in the dom parameter
+      dom: 'lfBrtip',
+
+      // Configure the buttons
+      buttons: [
+        { extend: 'colvis', text: 'Ocultar/Mostrar Columnas' },
+        {
+          extend: 'copy', text: 'Copiar al portapapeles'
+        },
+        { extend: 'print', text: 'Imprimir' },
+        { extend: 'excel', text: 'Exportar a Excel' },
+      ]
+    };
+
+    this._usuarioServices.listarUsuario().subscribe(res => {
+
+      console.log(res);
+
+      this.usuario = res.data;
+      this.dtTrigger.next();
+    });
 
     this.cargarUsuarios();
 
@@ -44,28 +78,13 @@ export class AdminRegistrarUsuarioComponent implements OnInit {
   }
 
   cargarUsuarios() {
-    this._usuarioServices.listarUsuario(this.desde).subscribe((res: any) => {
+    this._usuarioServices.listarUsuario().subscribe((res: any) => {
 
       console.log(res);
       this.totalUsuarios = res.total;
       this.usuario = res.usuarios;
 
     });
-  }
-
-  cambiarDesde(valor: number) {
-
-    let desd = 0;
-    desd = this.desde + valor;
-    if ( desd >= this.totalUsuarios ) {
-      return;
-    }
-    if ( desd < 0 ) {
-      return;
-    }
-    this.desde += valor;
-    this.cargarUsuarios();
-
   }
 
   sonIguales( campo1: string, campo2: string) {
@@ -125,6 +144,11 @@ export class AdminRegistrarUsuarioComponent implements OnInit {
 
   buscarUsuario(termino: string) {
     console.log(termino);
+  }
+
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
   }
 }
 

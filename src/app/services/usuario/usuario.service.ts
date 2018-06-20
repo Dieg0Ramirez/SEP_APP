@@ -5,6 +5,13 @@ import { URL_API } from '../../config/config';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
+class DataTablesResponse {
+  data: any[];
+  draw: number;
+  recordsFiltered: number;
+  recordsTotal: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -84,14 +91,11 @@ export class UsuarioService {
       }));
   }
 
-  listarUsuario(desde: number) {
-  let url = URL_API + '/usuario?desde=' + desde;
-  url += '&token=' + this.token;
-  return this.http.get(url);
+  listarUsuario() {
+  let url = URL_API + '/usuario';
+  url += '?token=' + this.token;
 
-  }
-
-  buscarUsuarios(termino: string) {
+  return this.http.get<DataTablesResponse>(url);
 
   }
 
