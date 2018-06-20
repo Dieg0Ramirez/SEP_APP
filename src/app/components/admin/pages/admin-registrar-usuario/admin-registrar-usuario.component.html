@@ -1,8 +1,8 @@
 <!--<section id="wrapper" class="login-register login-sidebar" style="background-image:url(../assets/images/background/login-register.jpg);">-->
 <div class="content-wrapper">
-    <!-- <section class="content">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="card-body">
+    <section class="content">
+        <div class="box">
+            <div class="box-body">
                 <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registrarUsuario()" class="form-horizontal form-material" id="loginform" action="index.html">
                     <h3 class="box-title m-t-40 m-b-0">Registrate <br><small> Crea una cuenta y administra tu perfil</small></h3>
                     <div class="col-md-6">
@@ -74,39 +74,33 @@
                 display: block;
                 clear: both;">
 
-        </div> -->
-
-    <!-- Main content -->
-    <section class="content">
-
-        <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Listado de personas</h3>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-
-                <table class="table table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Correo</th>
-                            <th>Rol</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let usuario of usuario">
-                            <td>{{ usuario.nombre }}</td>
-                            <td>{{ usuario.email }}</td>
-                            <td>{{ usuario.rol }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <!-- /.box-body -->
+            <table class="table table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Rol</th>
+                        <th>Disponibilidad</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let usuario of usuario">
+                        <td>{{ usuario.nombre }}</td>
+                        <td>{{ usuario.email }}</td>
+                        <td>{{ usuario.rol }}</td>
+                        <td>
+                            <label *ngIf="usuario.disponible" class="label label-info">Activado</label>
+                            <label *ngIf="!usuario.disponible" class="label label-danger">Desactivado</label>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-
-
 
     </section>
     <!-- /.content -->
