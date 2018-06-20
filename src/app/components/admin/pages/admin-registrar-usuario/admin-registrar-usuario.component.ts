@@ -134,7 +134,7 @@ export class AdminRegistrarUsuarioComponent implements OnInit, OnDestroy {
       this.forma.value.rol
     );
 
-    this._usuarioServices.crearUsuario( usuario )
+    this._usuarioServices.actualizarUsuario( usuario )
               .subscribe( resp => this.router.navigate(['/dashboard']) );
   }
 
@@ -146,5 +146,6 @@ export class AdminRegistrarUsuarioComponent implements OnInit, OnDestroy {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
   }
+
 }
 
