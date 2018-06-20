@@ -14,6 +14,13 @@ import { AdminActualizarComponent } from './components/admin/pages/admin-actuali
 import { AdminAprendicesComponent } from './components/admin/pages/admin-aprendices/admin-aprendices.component';
 import { AdminSeguimientoComponent } from './components/admin/pages/admin-seguimiento/admin-seguimiento.component';
 import { AdmiNivelFormacionComponent } from './components/admin/pages/admi-nivel-formacion/admi-nivel-formacion.component';
+import { AdminEditarAprendicesComponent } from './components/admin/pages/admin-editar-aprendices/admin-editar-aprendices.component';
+import { AdminFichasComponent } from './components/admin/pages/admin-fichas/admin-fichas.component';
+import { AdminExcelContratosComponent } from './components/admin/pages/admin-excel-contratos/admin-excel-contratos.component';
+// tslint:disable-next-line:max-line-length
+import { AdminExcelJuiciosEvaluativosComponent } from './components/admin/pages/admin-excel-juicios-evaluativos/admin-excel-juicios-evaluativos.component';
+
+
 const routes: Routes = [
   {
     path: '',
@@ -75,6 +82,24 @@ const routes: Routes = [
       {
         path: 'admin-nivelFormacion',
         component: AdmiNivelFormacionComponent
+      },
+      {
+        path: 'admin-editar-aprendices',
+        component: AdminEditarAprendicesComponent
+
+      },
+      {
+        path: 'admin-fichas',
+        component: AdminFichasComponent
+      },
+      {
+        path: 'admin-excel-contratos',
+        component: AdminExcelContratosComponent
+      },
+      {
+        path: 'admin-excel-juicios-evaluativos',
+        component: AdminExcelJuiciosEvaluativosComponent
+
       }
     ]
   },
