@@ -1,74 +1,120 @@
 <div class="content-wrapper">
     <section class="content">
         <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Programas</h3>
+            </div>
             <div class="box-body">
-                <h4> Crear programas </h4>
-                <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registrarPrograms()" class="form-horizontal form-material" id="" action="index.html">
 
-                    <div class="form-group">
-                        <label>Ingrese nombre del programa:</label>
-                        <input formControlName="nombre" name="nombre" type="text" class="form-control" id="nombre" style="width: 350px" required>
+                <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registrarPrograms()" class="form-horizontal form-material" id="loginform" action="index.html">
+                    <div class="box-body">
+                        <label>
+                            <h4> Crear programa </h4>
+                        </label>
+                        <div class="form-group col-md-6">
+                            <label>Ingrese nombre del programa:</label>
+                            <input formControlName="nombre" name="nombre" type="text" class="form-control" id="nombrecadena" style="width: 350px" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Nivel de formación:</label>
+                            <br>
+                            <select style="width: 150px" class="form-control" formControlName="nivelFormacion" name="nivelFormacion" id="nivelFormacion">
+                                <option *ngFor="let nivel of nivelFormacion">
+                                    {{nivel.nombre}}
+                                </option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Nivel de formación:</label>
-                        <br>
-                        <select formControlName="nivelFormacion" name="nivelFormacion" id="nivelFormacion" >
-                            <option *ngFor="let nivel of nivelFormacion">
-                                {{nivel.nombre}}
-                            </option>
-                        </select>
-                    </div>
 
-
-                    <div>
-                        <button type="submit" class="btn btn-success">Crear</button>
+                    <div class=" box-footer ">
+                        <button style="width: 150px" type="submit " class="btn btn-success ">Crear</button>
                     </div>
                 </form>
-
-
-                <h1>Programas</h1>
-                <div>
-                    <h3>Listado de Programas</h3>
-                </div>
-
-                <div>
-
-                    <table class="table table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Nivel de Formación</th>
-                                <th>Disponibilidad</th>
-                                <th>Opciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let pro of programs">
-                                <td>{{ pro.nombre }}</td>
-                                <td>{{ pro.nivelFormacion }}</td>
-                                <td>
-                                    <label *ngIf="pro.disponible" class="label label-info">Activo</label>
-                                    <label *ngIf="!pro.disponible" class="label label-danger">Inactivo</label>
-                                </td>
-
-                                <td>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <button type="button" class="btn btn-info btn-block">Editar</button>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <button type="button" class="btn btn-default btn-block">Activar-Inactivar</button>
-                                        </div>
-                                    </div>
-
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
             </div>
+            <div class="box-header">
+                <h3 class="box-title">Listado de programas</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
 
+                <table class="table table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Nivel de Formación</th>
+                            <th>Disponibilidad</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let pro of programs">
+                            <td>{{ pro.nombre }}</td>
+                            <td>{{ pro.nivelFormacion }}</td>
+                            <td>
+                                <label *ngIf="pro.disponible" class="label label-info">Activo</label>
+                                <label *ngIf="!pro.disponible" class="label label-danger">Inactivo</label>
+                            </td>
+
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#myModal">Editar</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-default btn-block">Activar-Inactivar</button>
+                                    </div>
+                                </div>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Actualizar programa</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="">
+                            <div class="col-xs-12">
+                                <input name="nombre" class="form-control" type="text" required placeholder="nombre">
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-xs-12">
+                                <select name="nivelFormacion" class="form-control" required>
+                                    <option value="nivelFormacion">Tecnico</option>
+                                </select>
+                            </div>
+                            <br>
+                            <br>
+                        </form>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="modal-footer">
+                        <button class="btn btn-info" type="submit">
+                            Actualizar programa
+                        </button>&nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-default " data-dismiss="modal">Cerrar</button>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
     </section>
 
 </div>
