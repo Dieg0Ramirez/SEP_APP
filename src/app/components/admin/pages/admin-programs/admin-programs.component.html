@@ -12,9 +12,9 @@
                     <div class="form-group">
                         <label>Nivel de formación:</label>
                         <br>
-                        <select formControlName="nivelFormacion" name="nivelFormacion" id="nivelFormacion">
-                            <option >
-                                Tecnico
+                        <select formControlName="nivelFormacion" name="nivelFormacion" id="nivelFormacion" >
+                            <option *ngFor="let nivel of nivelFormacion">
+                                {{nivel.nombre}}
                             </option>
                         </select>
                     </div>
@@ -46,7 +46,6 @@
                             <tr *ngFor="let pro of programs">
                                 <td>{{ pro.nombre }}</td>
                                 <td>{{ pro.nivelFormacion }}</td>
-
                                 <td>
                                     <label *ngIf="pro.disponible" class="label label-info">Activo</label>
                                     <label *ngIf="!pro.disponible" class="label label-danger">Inactivo</label>
@@ -55,10 +54,10 @@
                                 <td>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <button type="button" class="btn btn-info ">Editar</button>
+                                            <button type="button" class="btn btn-info btn-block">Editar</button>
                                         </div>
                                         <div class="col-md-6">
-                                            <button type="button" class="btn btn-default ">Activar-Inactivar</button>
+                                            <button type="button" class="btn btn-default btn-block">Activar-Inactivar</button>
                                         </div>
                                     </div>
 
