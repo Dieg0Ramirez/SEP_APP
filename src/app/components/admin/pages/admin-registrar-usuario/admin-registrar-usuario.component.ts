@@ -142,5 +142,6 @@ export class AdminRegistrarUsuarioComponent implements OnInit, OnDestroy {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
   }
+
 }
 
