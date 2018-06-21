@@ -1,32 +1,62 @@
 <div class="content-wrapper">
     <section class="content">
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.17/css/jquery.dataTables.css">
-
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.17/js/jquery.dataTables.js"></script>
-
-        <div class="box box-primary">
-            <div class="box-header with-border">
+        <div class="box">
+            <div class="box-header">
                 <h3 class="box-title">Cadenas</h3>
             </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registarCadena()" class="form-horizontal form-material" id="loginform" action="index.html">
-                <div class="box-body">
-                    <label for="">
+            <div class="box-body">
+
+                <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registarCadena()" class="form-horizontal form-material" id="loginform" action="index.html">
+                    <div class="box-body">
+                        <label for="">
                         <h4> Crear cadena </h4>
                     </label>
-                    <div class="form-group">
-                        <label>Ingrese nombre de la cadena:</label>
-                        <input formControlName="nombrecadena" name="nombrecadena" type="text" class="form-control" id="nombrecadena" style="width: 350px" required>
+                        <div class="form-group">
+                            <label>Ingrese nombre de la cadena:</label>
+                            <input formControlName="nombrecadena" name="nombrecadena" type="text" class="form-control" id="nombrecadena" style="width: 350px" required>
+                        </div>
                     </div>
-                </div>
-                <!-- /.box-body -->
 
-                <div class=" box-footer ">
-                    <button type="submit " class="btn btn-success ">Crear</button>
-                </div>
-            </form>
+                    <div class=" box-footer ">
+                        <button type="submit " class="btn btn-success ">Crear</button>
+                    </div>
+                </form>
+            </div>
+            <div class="box-header">
+                <h3 class="box-title">Listado de cadenas</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+                <table class="table table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Disponibilidad</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let cad of cadena">
+                            <td>{{ cad.nombre }}</td>
+                            <td>
+                                <label *ngIf="cad.disponible" class="label label-info">Activo</label>
+                                <label *ngIf="!cad.disponible" class="label label-danger">Inactivo</label>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-info">Editar</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-default ">Actival-Inactivar</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-
     </section>
 </div>
