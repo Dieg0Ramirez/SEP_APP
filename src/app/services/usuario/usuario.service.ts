@@ -77,7 +77,7 @@ export class UsuarioService {
   }
 
   actualizarUsuario( usuario: Usuario ) {
-    let url = URL_API + '/usuario' + usuario._id;
+    let url = URL_API + '/usuario/' + usuario._id;
     url += '?token=' + this.token;
     return this.http.put(url, usuario ).pipe(
       map((resp: any) => {
