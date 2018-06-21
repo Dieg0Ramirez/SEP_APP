@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormControlName } from '@angular/forms';
-import { ProgramaService } from '../../../../services/services.index';
+import { ProgramaService, NivelFormacionService } from '../../../../services/services.index';
 import { Router } from '@angular/router';
 import { Programs } from '../../../../models/programs.models';
 import { Subject } from 'rxjs';
 import { spanish } from '../../../../interfaces/dataTables.es';
 import { DataTableDirective } from 'angular-datatables';
+import { NivelFormacion } from '../../../../models/nivelFormacion.models';
 
 
 declare var AdminLTE: any;
@@ -24,9 +25,11 @@ export class AdminProgramsComponent implements OnInit, OnDestroy {
   programs: Programs[] = [];
   dtTrigger: Subject<any> = new Subject();
 
+  nivelFormacion: NivelFormacion[] = [];
 
   constructor(
     public _programsServices: ProgramaService,
+    public _nivelFormacionServices: NivelFormacionService,
     public router: Router
   ) { }
 
@@ -51,6 +54,12 @@ export class AdminProgramsComponent implements OnInit, OnDestroy {
       ]
     };
 
+    this._nivelFormacionServices.listarNivelFormacion().subscribe((res: any) => {
+
+      console.log(res);
+      this.nivelFormacion = res.nivelFormacion;
+    });
+
     this.cargarProgramas();
 
     this.forma = new FormGroup({
@@ -69,7 +78,6 @@ export class AdminProgramsComponent implements OnInit, OnDestroy {
   }
 
   registrarPrograms() {
-
     const programs = new Programs(
       this.forma.value.nombre,
       this.forma.value.nivelFormacion
