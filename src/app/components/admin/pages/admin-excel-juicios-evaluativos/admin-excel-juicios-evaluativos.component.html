@@ -1,31 +1,102 @@
 <div class="content-wrapper">
-    <div class="row">
-        <!-- left column -->
-        <div class="col-md-12">
-            <!-- general form elements -->
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Excel de Juicios Evaluativos</h3>
-                </div>
-                <!-- /.box-header -->
-                <!-- form start -->
-                <form role="form">
-                    <div class="box-body">
-
+    <section class="content">
+        <div class="box">
+            <div class="box-body">
+                <h4> Crear programas </h4>
+                <form>
+                    <div class="form-group">
+                        <label>Nivel de formación:</label>
+                        <br>
+                        <select name="nivelFormacion" id="nivelFormacion">
+                            <option *ngFor="let nivel of nivelFormacion">
+                                {{nivel.nombre}}
+                            </option>
+                        </select>
+                        <br>
+                        <br>
                         <div class="form-group">
-
                             <input type="file" id="exampleInputFile">
-
                         </div>
                     </div>
-                    <!-- /.box-body -->
-
-                    <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Subir</button>
+                    <div>
+                        <button type="submit" class="btn btn-success">Crear</button>
                     </div>
                 </form>
             </div>
-
         </div>
-    </div>
+
+
+        <div class="box">
+            <div class="box-body">
+                <h4> Excel sincronizado </h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Ficha de caracterización:</label>
+                        <br>
+                        <label>1320098</label>
+                        <br>
+                        <br>
+                        <label>Fecha de inicio:</label>
+                        <br>
+                        <label>23/01/2017</label>
+                        <br>
+                        <br>
+                        <label>Modalidad:</label>
+                        <br>
+                        <label>Presencial</label>
+                        <br>
+                        <br>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Programas:</label>
+                        <br>
+                        <label>Analisis y desarrollo de sistemas de información</label>
+                        <br>
+                        <br>
+                        <label>Fecha de fin:</label>
+                        <br>
+                        <label>23/01/2019</label>
+                        <br>
+                        <br>
+                        <label>Centro de formación:</label>
+                        <br>
+                        <label>9204 - CTMA</label>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="box-header">
+                <h3 class="box-title">Listado de aprendices</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+                <table class="table table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                    <thead>
+                        <tr>
+                            <th>Tipo de documento</th>
+                            <th>Número de documento</th>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>Estado</th>
+                            <th>Formación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let aprendices of aprendices">
+                            <td>{{ aprendices.tipoDocumento }}</td>
+                            <td>{{ aprendices.numeroDocumento }}</td>
+                            <td>{{ aprendices.nombre }}</td>
+                            <td>{{ aprendices.apellidos }}</td>
+                            <td>{{ aprendices.estado }}</td>
+                            <td>{{ aprendices.nivelFormacion }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+    </section>
 </div>
