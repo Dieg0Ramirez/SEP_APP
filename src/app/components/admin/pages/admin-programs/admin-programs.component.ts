@@ -3,8 +3,10 @@ import { FormGroup, FormControl, Validators, FormControlName } from '@angular/fo
 import { ProgramaService } from '../../../../services/services.index';
 import { Router } from '@angular/router';
 import { Programs } from '../../../../models/programs.models';
+import { Subject } from 'rxjs';
+import { spanish } from '../../../../interfaces/dataTables.es';
 
-import swal from 'sweetalert';
+
 
 declare var AdminLTE: any;
 
@@ -14,11 +16,13 @@ declare var AdminLTE: any;
   styleUrls: ['./admin-programs.component.css']
 })
 export class AdminProgramsComponent implements OnInit {
-  
   forma: FormGroup;
+  dtOptions: any = {};
+
+  dtLanguage: any = spanish;
   programs: Programs[] = [];
-  desde = 0;
-  totalPrograms = 0;
+  dtTrigger: Subject<any> = new Subject();
+
 
   constructor(
     public _programsServices: ProgramaService,
@@ -27,6 +31,32 @@ export class AdminProgramsComponent implements OnInit {
 
   ngOnInit() {
     AdminLTE.init();
+
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10,
+      language: this.dtLanguage,
+      // Declare the use of the extension in the dom parameter
+      dom: 'lfBrtip',
+
+      // Configure the buttons
+      buttons: [
+        { extend: 'colvis', text: 'Ocultar/Mostrar Columnas' },
+        {
+          extend: 'copy', text: 'Copiar al portapapeles'
+        },
+        { extend: 'print', text: 'Imprimir' },
+        { extend: 'excel', text: 'Exportar a Excel' },
+      ]
+    };
+
+    this._programsServices.listarPrograms().subscribe(res => {
+
+      console.log(res);
+
+      this.programs = res.data;
+      this.dtTrigger.next();
+    });
 
     this.cargarProgramas();
 
@@ -37,35 +67,15 @@ export class AdminProgramsComponent implements OnInit {
   }
 
   cargarProgramas() {
-    this._programsServices.listarPrograms(this.desde).subscribe((res: any) => {
+    this._programsServices.listarPrograms().subscribe((res: any) => {
 
       console.log(res);
-      this.totalPrograms = res.total;
       this.programs = res.programas;
 
     });
   }
 
-  cambiarDesde(valor: number) {
-
-    let desd = 0;
-    desd = this.desde + valor;
-    if ( desd >= this.totalPrograms ) {
-      return;
-    }
-    if ( desd < 0 ) {
-      return;
-    }
-    this.desde += valor;
-    this.cargarProgramas();
-
-  }
-
   registrarPrograms() {
-
-    if ( this.forma.invalid ) {
-      return;
-    }
 
     const programs = new Programs(
       this.forma.value.nombre,
@@ -73,7 +83,7 @@ export class AdminProgramsComponent implements OnInit {
     );
 
     this._programsServices.crearPrograms( programs )
-              .subscribe( resp => this.router.navigate(['/']) );
+              .subscribe( resp => this.router.navigate(['/admin/admin-programs']) );
   }
 
 
