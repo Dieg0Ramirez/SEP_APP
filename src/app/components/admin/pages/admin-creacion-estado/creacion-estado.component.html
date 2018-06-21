@@ -1,60 +1,62 @@
 <div class="content-wrapper">
     <section class="content">
-
-
-        <div class="box box-primary">
-            <div class="box-header with-border">
+        <div class="box">
+            <div class="box-header">
                 <h3 class="box-title">Estados</h3>
             </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form role="form">
-                <div class="box-body">
-                        <label for=""> <h4> Crear estados </h4></label>
-                    <div class="form-group">
-                        <label>Ingrese el estado:</label>
-                        <input type="text" class="form-control" id="nombreEstado" style="width: 350px" required>
+            <div class="box-body">
+
+                <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registrarEstado()" class="form-horizontal form-material" id="loginform" action="index.html">
+                    <div class="box-body">
+                        <label for="">
+                                <h4> Crear Estado </h4>
+                            </label>
+                        <div class="form-group">
+                            <label>Ingrese nombre del estado:</label>
+                            <input formControlName="nombreestado" name="nombreestado" type="text" class="form-control" id="nombreestado" style="width: 350px" required>
+                        </div>
                     </div>
-                </div>
-                <!-- /.box-body -->
 
-                <div class=" box-footer ">
-                    <button type="submit " class="btn btn-success ">Crear</button>
-                </div>
-            </form>
-        </div>
+                    <div class=" box-footer ">
+                        <button type="submit " class="btn btn-success ">Crear estado</button>
+                    </div>
+                </form>
+            </div>
+            <div class="box-header">
+                <h3 class="box-title">Lista de estados</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
 
-        <div class="container">
-            <h1>Listado de estados</h1>
-
-            <table class="table table-hover" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Nombre del estado</th>
-                        <th>Opciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!--*ngFor="let estado of listEstado"-->
-                    <tr>
-                        <td>estado.nombreCadena</td>
-                        <td>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <button class="btn btn-primary " (click)="updateCreacionEstado(estado)">
-                                        Editar
-                                    </button>
+                <table class="table table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Disponibilidad</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let est of estado">
+                            <td>{{ est.nombre }}</td>
+                            <td>
+                                <label *ngIf="est.disponible" class="label label-info">Activo</label>
+                                <label *ngIf="!est.disponible" class="label label-danger">Inactivo</label>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-info">Editar</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-default ">Actival-Inactivar</button>
+                                    </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <button class="btn btn-basic " (click)="estadoCreacionEstado(estado)">
-                                        Inactivar
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
 </div>
