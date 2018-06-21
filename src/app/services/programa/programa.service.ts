@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { URL_API } from '../../config/config';
 import { map } from 'rxjs/operators';
+import { UsuarioService } from '../usuario/usuario.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,51 +18,7 @@ export class ProgramaService {
   constructor(
     public http: HttpClient,
     public router: Router
-  ) {
-    this.cargarStorage();
-  }
-
-  estaCreado() {
-    return (this.token.length > 5) ? true : false;
-  }
-
-  cargarStorage() {
-    if (localStorage.getItem('token')) {
-      this.token = localStorage.getItem('token');
-      this.programs = JSON.parse(localStorage.getItem('programs'));
-    } else {
-      this.token = '';
-      this.programs = null;
-    }
-  }
-
-  guardarStorage(id: string, token: string, programs: Programs) {
-    localStorage.setItem('id', id);
-    localStorage.setItem('token', token);
-    localStorage.setItem('programs', JSON.stringify(programs));
-
-    this.programs = programs;
-    this.token = token;
-  }
-
-  logout() {
-    this.programs = null;
-    this.token = '';
-    localStorage.removeItem('token');
-    localStorage.removeItem('programs');
-
-    this.router.navigate(['/login']);
-  }
-
-  login(programs: Programs) {
-
-    const url = URL_API + '/login';
-    return this.http.post(url, programs).pipe(
-      map((resp: any) => {
-        this.guardarStorage(resp.id, resp.token, resp.programs);
-        return true;
-      }));
-  }
+  ) {}
 
   crearPrograms(programs: Programs) {
     let url = URL_API + '/programa';
@@ -82,9 +40,9 @@ export class ProgramaService {
       }));
   }
 
-  listarPrograms(desde: number) {
-    let url = URL_API + '/programa?desde=' + desde;
-    url += '&token=' + this.token;
+  listarPrograms() {
+    let url = URL_API + '/programa';
+    url += '?token=' + this.token;
     return this.http.get(url);
   }
 }

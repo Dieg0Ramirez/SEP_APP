@@ -3,7 +3,8 @@ import { FormGroup, FormControl, Validators, FormControlName } from '@angular/fo
 import { ProgramaService } from '../../../../services/services.index';
 import { Router } from '@angular/router';
 import { Programs } from '../../../../models/programs.models';
-
+import { NivelFormacion } from '../../../../models/nivelFormacion.models';
+import { Nivel } from '../../../../services/nivelFormacion/nivel.service';
 import swal from 'sweetalert';
 
 declare var AdminLTE: any;
@@ -14,19 +15,21 @@ declare var AdminLTE: any;
   styleUrls: ['./admin-programs.component.css']
 })
 export class AdminProgramsComponent implements OnInit {
-  
+
   forma: FormGroup;
   programs: Programs[] = [];
-  desde = 0;
-  totalPrograms = 0;
+  nivelFormacion: NivelFormacion[] = [];
 
   constructor(
+    public _nivelFormacion: Nivel,
     public _programsServices: ProgramaService,
     public router: Router
   ) { }
 
   ngOnInit() {
     AdminLTE.init();
+
+    
 
     this.cargarProgramas();
 
@@ -37,28 +40,20 @@ export class AdminProgramsComponent implements OnInit {
   }
 
   cargarProgramas() {
-    this._programsServices.listarPrograms(this.desde).subscribe((res: any) => {
+    this._programsServices.listarPrograms().subscribe((res: any) => {
 
       console.log(res);
-      this.totalPrograms = res.total;
       this.programs = res.programas;
 
     });
   }
 
-  cambiarDesde(valor: number) {
+  cargarUsuarios() {
+    this._nivelFormacion.listarNiveles().subscribe((res: any) => {
 
-    let desd = 0;
-    desd = this.desde + valor;
-    if ( desd >= this.totalPrograms ) {
-      return;
-    }
-    if ( desd < 0 ) {
-      return;
-    }
-    this.desde += valor;
-    this.cargarProgramas();
+      console.log(res);
 
+    });
   }
 
   registrarPrograms() {
