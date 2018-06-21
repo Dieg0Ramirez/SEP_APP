@@ -59,7 +59,7 @@
                             <div class="form-group row">
                                 <div class="col-md-6">
                                     <div class="checkbox checkbox-primary p-t-0">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input formControlName="condiciones" name="condiciones" id="checkbox-signup" type="checkbox"> Estoy de acuerdo con los <a routerLink="#">términos</a>
+                                        <input formControlName="condiciones" name="condiciones" id="checkbox-signup" type="checkbox"> Estoy de acuerdo con los <a routerLink="#">términos</a>
                                     </div>
                                 </div>
                             </div>
@@ -105,7 +105,7 @@
                             <td>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#myModal">Editar</button>
+                                        <button type="button" class="btn btn-info btn-block" data-toggle="modal" (click)="llenarDatos(usuario)" data-target="#myModal">Editar</button>
                                     </div>
                                     <div class="col-md-6">
                                         <button type="button" class="btn btn-default ">Actival-Inactivar</button>
@@ -134,29 +134,32 @@
                         <h4 class="modal-title">Actualizar usuario</h4>
                     </div>
                     <div class="modal-body">
-                        <form action="">
+                        <form (ngSubmit)="actualizarUsuario($event)" class="form-horizontal form-material" id="loginform1">
+                            <!-- Crear el campo de tipo hidden para almacenar el  id de usuario a actualizar -->
+                            <input [(ngModel)]="_id" name="_id" id="_id" class="form-control" type="hidden">
+
                             <div class="col-xs-12">
-                                <input name="nombre1" class="form-control" type="text" required placeholder="Nombre">
+                                <input [(ngModel)]="nombre" name="nombre" id="nombre" class="form-control" type="text" required placeholder="Nombre">
                             </div>
                             <br>
                             <br>
                             <div class="col-xs-12">
-                                <input name="email1" class="form-control" type="email" required placeholder="Correo">
+                                <input [(ngModel)]="email" name="email" id="email" class="form-control" type="email" required placeholder="Correo">
                             </div>
                             <br>
                             <br>
-                            <div class="col-xs-12">
+                            <!-- <div class="col-xs-12">
                                 <input name="password1" class="form-control" type="password" required placeholder="Contraseña">
                             </div>
                             <br>
                             <br>
                             <div class="col-xs-12">
                                 <input name="passwordRepeat" class="form-control" type="password" required placeholder="Confirme contraseña">
-                            </div>
-                            <br>
-                            <br>
+                            </div> -->
+                            <!-- <br>
+                            <br> -->
                             <div class="col-xs-12">
-                                <select name="rol1" class="form-control" required>
+                                <select [(ngModel)]="rol" name="rol" id="rol" class="form-control" required>
                                     <option value="ROL_SEGUIMIENTO">ROL_SEGUIMIENTO</option>
                                     <option value="ROL_ADMIN">ROL_ADMIN</option>
                                     <option value="ROL_SUPERADMIN">ROL_SUPERADMIN</option>
@@ -167,9 +170,9 @@
                     <br>
                     <br>
                     <div class="modal-footer">
-                        <button class="btn btn-info" type="submit">
+                        <button class="btn btn-info" type="submit" (click)="actualizarUsuario(usuario)">
                             Actualizar usuario
-                        </button>&nbsp;&nbsp;&nbsp;
+                        </button>
                         <button type="button" class="btn btn-default " data-dismiss="modal">Cerrar</button>
                     </div>
 
