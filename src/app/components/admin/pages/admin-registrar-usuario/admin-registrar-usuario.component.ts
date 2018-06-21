@@ -122,7 +122,7 @@ export class AdminRegistrarUsuarioComponent implements OnInit, OnDestroy {
     );
 
     this._usuarioServices.crearUsuario( usuario )
-              .subscribe( resp => this.router.navigate(['/dashboard']) );
+              .subscribe( resp => this.router.navigate(['/admin/admin-registrar']) );
   }
 
   actualizarUsuario() {
@@ -134,12 +134,8 @@ export class AdminRegistrarUsuarioComponent implements OnInit, OnDestroy {
       this.forma.value.rol
     );
 
-    this._usuarioServices.actualizarUsuario( usuario )
-              .subscribe( resp => this.router.navigate(['/dashboard']) );
-  }
-
-  buscarUsuario(termino: string) {
-    console.log(termino);
+    this._usuarioServices.crearUsuario( usuario )
+              .subscribe( resp => this.router.navigate(['/admin/admin-registrar']) );
   }
 
   ngOnDestroy(): void {
