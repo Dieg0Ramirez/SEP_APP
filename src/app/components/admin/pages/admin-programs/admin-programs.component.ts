@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormControlName } from '@angular/forms';
 import { ProgramaService } from '../../../../services/services.index';
 import { Router } from '@angular/router';
 import { Programs } from '../../../../models/programs.models';
 import { Subject } from 'rxjs';
 import { spanish } from '../../../../interfaces/dataTables.es';
-
+import { DataTableDirective } from 'angular-datatables';
 
 
 declare var AdminLTE: any;
@@ -15,7 +15,8 @@ declare var AdminLTE: any;
   templateUrl: './admin-programs.component.html',
   styleUrls: ['./admin-programs.component.css']
 })
-export class AdminProgramsComponent implements OnInit {
+export class AdminProgramsComponent implements OnInit, OnDestroy {
+  @ViewChild (DataTableDirective) dtElement: DataTableDirective;
   forma: FormGroup;
   dtOptions: any = {};
 
@@ -50,14 +51,6 @@ export class AdminProgramsComponent implements OnInit {
       ]
     };
 
-    this._programsServices.listarPrograms().subscribe(res => {
-
-      console.log(res);
-
-      this.programs = res.data;
-      this.dtTrigger.next();
-    });
-
     this.cargarProgramas();
 
     this.forma = new FormGroup({
@@ -71,7 +64,7 @@ export class AdminProgramsComponent implements OnInit {
 
       console.log(res);
       this.programs = res.programas;
-
+      this.dtTrigger.next();
     });
   }
 
@@ -83,8 +76,17 @@ export class AdminProgramsComponent implements OnInit {
     );
 
     this._programsServices.crearPrograms( programs )
-              .subscribe( resp => this.router.navigate(['/admin/admin-programs']) );
+              .subscribe( () => {
+                this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+                  dtInstance.destroy();
+                  this.cargarProgramas();
+                });
+              } );
   }
 
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
+  }
 
 }

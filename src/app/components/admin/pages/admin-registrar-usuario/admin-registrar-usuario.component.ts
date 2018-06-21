@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import {FormGroup, FormControl, Validators, FormControlName} from '@angular/forms';
 
 import { Subject } from 'rxjs';
@@ -9,6 +9,7 @@ import swal from 'sweetalert';
 import { UsuarioService } from '../../../../services/services.index';
 import { Usuario } from '../../../../models/usuario.model';
 import { Router } from '@angular/router';
+import { DataTableDirective } from 'angular-datatables';
 
 declare var AdminLTE: any;
 
@@ -18,7 +19,7 @@ declare var AdminLTE: any;
   styleUrls: ['./admin-registrar-usuario.component.css']
 })
 export class AdminRegistrarUsuarioComponent implements OnInit, OnDestroy {
-
+  @ViewChild (DataTableDirective) dtElement: DataTableDirective;
   dtOptions: any = {};
 
   dtLanguage: any = spanish;
@@ -54,14 +55,6 @@ export class AdminRegistrarUsuarioComponent implements OnInit, OnDestroy {
       ]
     };
 
-    this._usuarioServices.listarUsuario().subscribe(res => {
-
-      console.log(res);
-
-      this.usuario = res.data;
-      this.dtTrigger.next();
-    });
-
     this.cargarUsuarios();
 
     this.forma = new FormGroup({
@@ -79,7 +72,7 @@ export class AdminRegistrarUsuarioComponent implements OnInit, OnDestroy {
 
       console.log(res);
       this.usuario = res.usuarios;
-
+      this.dtTrigger.next();
     });
   }
 
@@ -122,7 +115,12 @@ export class AdminRegistrarUsuarioComponent implements OnInit, OnDestroy {
     );
 
     this._usuarioServices.crearUsuario( usuario )
-              .subscribe( resp => this.router.navigate(['/admin/admin-registrar']) );
+              .subscribe( () => {
+                this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+                  dtInstance.destroy();
+                  this.cargarUsuarios();
+                });
+              } );
   }
 
   actualizarUsuario() {
@@ -134,8 +132,13 @@ export class AdminRegistrarUsuarioComponent implements OnInit, OnDestroy {
       this.forma.value.rol
     );
 
-    this._usuarioServices.crearUsuario( usuario )
-              .subscribe( resp => this.router.navigate(['/admin/admin-registrar']) );
+    this._usuarioServices.actualizarUsuario( usuario )
+              .subscribe( () => {
+                this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+                  dtInstance.destroy();
+                  this.cargarUsuarios();
+                });
+              } );
   }
 
   ngOnDestroy(): void {

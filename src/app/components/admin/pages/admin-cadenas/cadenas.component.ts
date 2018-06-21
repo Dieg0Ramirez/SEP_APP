@@ -1,10 +1,11 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
 import { CadenaService } from '../../../../services/services.index';
 import { Router } from '@angular/router';
 import { Cadena } from '../../../../models/cadena.models';
 import {FormGroup, FormControl, Validators } from '@angular/forms';
 import { spanish } from '../../../../interfaces/dataTables.es';
 import { Subject } from 'rxjs';
+import { DataTableDirective } from 'angular-datatables';
 
 
 declare var AdminLTE: any;
@@ -14,7 +15,8 @@ declare var AdminLTE: any;
   templateUrl: './cadenas.component.html',
   styleUrls: ['./cadenas.component.css']
 })
-export class CadenasComponent implements OnInit {
+export class CadenasComponent implements OnInit, OnDestroy {
+  @ViewChild (DataTableDirective) dtElement: DataTableDirective;
   forma: FormGroup;
   dtOptions: any = {};
 
@@ -49,14 +51,6 @@ export class CadenasComponent implements OnInit {
       ]
     };
 
-    this._cadenaServices.listarCadena().subscribe(res => {
-
-      console.log(res);
-
-      this.cadena = res.data;
-      this.dtTrigger.next();
-    });
-
     this.cargarCadenas();
 
     this.forma = new FormGroup({
@@ -69,7 +63,7 @@ export class CadenasComponent implements OnInit {
 
       console.log(res);
       this.cadena = res.cadenas;
-
+      this.dtTrigger.next();
     });
   }
 
@@ -79,7 +73,12 @@ export class CadenasComponent implements OnInit {
     this.forma.value.nombrecadena
   );
   this._cadenaServices.actualizarCadena(cadena )
-        .subscribe( resp => this.router.navigate(['admin/admin-cadenas']) );
+        .subscribe( () => {
+          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            dtInstance.destroy();
+            this.cargarCadenas();
+          });
+        } );
 
   }
 
@@ -89,8 +88,18 @@ export class CadenasComponent implements OnInit {
     );
 
     this._cadenaServices.crearCadena( cadena )
-              .subscribe( resp => this.router.navigate(['/admin/admin-cadenas']) );
+              .subscribe( () => {
+                this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+                  dtInstance.destroy();
+                  this.cargarCadenas();
+                });
+              } );
 
+  }
+
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
   }
 }
 
