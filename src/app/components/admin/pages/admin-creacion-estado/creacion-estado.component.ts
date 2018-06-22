@@ -18,9 +18,9 @@ export class CreacionEstadoComponent implements OnInit, OnDestroy {
 
   @ViewChild (DataTableDirective) dtElement: DataTableDirective;
 
+  _id: string;
   nombre: string;
   disponible: boolean;
-  _id: string;
 
   forma: FormGroup;
   dtOptions: any = {};
@@ -74,16 +74,21 @@ export class CreacionEstadoComponent implements OnInit, OnDestroy {
   }
 
   actualizarEstado() {
-    const estado = new Estado(
-      this.forma.value.nombreestado
-    );
-    this._estadoService.actualizarEstado(estado).subscribe(() => {
+    const response = confirm('¿Deseas actualizar esta información?');
+    if ( response ) {
+    const newEstado = {
+      _id: this._id,
+      nombre: this.nombre,
+    };
 
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-        dtInstance.destroy();
-        this.cargarEstados();
-      });
-    });
+      this._estadoService.actualizarEstado(newEstado)
+        .subscribe(() => {
+          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            dtInstance.destroy();
+            this.cargarEstados();
+          });
+        });
+    }
   }
 
   registrarEstado() {
@@ -98,6 +103,11 @@ export class CreacionEstadoComponent implements OnInit, OnDestroy {
       });
     });
 
+  }
+
+  llenarDatos(estado: Estado) {
+    this._id = estado._id;
+    this.nombre = estado.nombre;
   }
 
   actualizarDisponibilidad(est: Estado) {

@@ -44,10 +44,10 @@
                             <td>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#myModal">Editar</button>
+                                        <button type="button" class="btn btn-info btn-block" data-toggle="modal" (click)="llenarDatos(est)" data-target="#myModal">Editar</button>
                                     </div>
                                     <div class="col-md-6">
-                                        <button type="button" (click)="actualizarDisponibilidad(est)" class="btn btn-default ">Actival-Inactivar</button>
+                                        <button type="button" (click)="actualizarDisponibilidad(est)" class="btn btn-default ">Activar-Inactivar</button>
                                     </div>
                                 </div>
                             </td>
@@ -67,18 +67,19 @@
                         <h4 class="modal-title">Actualizar Estados</h4>
                     </div>
                     <div class="modal-body">
-                        <form action="">
+                        <form class="form-horizontal form-material" id="loginform1">
+                            <!-- Crear el campo de tipo hidden para almacenar el  id de estado a actualizar -->
+                            <input [(ngModel)]="_id" name="_id" id="_id" class="form-control" type="hidden">
                             <div class="col-xs-12">
-                                <input name="nombreestado" class="form-control" type="text" required placeholder="nombre estado">
+                                <input [(ngModel)]="nombre" name="nombre" id="nombre" class="form-control" type="text" required placeholder="Nombre del estado">
                             </div>
                             <br>
-
                         </form>
                     </div>
                     <br>
                     <br>
                     <div class="modal-footer">
-                        <button class="btn btn-info" type="submit">
+                        <button class="btn btn-info" type="submit" (click)="actualizarEstado(estado)">
                             Actualizar Estados
                         </button>&nbsp;&nbsp;&nbsp;
                         <button type="button" class="btn btn-default " data-dismiss="modal">Cerrar</button>

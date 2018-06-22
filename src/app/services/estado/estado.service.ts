@@ -28,7 +28,7 @@ export class EstadoService {
   }
 
   actualizarEstado(estado: Estado) {
-    let url = URL_API + '/estado' + estado._id;
+    let url = URL_API + '/estado/' + estado._id;
     url += '?token=' + this._usuarioServices.token;
     return this.http.put(url , estado );
   }
