@@ -5,7 +5,7 @@ import { UsuarioService } from '../usuario/usuario.service';
 import { map } from 'rxjs/operators';
 import { Estado } from '../../models/estado.models';
 import { DataTablesResponse } from '../../models/tablaModels';
-import { AlertifyService } from 'src/app/services/services.index';
+import { AlertifyService } from 'src/app/services/alertify/alertify.service';
 
 @Injectable({
   providedIn: 'root'
