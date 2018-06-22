@@ -24,6 +24,8 @@ export class CadenasComponent implements OnInit, OnDestroy {
   cadena: Cadena[] = [];
 
   dtTrigger: Subject<any> = new Subject();
+  _id: string;
+  nombre: string;
 
   constructor(
     public _cadenaServices: CadenaService,
@@ -68,11 +70,13 @@ export class CadenasComponent implements OnInit, OnDestroy {
   }
 
   actualizarCadena() {
-
-  const cadena = new Cadena(
-    this.forma.value.nombrecadena
-  );
-  this._cadenaServices.actualizarCadena(cadena )
+    const response = confirm('¿Deseas actualizar esta información?');
+    if ( response ) {
+    const newEstado = {
+      _id: this._id,
+      nombre: this.nombre,
+    };
+  this._cadenaServices.actualizarCadena(newEstado )
         .subscribe( () => {
           this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
             dtInstance.destroy();
@@ -81,6 +85,7 @@ export class CadenasComponent implements OnInit, OnDestroy {
         } );
 
   }
+}
 
   registarCadena() {
     const cadena = new Cadena(
@@ -114,6 +119,10 @@ export class CadenasComponent implements OnInit, OnDestroy {
         });
     }
 
+  }
+  llenarDatos(cadena: Cadena) {
+    this._id = cadena._id;
+    this.nombre = cadena.nombre;
   }
 
   ngOnDestroy(): void {

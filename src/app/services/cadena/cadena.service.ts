@@ -28,7 +28,7 @@ crearCadena( cadena: Cadena) {
   }
 
   actualizarCadena(cadena: Cadena) {
-    let url = URL_API + '/cadena' + cadena._id;
+    let url = URL_API + '/cadena/' + cadena._id;
     url += '?token=' + this._usuarioServices.token;
     return this.http.put(url , cadena );
   }
