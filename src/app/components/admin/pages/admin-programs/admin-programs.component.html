@@ -6,20 +6,21 @@
             </div>
             <div class="box-body">
 
-                <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registrarPrograms()" class="form-horizontal form-material" id="loginform" action="index.html">
+                <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registrarPrograms()" class="form-horizontal form-material" id="loginform"
+                    action="index.html">
                     <div class="box-body">
                         <label>
                             <h4> Crear programa </h4>
                         </label>
                         <div class="form-group col-md-6">
                             <label>Ingrese nombre del programa:</label>
-                            <input formControlName="nombre" name="nombre" type="text" class="form-control" id="nombrecadena" style="width: 350px" required>
+                            <input formControlName="nombre" name="nombre" type="text" class="form-control"  style="width: 350px" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label>Nivel de formación:</label>
                             <br>
-                            <select style="width: 150px" class="form-control" formControlName="nivelFormacion" name="nivelFormacion" id="nivelFormacion">
-                                <option *ngFor="let nivel of nivelFormacion">
+                            <select style="width: 150px" class="form-control" formControlName="nivelFormacion" name="nivelFormacion">
+                                <option *ngFor="let nivel of nivelFormacionn">
                                     {{nivel.nombre}}
                                 </option>
                             </select>
@@ -47,18 +48,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let pro of programs">
-                            <td>{{ pro.nombre }}</td>
-                            <td>{{ pro.nivelFormacion }}</td>
+                        <tr *ngFor="let programs of programs">
+                            <td>{{ programs.nombre }}</td>
+                            <td>{{ programs.nivelFormacion }}</td>
                             <td>
-                                <label *ngIf="pro.disponible" class="label label-info">Activo</label>
-                                <label *ngIf="!pro.disponible" class="label label-danger">Inactivo</label>
+                                <label *ngIf="programs.disponible" class="label label-info">Activo</label>
+                                <label *ngIf="!programs.disponible" class="label label-danger">Inactivo</label>
                             </td>
 
                             <td>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#myModal">Editar</button>
+                                        <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#myModal" (click)="llenarDatos(programs)">
+                                            Editar
+                                        </button>
                                     </div>
                                     <div class="col-md-6">
                                         <button type="button" class="btn btn-default btn-block">Activar-Inactivar</button>
@@ -81,15 +84,18 @@
                         <h4 class="modal-title">Actualizar programa</h4>
                     </div>
                     <div class="modal-body">
-                        <form action="">
+                        <form class="form-horizontal form-material" id="loginform1">
+                            <input [(ngModel)]="_id" name="_id" id="_id" class="form-control" type="hidden">
                             <div class="col-xs-12">
-                                <input name="nombre" class="form-control" type="text" required placeholder="nombre">
+                                <input [(ngModel)]="nombre" name="nombre" id="nombre" class="form-control" type="text" required placeholder="nombre">
                             </div>
                             <br>
                             <br>
                             <div class="col-xs-12">
-                                <select name="nivelFormacion" class="form-control" required>
-                                    <option value="nivelFormacion">Tecnico</option>
+                                <select [(ngModel)]="nivelFormacion" name="nivelFormacion" id="nivelFormacion" class="form-control" required>
+                                    <option *ngFor="let nivel of nivelFormacionn">
+                                        {{nivel.nombre}}
+                                    </option>
                                 </select>
                             </div>
                             <br>
@@ -99,7 +105,7 @@
                     <br>
                     <br>
                     <div class="modal-footer">
-                        <button class="btn btn-info" type="submit">
+                        <button class="btn btn-info" type="submit" (click)="actualizarPrograms(programs)">
                             Actualizar programa
                         </button>&nbsp;&nbsp;&nbsp;
                         <button type="button" class="btn btn-default " data-dismiss="modal">Cerrar</button>
