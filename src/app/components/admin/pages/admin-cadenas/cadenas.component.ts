@@ -87,13 +87,32 @@ export class CadenasComponent implements OnInit, OnDestroy {
       this.forma.value.nombrecadena
     );
 
-    this._cadenaServices.crearCadena( cadena )
-              .subscribe( () => {
-                this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-                  dtInstance.destroy();
-                  this.cargarCadenas();
-                });
-              } );
+    this._cadenaServices.crearCadena(cadena)
+      .subscribe(() => {
+        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+          dtInstance.destroy();
+          this.cargarCadenas();
+        });
+      });
+  }
+
+  actualizarDisponibilidad(cadena: Cadena) {
+    const response = confirm('¿Deseas actualizar la disponibilidad?');
+    if ( response ) {
+      if ( cadena.disponible ) {
+        cadena.disponible = false;
+      } else {
+        cadena.disponible = true;
+      }
+
+      this._cadenaServices.actualizarDisponibilidad(cadena)
+        .subscribe(() => {
+          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            dtInstance.destroy();
+            this.cargarCadenas();
+          });
+        });
+    }
 
   }
 

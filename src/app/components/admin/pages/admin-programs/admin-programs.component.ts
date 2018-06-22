@@ -83,13 +83,32 @@ export class AdminProgramsComponent implements OnInit, OnDestroy {
       this.forma.value.nivelFormacion
     );
 
-    this._programsServices.crearPrograms( programs )
-              .subscribe( () => {
-                this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-                  dtInstance.destroy();
-                  this.cargarProgramas();
-                });
-              } );
+    this._programsServices.crearPrograms(programs)
+      .subscribe(() => {
+        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+          dtInstance.destroy();
+          this.cargarProgramas();
+        });
+      });
+  }
+
+  actualizarDisponibilidad(program: Programs) {
+    const response = confirm('¿Deseas actualizar la disponibilidad?');
+    if ( response ) {
+      if ( program.disponible ) {
+        program.disponible = false;
+      } else {
+        program.disponible = true;
+      }
+
+      this._programsServices.actualizarDisponibilidad(program)
+        .subscribe(() => {
+          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            dtInstance.destroy();
+            this.cargarProgramas();
+          });
+        });
+    }
   }
 
   ngOnDestroy(): void {

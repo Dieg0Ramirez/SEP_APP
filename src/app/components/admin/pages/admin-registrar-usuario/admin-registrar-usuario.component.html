@@ -59,7 +59,7 @@
                             <div class="form-group row">
                                 <div class="col-md-6">
                                     <div class="checkbox checkbox-primary p-t-0">
-                                        <input formControlName="condiciones" name="condiciones" id="checkbox-signup" type="checkbox"> Estoy de acuerdo con los <a routerLink="#">términos</a>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input formControlName="condiciones" name="condiciones" id="checkbox-signup" type="checkbox"> Estoy de acuerdo con los <a routerLink="#">términos</a>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
                                         <button type="button" class="btn btn-info btn-block" data-toggle="modal" (click)="llenarDatos(usuario)" data-target="#myModal">Editar</button>
                                     </div>
                                     <div class="col-md-6">
-                                        <button type="button" class="btn btn-default ">Actival-Inactivar</button>
+                                        <button type="button" (click)="actualizarDisponibilidad(usuario)" class="btn btn-default ">Actival-Inactivar</button>
                                     </div>
                                 </div>
                             </td>
@@ -148,16 +148,6 @@
                             </div>
                             <br>
                             <br>
-                            <!-- <div class="col-xs-12">
-                                <input name="password1" class="form-control" type="password" required placeholder="Contraseña">
-                            </div>
-                            <br>
-                            <br>
-                            <div class="col-xs-12">
-                                <input name="passwordRepeat" class="form-control" type="password" required placeholder="Confirme contraseña">
-                            </div> -->
-                            <!-- <br>
-                            <br> -->
                             <div class="col-xs-12">
                                 <select [(ngModel)]="rol" name="rol" id="rol" class="form-control" required>
                                     <option value="ROL_SEGUIMIENTO">ROL_SEGUIMIENTO</option>

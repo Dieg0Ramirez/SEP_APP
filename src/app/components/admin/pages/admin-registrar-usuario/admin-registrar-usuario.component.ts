@@ -30,7 +30,6 @@ export class AdminRegistrarUsuarioComponent implements OnInit, OnDestroy {
   rol: string;
 
   forma: FormGroup;
-  forma1: FormGroup;
   usuario: Usuario[] = [];
 
   dtTrigger: Subject<any> = new Subject();
@@ -73,17 +72,12 @@ export class AdminRegistrarUsuarioComponent implements OnInit, OnDestroy {
       condiciones: new FormControl( false )
     }, { validators: this.sonIguales('password', 'password2') }  );
 
-    this.forma1 = new FormGroup({
-      nombre1: new FormControl(null , Validators.required ),
-      email1: new FormControl(null , [Validators.required , Validators.email]),
-      rol1: new FormControl(null, Validators.required)
-    });
+
   }
 
   cargarUsuarios() {
     this._usuarioServices.listarUsuario().subscribe((res: any) => {
 
-      console.log(res);
       this.usuario = res.usuarios;
       this.dtTrigger.next();
     });
@@ -127,25 +121,18 @@ export class AdminRegistrarUsuarioComponent implements OnInit, OnDestroy {
       this.forma.value.rol
     );
 
-    this._usuarioServices.crearUsuario( usuario )
-              .subscribe( () => {
-                this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-                  dtInstance.destroy();
-                  this.cargarUsuarios();
-                });
-              } );
+    this._usuarioServices.crearUsuario(usuario)
+      .subscribe(() => {
+        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+          dtInstance.destroy();
+          this.cargarUsuarios();
+        });
+      });
   }
 
   actualizarUsuario(usuario: Usuario) {
     const response = confirm('¿Deseas actualizar esta información');
     if ( response ) {
-    // const usuario = new Usuario(
-    //   this.forma.value._id,
-    //   this.forma.value.nombre,
-    //   this.forma.value.email,
-    //   this.forma.value.password,
-    //   this.forma.value.rol
-    // );
     const newUsuario = {
       _id: this._id,
       nombre: this.nombre,
@@ -153,7 +140,6 @@ export class AdminRegistrarUsuarioComponent implements OnInit, OnDestroy {
       rol: this.rol,
       password: usuario.password
     };
-    console.log(newUsuario);
 
       this._usuarioServices.actualizarUsuario(newUsuario)
         .subscribe(() => {
@@ -170,6 +156,26 @@ export class AdminRegistrarUsuarioComponent implements OnInit, OnDestroy {
     this.email = usuario.email;
     this.password = usuario.password;
     this.rol = usuario.rol;
+  }
+
+  actualizarDisponibilidad(usuario: Usuario) {
+    const response = confirm('¿Deseas actualizar la disponibilidad?');
+    if ( response ) {
+      if ( usuario.disponible ) {
+        usuario.disponible = false;
+      } else {
+        usuario.disponible = true;
+      }
+
+      this._usuarioServices.actualizarDisponibilidad(usuario)
+        .subscribe(() => {
+          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            dtInstance.destroy();
+            this.cargarUsuarios();
+          });
+        });
+    }
+
   }
 
   ngOnDestroy(): void {

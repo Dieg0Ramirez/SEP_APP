@@ -1,3 +1,4 @@
+import { AlertifyService } from './../alertify/alertify.service';
 import { Injectable } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
 import { HttpClient } from '@angular/common/http';
@@ -16,7 +17,8 @@ export class UsuarioService {
   token: string;
   constructor(
     public http: HttpClient,
-    public router: Router
+    public router: Router,
+    private alertify: AlertifyService
   ) {
     this.cargarStorage();
   }
@@ -59,11 +61,11 @@ export class UsuarioService {
   login(usuario: Usuario ) {
 
     const url = URL_API + '/login';
-    return this.http.post(url , usuario ).pipe(
-               map((resp: any ) => {
-                 this.guardarStorage( resp.id, resp.token, resp.usuario );
-              return true;
-              }));
+    return this.http.post(url, usuario).pipe(
+      map((resp: any) => {
+        this.guardarStorage(resp.id, resp.token, resp.usuario);
+        return true;
+      }));
   }
 
   crearUsuario( usuario: Usuario) {
@@ -92,6 +94,16 @@ export class UsuarioService {
 
   return this.http.get<DataTablesResponse>(url);
 
+  }
+
+  actualizarDisponibilidad(usuario: Usuario) {
+    let url = URL_API + '/usuario/disponible/' + usuario._id;
+    url += '?token=' + this.token;
+    return this.http.put(url, usuario ).pipe(
+      map((resp: any) => {
+        this.alertify.success('disponibilidad actualizada');
+        return resp.Usuario;
+      }));
   }
 
 }

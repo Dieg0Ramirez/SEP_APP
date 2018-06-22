@@ -5,15 +5,12 @@
                 <h3 class="box-title">Cadenas</h3>
             </div>
             <div class="box-body">
-
                 <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registarCadena()" class="form-horizontal form-material" id="loginform" action="index.html">
                     <div class="box-body">
-                        <label for="">
                         <h4> Crear cadena </h4>
-                    </label>
                         <div class="form-group col-md-6">
                             <label>Ingrese nombre de la cadena:</label>
-                            <input formControlName="nombre cadena" name="nombrecadena" type="text" class="form-control" id="nombrecadena" style="width: 350px" required>
+                            <input formControlName="nombrecadena" name="nombrecadena" type="text" class="form-control" id="nombrecadena" style="width: 350px" required>
                         </div>
                     </div>
 
@@ -49,7 +46,7 @@
                                         <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#myModal">Editar</button>
                                     </div>
                                     <div class="col-md-6">
-                                        <button type="button" class="btn btn-default btn-block">Actival-Inactivar</button>
+                                        <button type="button" (click)="actualizarDisponibilidad(cad)" class="btn btn-default btn-block">Actival-Inactivar</button>
                                     </div>
                                 </div>
                             </td>

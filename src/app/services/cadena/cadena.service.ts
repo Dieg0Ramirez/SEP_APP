@@ -5,6 +5,7 @@ import { UsuarioService } from '../usuario/usuario.service';
 import { map } from 'rxjs/operators';
 import { Cadena } from '../../models/cadena.models';
 import { DataTablesResponse } from '../../models/tablaModels';
+import { AlertifyService } from './../alertify/alertify.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ import { DataTablesResponse } from '../../models/tablaModels';
 export class CadenaService {
 
   constructor( public http: HttpClient,
-  public _usuarioServices: UsuarioService ) { }
+  public _usuarioServices: UsuarioService,
+  public alertify: AlertifyService ) { }
 
 crearCadena( cadena: Cadena) {
   let url = URL_API + '/cadena';
@@ -36,5 +38,16 @@ crearCadena( cadena: Cadena) {
     url += '?token=' + this._usuarioServices.token;
     return this.http.get<DataTablesResponse>(url);
 
-    }
+  }
+
+  actualizarDisponibilidad(cadena: Cadena) {
+    let url = URL_API + '/cadena/disponible/' + cadena._id;
+    url += '?token=' + this._usuarioServices.token;
+    return this.http.put(url, cadena ).pipe(
+      map((resp: any) => {
+        this.alertify.success('disponibilidad actualizada');
+      return resp.Cadena;
+      }));
+  }
+
 }

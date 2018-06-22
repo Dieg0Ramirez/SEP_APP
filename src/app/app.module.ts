@@ -32,6 +32,7 @@ import { AdminFichasComponent } from './components/admin/pages/admin-fichas/admi
 import { AdminExcelContratosComponent } from './components/admin/pages/admin-excel-contratos/admin-excel-contratos.component';
 // tslint:disable-next-line:max-line-length
 import { AdminExcelJuiciosEvaluativosComponent } from './components/admin/pages/admin-excel-juicios-evaluativos/admin-excel-juicios-evaluativos.component';
+import { AlertifyService } from './services/alertify/alertify.service';
 
 
 
@@ -71,7 +72,9 @@ import { AdminExcelJuiciosEvaluativosComponent } from './components/admin/pages/
     ServicesModule,
     DataTablesModule
   ],
-  providers: [],
+  providers: [
+    AlertifyService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

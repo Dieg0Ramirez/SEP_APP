@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Programs } from '../../models/programs.models';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { URL_API } from '../../config/config';
 import { map } from 'rxjs/operators';
 import { UsuarioService } from '../usuario/usuario.service';
 import { DataTablesResponse } from '../../models/tablaModels';
+import { AlertifyService } from '../alertify/alertify.service';
 
 
 @Injectable({
@@ -14,7 +14,8 @@ import { DataTablesResponse } from '../../models/tablaModels';
 export class ProgramaService {
 
   constructor( public http: HttpClient,
-  public _usuarioServices: UsuarioService) { }
+  public _usuarioServices: UsuarioService,
+  public alertify: AlertifyService) { }
 
   crearPrograms(programs: Programs) {
     let url = URL_API + '/programa';
@@ -36,5 +37,15 @@ export class ProgramaService {
     let url = URL_API + '/programa';
     url += '?token=' + this._usuarioServices.token;
     return this.http.get<DataTablesResponse>(url);
+  }
+
+  actualizarDisponibilidad(program: Programs) {
+    let url = URL_API + '/programa/disponible/' + program._id;
+    url += '?token=' + this._usuarioServices.token;
+    return this.http.put(url, program ).pipe(
+      map((resp: any) => {
+        this.alertify.success('disponibilidad actualizada');
+      return resp.Programs;
+      }));
   }
 }

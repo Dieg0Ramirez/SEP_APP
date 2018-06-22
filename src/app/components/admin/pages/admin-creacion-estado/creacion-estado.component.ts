@@ -18,6 +18,10 @@ export class CreacionEstadoComponent implements OnInit, OnDestroy {
 
   @ViewChild (DataTableDirective) dtElement: DataTableDirective;
 
+  nombre: string;
+  disponible: boolean;
+  _id: string;
+
   forma: FormGroup;
   dtOptions: any = {};
 
@@ -94,6 +98,25 @@ export class CreacionEstadoComponent implements OnInit, OnDestroy {
       });
     });
 
+  }
+
+  actualizarDisponibilidad(est: Estado) {
+    const response = confirm('¿Deseas actualizar la disponibilidad?');
+    if ( response ) {
+      if ( est.disponible ) {
+        est.disponible = false;
+      } else {
+        est.disponible = true;
+      }
+
+      this._estadoService.actualizarDisponibilidad(est)
+        .subscribe(() => {
+          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            dtInstance.destroy();
+            this.cargarEstados();
+          });
+        });
+    }
   }
 
   ngOnDestroy(): void {

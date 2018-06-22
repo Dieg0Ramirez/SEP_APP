@@ -8,9 +8,7 @@
 
                 <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registrarEstado()" class="form-horizontal form-material" id="loginform" action="index.html">
                     <div class="box-body">
-                        <label for="">
-                                <h4> Crear Estado </h4>
-                            </label>
+                        <h4> Crear Estado </h4>
                         <div class="form-group col-md-6">
                             <label>Ingrese nombre del estado:</label>
                             <input formControlName="nombreestado" name="nombreestado" type="text" class="form-control" id="nombreestado" style="width: 350px" required>
@@ -49,7 +47,7 @@
                                         <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#myModal">Editar</button>
                                     </div>
                                     <div class="col-md-6">
-                                        <button type="button" class="btn btn-default ">Actival-Inactivar</button>
+                                        <button type="button" (click)="actualizarDisponibilidad(est)" class="btn btn-default ">Actival-Inactivar</button>
                                     </div>
                                 </div>
                             </td>
