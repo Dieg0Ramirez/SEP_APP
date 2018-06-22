@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import {FormGroup, FormControl, Validators, FormControlName} from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormControlName } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { spanish } from '../../../../interfaces/dataTables.es';
@@ -19,7 +19,7 @@ declare var AdminLTE: any;
   styleUrls: ['./admin-registrar-usuario.component.css']
 })
 export class AdminRegistrarUsuarioComponent implements OnInit, OnDestroy {
-  @ViewChild (DataTableDirective) dtElement: DataTableDirective;
+  @ViewChild(DataTableDirective) dtElement: DataTableDirective;
   dtOptions: any = {};
 
   dtLanguage: any = spanish;
@@ -64,14 +64,13 @@ export class AdminRegistrarUsuarioComponent implements OnInit, OnDestroy {
     this.cargarUsuarios();
 
     this.forma = new FormGroup({
-      nombre: new FormControl(null , Validators.required ),
-      email: new FormControl(null , [Validators.required , Validators.email]),
-      password: new FormControl(null , Validators.required),
-      password2: new FormControl(null , Validators.required),
+      nombre: new FormControl(null, Validators.required),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, Validators.required),
+      password2: new FormControl(null, Validators.required),
       rol: new FormControl(null, Validators.required),
-      condiciones: new FormControl( false )
-    }, { validators: this.sonIguales('password', 'password2') }  );
-
+      condiciones: new FormControl(false)
+    }, { validators: this.sonIguales('password', 'password2') });
 
   }
 
@@ -83,14 +82,14 @@ export class AdminRegistrarUsuarioComponent implements OnInit, OnDestroy {
     });
   }
 
-  sonIguales( campo1: string, campo2: string) {
+  sonIguales(campo1: string, campo2: string) {
 
-    return (group: FormGroup ) => {
+    return (group: FormGroup) => {
       const pass1 = group.controls[campo1].value;
 
       const pass2 = group.controls[campo2].value;
 
-      if ( pass1 === pass2 ) {
+      if (pass1 === pass2) {
         return null;
 
       }
@@ -104,11 +103,11 @@ export class AdminRegistrarUsuarioComponent implements OnInit, OnDestroy {
 
   registrarUsuario() {
 
-    if ( this.forma.invalid ) {
+    if (this.forma.invalid) {
       return;
     }
 
-    if ( !this.forma.value.condiciones ) {
+    if (!this.forma.value.condiciones) {
       swal('Importante', 'Debe de aceptar las condiciones', 'warning');
       return;
     }
@@ -148,9 +147,10 @@ export class AdminRegistrarUsuarioComponent implements OnInit, OnDestroy {
             this.cargarUsuarios();
           });
         });
+    }
   }
-  }
-  llenarDatos(usuario: Usuario ) {
+
+  llenarDatos(usuario: Usuario) {
     this._id = usuario._id;
     this.nombre = usuario.nombre;
     this.email = usuario.email;

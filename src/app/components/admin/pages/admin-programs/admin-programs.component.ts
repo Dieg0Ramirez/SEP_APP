@@ -17,15 +17,22 @@ declare var AdminLTE: any;
   styleUrls: ['./admin-programs.component.css']
 })
 export class AdminProgramsComponent implements OnInit, OnDestroy {
-  @ViewChild (DataTableDirective) dtElement: DataTableDirective;
+  @ViewChild(DataTableDirective) dtElement: DataTableDirective;
+  
+  nivelFormacion: string;
+  nombre: string;
+  _id: string;
+  
+  forma1: FormGroup;
   forma: FormGroup;
+
   dtOptions: any = {};
+  dtLanguage: any = spanish; 
 
-  dtLanguage: any = spanish;
-  programs: Programs[] = [];
   dtTrigger: Subject<any> = new Subject();
-
-  nivelFormacion: NivelFormacion[] = [];
+  
+  programs: Programs[] = [];
+  nivelFormacionn: NivelFormacion[] = [];
 
   constructor(
     public _programsServices: ProgramaService,
@@ -57,14 +64,19 @@ export class AdminProgramsComponent implements OnInit, OnDestroy {
     this._nivelFormacionServices.listarNivelFormacion().subscribe((res: any) => {
 
       console.log(res);
-      this.nivelFormacion = res.nivelFormacion;
+      this.nivelFormacionn = res.nivelFormacion;
     });
 
     this.cargarProgramas();
 
     this.forma = new FormGroup({
-      nombre: new FormControl(null , Validators.required ),
-      nivelFormacion: new FormControl(null , Validators.required )
+      nombre: new FormControl(null, Validators.required),
+      nivelFormacion: new FormControl(null, Validators.required)
+    });
+
+    this.forma1 = new FormGroup({
+      nombre1: new FormControl(null, Validators.required),
+      nivelFormacion1: new FormControl(null, Validators.required)
     });
   }
 
@@ -109,6 +121,32 @@ export class AdminProgramsComponent implements OnInit, OnDestroy {
           });
         });
     }
+  }
+
+  actualizarPrograms(programs: Programs, nivelFormacion: NivelFormacion) {
+    const response = confirm('¿Deseas actualizar esta información');
+    if (response) {
+      const newPrograms = {
+        _id: this._id,
+        nombre: this.nombre,
+        nivelFormacion: this.nivelFormacion
+      };
+      console.log(newPrograms);
+
+      this._programsServices.actualizarPrograms(newPrograms)
+        .subscribe(() => {
+          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            dtInstance.destroy();
+            this.cargarProgramas();
+          });
+        });
+    }
+  }
+
+  llenarDatos(programs: Programs) {
+    this._id = programs._id;
+    this.nombre = programs.nombre;
+    this.nivelFormacion = programs.nivelFormacion;
   }
 
   ngOnDestroy(): void {

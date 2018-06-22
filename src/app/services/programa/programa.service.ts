@@ -23,14 +23,19 @@ export class ProgramaService {
 
     return this.http.post(url, programs).pipe(
       map((resp: any) => {
-        console.log(resp);
-      }));
+      swal('Programa creado', programs.nombre, 'success' );
+      return resp.Usuario;
+    }));
   }
 
   actualizarPrograms(programs: Programs) {
-    let url = URL_API + '/programa' + programs._id;
+    let url = URL_API + '/programa/' + programs._id;
     url += '?token=' + this._usuarioServices.token;
-    return this.http.put(url, programs);
+    return this.http.put(url, programs).pipe(
+      map((resp: any) => {
+      swal('Programa actualizado', programs.nombre, 'success' );
+      return resp.Usuario;
+      }));
   }
 
   listarPrograms() {
