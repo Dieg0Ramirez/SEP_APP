@@ -18,19 +18,19 @@ declare var AdminLTE: any;
 })
 export class AdminProgramsComponent implements OnInit, OnDestroy {
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
-  
+
   nivelFormacion: string;
   nombre: string;
   _id: string;
-  
+
   forma1: FormGroup;
   forma: FormGroup;
 
   dtOptions: any = {};
-  dtLanguage: any = spanish; 
+  dtLanguage: any = spanish;
 
   dtTrigger: Subject<any> = new Subject();
-  
+
   programs: Programs[] = [];
   nivelFormacionn: NivelFormacion[] = [];
 
