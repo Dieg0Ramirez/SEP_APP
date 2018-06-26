@@ -13,3 +13,44 @@
     <app-control-sidebar></app-control-sidebar>
     <!-- /.control-sidebar -->
 </div>
+
+<div id="box-excel" *ngIf="showBox">
+
+    <div class="box-header">
+        <span id="box-title-process" *ngIf="titleProcess">
+            Procesando archivo de excel...
+        </span>
+
+        <span id="box-title-process" *ngIf="titleFinish">
+            Excel procesado con éxito.
+        </span>
+
+        <div class="box-tools">
+            <button class="btn-tool" (click)="bodyShow()">
+                <i [className]="iconChevron"></i>
+            </button>
+    
+            <button class="btn-tool" *ngIf="showBtnClose" (click)="boxClose()">
+                <i class="fa fa-close"></i>
+            </button>
+        </div>
+
+    </div>
+
+    <div class="box-body" *ngIf="showBoxBody">
+
+        <div class="box-message">
+            <i class="fa fa-file">
+            </i>
+            <span>
+                {{iteracion | number}} de {{sizeExcel | number}} procesados.
+            </span>
+        </div>
+
+        <div class="finishProcess" *ngIf="titleFinish">
+            <i class="fa fa-check-circle"></i>
+        </div>
+
+    </div>
+
+</div>

@@ -30,3 +30,75 @@ div.dt-buttons {
 .dataTables_length {
     float: left;
 }
+
+/*
+Estilos para el box de Excel
+*/
+
+
+#box-excel{
+  z-index: 99999;
+  position: fixed;
+  bottom: 0%;
+  right: 0%;
+  width: 350px;
+  background-color: #ebe3e3;
+
+}
+
+.box-tools{
+  position: absolute;
+  right: 3%;
+  top: 50% !important;
+  transform: translateY(-50%);
+}
+
+.btn-tool {
+  color: #fff;
+  background: transparent;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  float: left;
+  margin-left: 5px;
+}
+
+.btn-tool:active,
+.btn-tool:focus {
+  border: none;
+  outline: none;
+}
+
+#box-excel>.box-header {
+  -webkit-border-radius: 3px 3px 0 0;
+  border-radius: 3px 3px 0 0;
+  background-color: #67bd4a;
+  border: 1px transparent solid;
+  color: #fff;
+  font-size: 17px;
+  height: 52px;
+  padding: 10px 0px 10px 20px;
+  position: relative;
+}
+
+#box-excel>.box-body {
+  color: #323232;
+  font-size: 17px;
+  min-height: 80px;
+  position: relative;
+  padding: 20px;
+}
+
+.box-message>i {
+  margin-right: 5px;
+}
+
+.finishProcess {
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #67bd4a;
+  font-size: 30px;
+}
+

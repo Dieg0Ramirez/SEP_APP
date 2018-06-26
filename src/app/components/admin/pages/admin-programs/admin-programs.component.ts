@@ -6,7 +6,7 @@ import { Programs } from '../../../../models/programs.models';
 import { Subject } from 'rxjs';
 import { spanish } from '../../../../interfaces/dataTables.es';
 import { DataTableDirective } from 'angular-datatables';
-import { NivelFormacion } from '../../../../models/nivelFormacion.models';
+import { NivelFormacion } from './../../../../models/nivelFormacion.models';
 
 
 declare var AdminLTE: any;
