@@ -91,6 +91,10 @@ export class CreacionEstadoComponent implements OnInit, OnDestroy {
     }
   }
 
+  limpiar() {
+    this.forma.reset();
+  }
+
   registrarEstado() {
     const estado = new Estado(
       this.forma.value.nombreestado
@@ -100,6 +104,7 @@ export class CreacionEstadoComponent implements OnInit, OnDestroy {
       this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
         dtInstance.destroy();
         this.cargarEstados();
+        this.limpiar();
       });
     });
 

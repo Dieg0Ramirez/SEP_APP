@@ -74,6 +74,10 @@ export class AdminRegistrarUsuarioComponent implements OnInit, OnDestroy {
 
   }
 
+  limpiar() {
+    this.forma.reset();
+  }
+
   cargarUsuarios() {
     this._usuarioServices.listarUsuario().subscribe((res: any) => {
 
@@ -125,6 +129,7 @@ export class AdminRegistrarUsuarioComponent implements OnInit, OnDestroy {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
           dtInstance.destroy();
           this.cargarUsuarios();
+          this.limpiar();
         });
       });
   }

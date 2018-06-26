@@ -23,6 +23,7 @@ crearCadena( cadena: Cadena) {
   return this.http.post(url , cadena).pipe(
     map((resp: any) => {
       console.log(resp);
+      this.alertify.success('Cadena creada con éxito');
     }));
 
   }

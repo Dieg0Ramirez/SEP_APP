@@ -23,6 +23,7 @@ export class EstadoService {
   return this.http.post(url , estado).pipe(
     map((resp: any) => {
       console.log(resp);
+      swal('Estado creado', estado.nombre, 'success' );
     }));
 
   }

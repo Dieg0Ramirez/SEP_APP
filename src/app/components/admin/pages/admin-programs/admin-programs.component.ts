@@ -78,6 +78,10 @@ export class AdminProgramsComponent implements OnInit, OnDestroy {
     });
   }
 
+  limpiar() {
+    this.forma.reset();
+  }
+
   cargarProgramas() {
     this._programsServices.listarPrograms().subscribe((res: any) => {
 
@@ -100,6 +104,7 @@ export class AdminProgramsComponent implements OnInit, OnDestroy {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
           dtInstance.destroy();
           this.cargarProgramas();
+          this.limpiar();
         });
       });
   }

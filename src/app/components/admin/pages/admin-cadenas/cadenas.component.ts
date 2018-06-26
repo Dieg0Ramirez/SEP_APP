@@ -69,23 +69,28 @@ export class CadenasComponent implements OnInit, OnDestroy {
     });
   }
 
+  limpiar() {
+    this.forma.reset();
+  }
+
   actualizarCadena() {
     const response = confirm('¿Deseas actualizar esta información?');
-    if ( response ) {
-    const newEstado = {
-      _id: this._id,
-      nombre: this.nombre,
-    };
-  this._cadenaServices.actualizarCadena(newEstado )
-        .subscribe( () => {
+    if (response) {
+      const newEstado = {
+        _id: this._id,
+        nombre: this.nombre,
+      };
+      this._cadenaServices.actualizarCadena(newEstado)
+        .subscribe(() => {
           this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
             dtInstance.destroy();
             this.cargarCadenas();
+            this.limpiar();
           });
-        } );
+        });
 
+    }
   }
-}
 
   registarCadena() {
     const cadena = new Cadena(
@@ -97,6 +102,7 @@ export class CadenasComponent implements OnInit, OnDestroy {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
           dtInstance.destroy();
           this.cargarCadenas();
+          this.limpiar();
         });
       });
   }
