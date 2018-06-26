@@ -126,6 +126,7 @@ export class CadenasComponent implements OnInit, OnDestroy {
     }
 
   }
+
   llenarDatos(cadena: Cadena) {
     this._id = cadena._id;
     this.nombre = cadena.nombre;
