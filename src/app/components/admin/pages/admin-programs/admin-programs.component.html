@@ -17,7 +17,7 @@
                             <label>Nivel de formación:</label>
                             <br>
                             <select style="width: 150px" class="form-control" formControlName="nivelFormacion" name="nivelFormacion">
-                                <option *ngFor="let nivel of nivelFormacionn">
+                                <option *ngFor="let nivel of nivelFormacionn" [value]="nivel._id">
                                     {{nivel.nombre}}
                                 </option>
                             </select>
@@ -47,7 +47,7 @@
                     <tbody>
                         <tr *ngFor="let programs of programs">
                             <td>{{ programs.nombre }}</td>
-                            <td>{{ programs.nivelFormacion }}</td>
+                            <td>{{ programs.nivelFormacion?.nombre }}</td>
                             <td>
                                 <label *ngIf="programs.disponible" class="label label-info">Activo</label>
                                 <label *ngIf="!programs.disponible" class="label label-danger">Inactivo</label>
