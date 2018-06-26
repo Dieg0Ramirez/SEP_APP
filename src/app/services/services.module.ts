@@ -5,7 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {
   UsuarioService,
   LoginGuardGuard,
-  ProgramaService
+  ProgramaService,
+  ExcelService
  } from './services.index';
 
 @NgModule({
@@ -16,7 +17,8 @@ import {
   providers: [
     UsuarioService,
     LoginGuardGuard,
-    ProgramaService
+    ProgramaService,
+    ExcelService
   ],
   declarations: []
 })

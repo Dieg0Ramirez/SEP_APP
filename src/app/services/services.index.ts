@@ -7,5 +7,6 @@ export { LoginGuardGuard } from './guards/login-guard.guard';
 export { UsuarioService } from './usuario/usuario.service';
 export { TipoDocumentoService } from './tipoDocumento/tipo-documento.service';
 export { EstadoService } from './estado/estado.service';
+export { ExcelService } from './excel/excel.service';
 
 
