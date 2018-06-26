@@ -5,69 +5,23 @@ import { URL_API } from '../../config/config';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { DataTablesResponse } from '../../models/tablaModels';
+import { UsuarioService } from '../usuario/usuario.service';
+import { AlertifyService } from './../alertify/alertify.service';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class TipoDocumentoService {
-
-  tipoDocumento: TipoDocumento;
-  token: string;
   constructor(
     public http: HttpClient,
-    public router: Router
-  ) {
-    this.cargarStorage();
-  }
-
-  estaLogueado() {
-    return (this.token.length > 5 )  ? true : false;
-  }
-
-  // --------------------- Nivel de formacion --------------------- //
-
-   cargarStorage() {
-    if (localStorage.getItem('token')) {
-      this.token = localStorage.getItem('token');
-      this.tipoDocumento = JSON.parse(localStorage.getItem('nivelFormacion'));
-    } else {
-      this.token = '';
-      this.tipoDocumento = null;
-    }
-  }
-
-  guardarStorage( id: string, token: string, tipoDocumento: TipoDocumento ) {
-    localStorage.setItem( 'id', id );
-    localStorage.setItem( 'token', token );
-    localStorage.setItem( 'tipoDocumento', JSON.stringify(tipoDocumento) );
-
-    this.tipoDocumento = tipoDocumento;
-    this.token = token;
-  }
-
-  logout() {
-    this.tipoDocumento = null;
-    this.token = '';
-    localStorage.removeItem('token');
-    localStorage.removeItem('tipoDocumento');
-
-    this.router.navigate(['']);
-
-  }
-
-  login(tipoDocumento: TipoDocumento ) {
-
-    const url = URL_API + '/tipoDocumento';
-    return this.http.post(url , tipoDocumento ).pipe(
-               map((resp: any ) => {
-                 this.guardarStorage( resp.id, resp.token, resp.usuario );
-              return true;
-              }));
-  }
-
+    public _usuarioServices: UsuarioService,
+    public alertify: AlertifyService
+  ) {}
   creartipoDocumento( tipoDocumento: TipoDocumento) {
     let url = URL_API + '/tipoDocumento';
-    url += '/?token=' + this.token;
+    url += '?token=' + this._usuarioServices.token;
     return this.http.post(url , tipoDocumento).pipe(
       map((resp: any) => {
       swal('Usuario creado', tipoDocumento.nombre, 'success' );
@@ -76,18 +30,27 @@ export class TipoDocumentoService {
   }
 
   actualizartipoDocumento( tipoDocumento: TipoDocumento ) {
-    let url = URL_API + '/tipoDocumento' + tipoDocumento._id;
-    url += '?token=' + this.token;
+    let url = URL_API + '/tipoDocumento/' + tipoDocumento._id;
+    url += '?token=' + this._usuarioServices.token;
     return this.http.put(url, tipoDocumento ).pipe(
       map((resp: any) => {
       swal('Usuario actualizado', tipoDocumento.nombre, 'success' );
       return resp.Usuario;
       }));
   }
+  actualizarDisponibilidad(tipoDocumento: TipoDocumento) {
+    let url = URL_API + '/tipoDocumento/disponible/' + tipoDocumento._id;
+    url += '?token=' + this._usuarioServices.token;
+    return this.http.put(url, tipoDocumento ).pipe(
+      map((resp: any) => {
+        this.alertify.success('disponibilidad actualizada');
+      return resp.tipoDocumento;
+      }));
+  }
 
   listartipoDocumento() {
   let url = URL_API + '/tipoDocumento';
-  url += '?token=' + this.token;
+  url += '?token=' + this._usuarioServices.token;
 
   return this.http.get<DataTablesResponse>(url);
 
