@@ -24,6 +24,8 @@ export class CadenasComponent implements OnInit, OnDestroy {
   cadena: Cadena[] = [];
 
   dtTrigger: Subject<any> = new Subject();
+  _id: string;
+  nombre: string;
 
   constructor(
     public _cadenaServices: CadenaService,
@@ -67,19 +69,27 @@ export class CadenasComponent implements OnInit, OnDestroy {
     });
   }
 
-  actualizarCadena() {
+  limpiar() {
+    this.forma.reset();
+  }
 
-  const cadena = new Cadena(
-    this.forma.value.nombrecadena
-  );
-  this._cadenaServices.actualizarCadena(cadena )
-        .subscribe( () => {
+  actualizarCadena() {
+    const response = confirm('¿Deseas actualizar esta información?');
+    if (response) {
+      const newEstado = {
+        _id: this._id,
+        nombre: this.nombre,
+      };
+      this._cadenaServices.actualizarCadena(newEstado)
+        .subscribe(() => {
           this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
             dtInstance.destroy();
             this.cargarCadenas();
+            this.limpiar();
           });
-        } );
+        });
 
+    }
   }
 
   registarCadena() {
@@ -92,6 +102,7 @@ export class CadenasComponent implements OnInit, OnDestroy {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
           dtInstance.destroy();
           this.cargarCadenas();
+          this.limpiar();
         });
       });
   }
@@ -114,6 +125,10 @@ export class CadenasComponent implements OnInit, OnDestroy {
         });
     }
 
+  }
+  llenarDatos(cadena: Cadena) {
+    this._id = cadena._id;
+    this.nombre = cadena.nombre;
   }
 
   ngOnDestroy(): void {

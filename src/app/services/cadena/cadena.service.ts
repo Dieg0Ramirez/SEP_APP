@@ -23,12 +23,13 @@ crearCadena( cadena: Cadena) {
   return this.http.post(url , cadena).pipe(
     map((resp: any) => {
       console.log(resp);
+      this.alertify.success('Cadena creada con éxito');
     }));
 
   }
 
   actualizarCadena(cadena: Cadena) {
-    let url = URL_API + '/cadena' + cadena._id;
+    let url = URL_API + '/cadena/' + cadena._id;
     url += '?token=' + this._usuarioServices.token;
     return this.http.put(url , cadena );
   }

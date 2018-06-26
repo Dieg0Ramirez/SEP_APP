@@ -23,7 +23,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ServicesModule } from './services/services.module';
 import { AdminTipoDocumentoComponent } from './components/admin/pages/admin-tipo-documento/admin-tipo-documento.component';
-import { AdminActualizarComponent } from './components/admin/pages/admin-actualizar/admin-actualizar.component';
 import { AdminAprendicesComponent } from './components/admin/pages/admin-aprendices/admin-aprendices.component';
 import { AdminSeguimientoComponent } from './components/admin/pages/admin-seguimiento/admin-seguimiento.component';
 import { AdmiNivelFormacionComponent } from './components/admin/pages/admi-nivel-formacion/admi-nivel-formacion.component';
@@ -54,7 +53,6 @@ import { AlertifyService } from './services/alertify/alertify.service';
     AdminRegistrarUsuarioComponent,
     LoginComponent,
     AdminTipoDocumentoComponent,
-    AdminActualizarComponent,
     AdminAprendicesComponent,
     AdminSeguimientoComponent,
     AdmiNivelFormacionComponent,

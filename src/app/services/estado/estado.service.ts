@@ -5,7 +5,7 @@ import { UsuarioService } from '../usuario/usuario.service';
 import { map } from 'rxjs/operators';
 import { Estado } from '../../models/estado.models';
 import { DataTablesResponse } from '../../models/tablaModels';
-import { AlertifyService } from 'src/app/services/services.index';
+import { AlertifyService } from 'src/app/services/alertify/alertify.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,12 +23,13 @@ export class EstadoService {
   return this.http.post(url , estado).pipe(
     map((resp: any) => {
       console.log(resp);
+      swal('Estado creado', estado.nombre, 'success' );
     }));
 
   }
 
   actualizarEstado(estado: Estado) {
-    let url = URL_API + '/estado' + estado._id;
+    let url = URL_API + '/estado/' + estado._id;
     url += '?token=' + this._usuarioServices.token;
     return this.http.put(url , estado );
   }

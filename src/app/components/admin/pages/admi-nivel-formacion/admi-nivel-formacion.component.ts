@@ -4,7 +4,7 @@ import {FormGroup, FormControl, Validators, FormControlName} from '@angular/form
 import { Subject } from 'rxjs';
 import { spanish } from '../../../../interfaces/dataTables.es';
 
-import swal from 'sweetalert';
+import { DataTableDirective } from 'angular-datatables';
 
 import { NivelFormacionService } from '../../../../services/services.index';
 import { NivelFormacion } from '../../../../models/nivelFormacion.Models';
@@ -18,12 +18,15 @@ declare var AdminLTE: any;
   styleUrls: ['./admi-nivel-formacion.component.css']
 })
 export class AdmiNivelFormacionComponent implements OnInit, OnDestroy {
-
+  @ViewChild (DataTableDirective) dtElement: DataTableDirective;
+  forma: FormGroup;
   dtOptions: any = {};
 
   dtLanguage: any = spanish;
 
   dtTrigger: Subject<any> = new Subject();
+  _id: string;
+  nombre: string;
 
   nivelFormacion: NivelFormacion[] = [];
 
@@ -63,6 +66,27 @@ export class AdmiNivelFormacionComponent implements OnInit, OnDestroy {
       this.nivelFormacion = res.nivelFormacion;
       this.dtTrigger.next();
     });
+  }
+
+  limpiar() {
+    this.forma.reset();
+  }
+
+  actualizarNivelFormacion() {
+    const response = confirm('¿Deseas actualizar esta información?');
+    if (response) {
+      const newNivelFormacion = {
+        _id: this._id,
+        nombre: this.nombre
+      };
+      this._nivelFormacionServices.actualizarNivelFormacion( newNivelFormacion ).subscribe(() => {
+        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+          dtInstance.destroy();
+          this.cargarNivelFormacion();
+          this.limpiar();
+        });
+      });
+    }
   }
 
   ngOnDestroy(): void {

@@ -6,19 +6,18 @@
             </div>
             <div class="box-body">
 
-                <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registrarPrograms()" class="form-horizontal form-material" id="loginform"
-                    action="index.html">
+                <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registrarPrograms()" class="form-horizontal form-material" id="loginform" action="index.html">
                     <div class="box-body">
                         <h4> Crear programa </h4>
                         <div class="form-group col-md-6">
                             <label>Ingrese nombre del programa:</label>
-                            <input formControlName="nombre" name="nombre" type="text" class="form-control"  style="width: 350px" required>
+                            <input formControlName="nombre" name="nombre" type="text" class="form-control" style="width: 350px" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label>Nivel de formación:</label>
                             <br>
                             <select style="width: 150px" class="form-control" formControlName="nivelFormacion" name="nivelFormacion">
-                                <option *ngFor="let nivel of nivelFormacionn">
+                                <option *ngFor="let nivel of nivelFormacionn" [value]="nivel._id">
                                     {{nivel.nombre}}
                                 </option>
                             </select>
@@ -48,7 +47,7 @@
                     <tbody>
                         <tr *ngFor="let programs of programs">
                             <td>{{ programs.nombre }}</td>
-                            <td>{{ programs.nivelFormacion }}</td>
+                            <td>{{ programs.nivelFormacion?.nombre }}</td>
                             <td>
                                 <label *ngIf="programs.disponible" class="label label-info">Activo</label>
                                 <label *ngIf="!programs.disponible" class="label label-danger">Inactivo</label>
@@ -62,7 +61,7 @@
                                         </button>
                                     </div>
                                     <div class="col-md-6">
-                                        <button type="button" (click)="actualizarDisponibilidad(pro)" class="btn btn-default btn-block">Activar-Inactivar</button>
+                                        <button type="button" (click)="actualizarDisponibilidad(programs)" class="btn btn-default btn-block">Activar-Inactivar</button>
                                     </div>
                                 </div>
 

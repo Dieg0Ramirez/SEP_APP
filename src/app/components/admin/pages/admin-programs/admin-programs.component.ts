@@ -53,9 +53,7 @@ export class AdminProgramsComponent implements OnInit, OnDestroy {
       // Configure the buttons
       buttons: [
         { extend: 'colvis', text: 'Ocultar/Mostrar Columnas' },
-        {
-          extend: 'copy', text: 'Copiar al portapapeles'
-        },
+        { extend: 'copy', text: 'Copiar al portapapeles' },
         { extend: 'print', text: 'Imprimir' },
         { extend: 'excel', text: 'Exportar a Excel' },
       ]
@@ -80,6 +78,10 @@ export class AdminProgramsComponent implements OnInit, OnDestroy {
     });
   }
 
+  limpiar() {
+    this.forma.reset();
+  }
+
   cargarProgramas() {
     this._programsServices.listarPrograms().subscribe((res: any) => {
 
@@ -95,11 +97,14 @@ export class AdminProgramsComponent implements OnInit, OnDestroy {
       this.forma.value.nivelFormacion
     );
 
+  console.log(programs);
+
     this._programsServices.crearPrograms(programs)
       .subscribe(() => {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
           dtInstance.destroy();
           this.cargarProgramas();
+          this.limpiar();
         });
       });
   }
