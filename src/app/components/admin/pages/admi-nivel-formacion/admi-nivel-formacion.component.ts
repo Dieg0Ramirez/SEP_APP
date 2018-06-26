@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import {FormGroup, FormControl, Validators, FormControlName} from '@angular/forms';
 
 import { Subject } from 'rxjs';
@@ -57,6 +57,10 @@ export class AdmiNivelFormacionComponent implements OnInit, OnDestroy {
     };
 
     this.cargarNivelFormacion();
+
+    this.forma = new FormGroup({
+      nombreNivelFormacion: new FormControl(null , Validators.required )
+    });
   }
 
   cargarNivelFormacion() {
@@ -87,6 +91,43 @@ export class AdmiNivelFormacionComponent implements OnInit, OnDestroy {
         });
       });
     }
+  }
+
+  registarNivelFormacion() {
+    const nivelFormacion = new NivelFormacion(this.forma.value.nombreNivelFormacion);
+
+    this._nivelFormacionServices.crearNivelFormacion( nivelFormacion ).subscribe(() => {
+      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        dtInstance.destroy();
+        this.cargarNivelFormacion();
+        this.limpiar();
+      });
+    });
+  }
+
+  actualizarDisponibilidad(nivelFormacion: NivelFormacion) {
+    const response = confirm('¿Deseas actualizar la disponibilidad?');
+    if (response) {
+      if (nivelFormacion.disponible) {
+        nivelFormacion.disponible = false;
+      } else {
+        nivelFormacion.disponible = true;
+      }
+
+      this._nivelFormacionServices.actualizarDisponibilidad(nivelFormacion)
+        .subscribe(() => {
+          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            dtInstance.destroy();
+            this.cargarNivelFormacion();
+          });
+        });
+    }
+
+  }
+
+  llenarDatos(nivelFormacion: NivelFormacion) {
+    this._id = nivelFormacion._id;
+    this.nombre = nivelFormacion.nombre;
   }
 
   ngOnDestroy(): void {
