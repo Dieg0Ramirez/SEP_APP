@@ -1,24 +1,92 @@
 <div class="content-wrapper">
     <section class="content">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Tipo de Documento</h3>
+            </div>
+            <div class="box-body">
+                <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registarTipoDocumento()" class="form-horizontal form-material" id="loginform" action="index.html">
+                    <div class="box-body">
+                        <h4> Crear tipo de documento </h4>
+                        <div class="form-group col-md-6">
+                            <label>Ingrese nuevo tipo de documento:</label>
+                            <input formControlName="nombreTipoD" name="nombreTipoD" type="text" class="form-control" id="nombrecadena" style="width: 350px" required>
+                        </div>
+                    </div>
 
-        <div class="box-header">
-            <h3 class="box-title">Tipo de documento</h3>
+                    <div class=" box-footer ">
+                        <button style="width: 150px" type="submit " class="btn btn-success ">Crear</button>
+                    </div>
+                </form>
+            </div>
+            <div class="box-header">
+                <h3 class="box-title">Listado de tipos de documento</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+                <table class="table table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Disponibilidad</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let tipo of tipoDocumento">
+                            <td>{{ tipo.nombre }}</td>
+                            <td>
+                                <label *ngIf="tipo.disponible" class="label label-info">Activo</label>
+                                <label *ngIf="!tipo.disponible" class="label label-danger">Inactivo</label>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button type="button" (click)="llenarDatos(tipo)" class="btn btn-info btn-block" data-toggle="modal" data-target="#myModal">Editar</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" (click)="actualizarDisponibilidad(tipo)" class="btn btn-default btn-block">Actival-Inactivar</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <!-- /.box-header -->
-        <div class="box-body">
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
 
-            <table class="table table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let tipo of tipoDocumento">
-                        <td>{{ tipo.nombre }}</td>
-                    </tr>
-                </tbody>
-            </table>
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"></button>
+                        <h4 class="modal-title">Actualizar Cadena</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="">
+                            <input [(ngModel)]="_id" name="_id" id="_id" class="form-control" type="hidden">
+                            <div class="col-xs-12">
+                                <input [(ngModel)]="nombre" name="nombre" class="form-control" type="text" required placeholder="nombre cadena">
+                            </div>
+                            <br>
+
+                        </form>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="modal-footer">
+                        <button class="btn btn-info" type="submit" (click)="actualizarTipoD(tipoDocumento)">
+                                Actualizar Cadena
+                            </button>
+                        <button type="button" class="btn btn-default " data-dismiss="modal">Cerrar</button>
+                    </div>
+
+
+                </div>
+
+            </div>
         </div>
 
     </section>
