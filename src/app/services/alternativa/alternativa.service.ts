@@ -31,7 +31,11 @@ crearAlternativa( alternativa: Alternativa) {
   actualizarAlternativa(alternativa: Alternativa) {
     let url = URL_API + '/alternativa/' + alternativa._id;
     url += '?token=' + this._usuarioServices.token;
-    return this.http.put(url , alternativa );
+    return this.http.put(url , alternativa ).pipe(
+      map((resp: any) => {
+        console.log(resp);
+        this.alertify.success('Alternativa actualizada con éxito');
+      }));
   }
 
   listarAlternativa() {
@@ -42,7 +46,7 @@ crearAlternativa( alternativa: Alternativa) {
   }
 
   actualizarDisponibilidad(alternativa: Alternativa) {
-    let url = URL_API + '/cadena/disponible/' + alternativa._id;
+    let url = URL_API + '/alternativa/disponible/' + alternativa._id;
     url += '?token=' + this._usuarioServices.token;
     return this.http.put(url, alternativa ).pipe(
       map((resp: any) => {

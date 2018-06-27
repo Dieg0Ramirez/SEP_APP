@@ -27,6 +27,7 @@ export class AdminAlternativaPracticaComponent implements OnInit, OnDestroy {
 
   _id: string;
   nombre: string;
+  disponible: boolean;
 
   constructor(
     public _alternativaServices: AlternativaService,
@@ -40,7 +41,7 @@ export class AdminAlternativaPracticaComponent implements OnInit, OnDestroy {
       pageLength: 10,
       language: this.dtLanguage,
       // Declare the use of the extension in the dom parameter
-      dom: 'lfBrtip',
+      // dom: 'lfBrtip',
 
       // Configure the buttons
       // buttons: [
@@ -61,7 +62,8 @@ export class AdminAlternativaPracticaComponent implements OnInit, OnDestroy {
   cargarAlternativas() {
     this._alternativaServices.listarAlternativa().subscribe((res: any) => {
       console.log(res);
-      this.alternativa = res.alternativa;
+      this.alternativa = res.alternativas;
+      this.dtTrigger.next();
     });
   }
 
