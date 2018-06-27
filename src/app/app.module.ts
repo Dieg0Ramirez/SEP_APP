@@ -15,6 +15,8 @@ import { LeftSideComponent } from './components/admin/left-side/left-side.compon
 import { AdminHomeComponent } from './components/admin/pages/admin-home/admin-home.component';
 import { AdminProgramsComponent } from './components/admin/pages/admin-programs/admin-programs.component';
 import { CadenasComponent } from './components/admin/pages/admin-cadenas/cadenas.component';
+// tslint:disable-next-line:max-line-length
+import { AdminAlternativaPracticaComponent } from './components/admin/pages/admin-alternativa-practica/admin-alternativa-practica.component';
 import { CreacionEstadoComponent } from './components/admin/pages/admin-creacion-estado/creacion-estado.component';
 import { AdminRegistrarUsuarioComponent } from './components/admin/pages/admin-registrar-usuario/admin-registrar-usuario.component';
 
@@ -59,6 +61,7 @@ import { AlertifyService } from './services/alertify/alertify.service';
     AdminEditarAprendicesComponent,
     AdminFichasComponent,
     AdminExcelContratosComponent,
+    AdminAlternativaPracticaComponent,
     AdminExcelJuiciosEvaluativosComponent
   ],
   imports: [

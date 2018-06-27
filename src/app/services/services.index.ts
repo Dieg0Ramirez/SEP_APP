@@ -1,4 +1,5 @@
 
+export { AlternativaService } from './alternativa/alternativa.service';
 export { AlertifyService } from './alertify/alertify.service';
 export { CadenaService } from './cadena/cadena.service';
 export { EstadoService } from './estado/estado.service';
@@ -8,5 +9,3 @@ export { LoginGuardGuard } from './guards/login-guard.guard';
 export { UsuarioService } from './usuario/usuario.service';
 export { TipoDocumentoService } from './tipoDocumento/tipo-documento.service';
 export { ExcelService } from './excel/excel.service';
-
-
