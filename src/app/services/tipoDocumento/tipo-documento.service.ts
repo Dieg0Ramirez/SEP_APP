@@ -24,7 +24,7 @@ export class TipoDocumentoService {
     url += '?token=' + this._usuarioServices.token;
     return this.http.post(url , tipoDocumento).pipe(
       map((resp: any) => {
-      swal('Usuario creado', tipoDocumento.nombre, 'success' );
+      this.alertify.success('Tipo documento creada con éxito');
       return resp.Usuario;
     }));
   }
@@ -34,7 +34,7 @@ export class TipoDocumentoService {
     url += '?token=' + this._usuarioServices.token;
     return this.http.put(url, tipoDocumento ).pipe(
       map((resp: any) => {
-      swal('Usuario actualizado', tipoDocumento.nombre, 'success' );
+        this.alertify.message('Tipo documento actualizado con éxito');
       return resp.Usuario;
       }));
   }

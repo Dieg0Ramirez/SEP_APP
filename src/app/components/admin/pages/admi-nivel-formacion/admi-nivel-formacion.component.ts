@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import {FormGroup, FormControl, Validators, FormControlName} from '@angular/forms';
 
 import { Subject } from 'rxjs';

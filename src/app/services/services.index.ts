@@ -7,4 +7,6 @@ export { ProgramaService } from './programa/programa.service';
 export { LoginGuardGuard } from './guards/login-guard.guard';
 export { UsuarioService } from './usuario/usuario.service';
 export { TipoDocumentoService } from './tipoDocumento/tipo-documento.service';
+export { FichasService } from './fichas/fichas.service';
+
 

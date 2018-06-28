@@ -5,6 +5,10 @@ import { Subject } from 'rxjs';
 import { spanish } from '../../../../interfaces/dataTables.es';
 import { DataTableDirective } from 'angular-datatables';
 import { NivelFormacionService } from '../../../../services/services.index';
+import { CadenaService } from '../../../../services/cadena/cadena.service';
+import { ProgramaService } from '../../../../services/programa/programa.service';
+import { EstadoService } from '../../../../services/estado/estado.service';
+import { FichasService } from '../../../../services/fichas/fichas.service';
 
 declare var AdminLTE: any;
 
@@ -17,12 +21,20 @@ export class AdminAprendicesComponent implements OnInit, OnDestroy {
   @ViewChild (DataTableDirective) dtElement: DataTableDirective;
   forma: FormGroup;
   dtOptions: any = {};
-
+  cadenaFormacion: string;
   dtLanguage: any = spanish;
   dtTrigger: Subject<any> = new Subject();
+  nivelFormacion: any;
+  programa: any;
+  estado: any;
+  fichas: any;
 
   constructor(
+    public _cadenaServices: CadenaService,
     public _nivelFormacionServices: NivelFormacionService,
+    public _programaServices: ProgramaService,
+    public _estadoServices: EstadoService,
+    public _fichaServices: FichasService,
     public router: Router
   ) { }
 
@@ -45,13 +57,49 @@ export class AdminAprendicesComponent implements OnInit, OnDestroy {
         { extend: 'print', text: 'Imprimir' },
         { extend: 'excel', text: 'Exportar a Excel' },
       ]
-    };
+    },
+    this.forma = new FormGroup({
+      cadenaFormacion: new FormControl(null, Validators.required),
+      programa: new FormControl(null, Validators.required),
+      nivelFormacion: new FormControl(null, Validators.required),
+      ficha: new FormControl(null, Validators.required),
+      estado: new FormControl(null, Validators.required)
 
+    });
+
+
+    this.listarNivelF();
+    this.listarCadena();
+    this.listarprograma();
+    this.listarEstado();
+    this.listarFicha();
+  }
+
+
+  listarNivelF() {
     this._nivelFormacionServices.listarNivelFormacion().subscribe((res: any) => {
+      this.nivelFormacion = res.nivelFormacion;
+    });
+  }
+  listarCadena() {
+    this._cadenaServices.listarCadena().subscribe((res: any) => {
+      this.cadenaFormacion = res.cadenas;
+    });
+  }
 
-      console.log(res);
-      //this.nivelFormacion = res.nivelFormacion;
-      this.dtTrigger.next();
+  listarprograma() {
+    this._programaServices.listarPrograms().subscribe((res: any) => {
+      this.programa = res.programas;
+    });
+  }
+  listarEstado() {
+    this._estadoServices.listarEstado().subscribe((res: any) => {
+      this.estado = res.estados;
+    });
+  }
+  listarFicha() {
+    this._fichaServices.listarFicha().subscribe((res: any) => {
+      this.fichas = res.fichas;
     });
   }
 
@@ -59,5 +107,4 @@ export class AdminAprendicesComponent implements OnInit, OnDestroy {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
   }
-
 }
