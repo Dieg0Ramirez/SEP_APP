@@ -65,8 +65,6 @@ export class AdmiNivelFormacionComponent implements OnInit, OnDestroy {
 
   cargarNivelFormacion() {
     this._nivelFormacionServices.listarNivelFormacion().subscribe((res: any) => {
-
-      console.log(res);
       this.nivelFormacion = res.nivelFormacion;
       this.dtTrigger.next();
     });

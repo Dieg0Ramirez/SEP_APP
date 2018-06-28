@@ -66,7 +66,6 @@ export class CreacionEstadoComponent implements OnInit, OnDestroy {
   cargarEstados() {
     this._estadoService.listarEstado().subscribe((res: any) => {
 
-      console.log(res);
       this.estado = res.estados;
       this.dtTrigger.next();
 

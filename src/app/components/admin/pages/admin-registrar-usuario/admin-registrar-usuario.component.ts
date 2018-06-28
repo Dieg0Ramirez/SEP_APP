@@ -53,9 +53,7 @@ export class AdminRegistrarUsuarioComponent implements OnInit, OnDestroy {
       // Configure the buttons
       buttons: [
         { extend: 'colvis', text: 'Ocultar/Mostrar Columnas' },
-        {
-          extend: 'copy', text: 'Copiar al portapapeles'
-        },
+        { extend: 'copy', text: 'Copiar al portapapeles' },
         { extend: 'print', text: 'Imprimir' },
         { extend: 'excel', text: 'Exportar a Excel' },
       ]

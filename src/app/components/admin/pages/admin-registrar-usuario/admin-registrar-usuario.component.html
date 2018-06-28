@@ -4,7 +4,7 @@
         <div class="box">
             <div class="box-body">
                 <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registrarUsuario()" class="form-horizontal form-material" id="loginform" action="index.html">
-                    <h3 class="box-title m-t-40 m-b-0">Registrate
+                    <h3 class="box-title m-t-40 m-b-0">Regístrate
                         <br>
                         <small> Crea una cuenta y administra tu perfil</small>
                     </h3>
@@ -108,7 +108,7 @@
                                         <button type="button" class="btn btn-info btn-block" data-toggle="modal" (click)="llenarDatos(usuario)" data-target="#myModal">Editar</button>
                                     </div>
                                     <div class="col-md-6">
-                                        <button type="button" (click)="actualizarDisponibilidad(usuario)" class="btn btn-default ">Actival-Inactivar</button>
+                                        <button type="button" (click)="actualizarDisponibilidad(usuario)" class="btn btn-default ">Activar-Inactivar</button>
                                     </div>
                                 </div>
                             </td>
@@ -118,15 +118,10 @@
             </div>
             <!-- /.box-body -->
         </div>
-
-
         <!-- Ventana modal -->
-
-
         <!-- Modal -->
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
-
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
@@ -137,7 +132,6 @@
                         <form class="form-horizontal form-material" id="loginform1">
                             <!-- Crear el campo de tipo hidden para almacenar el  id de usuario a actualizar -->
                             <input [(ngModel)]="_id" name="_id" id="_id" class="form-control" type="hidden">
-
                             <div class="col-xs-12">
                                 <input [(ngModel)]="nombre" name="nombre" id="nombre" class="form-control" type="text" required placeholder="Nombre">
                             </div>
@@ -165,18 +159,12 @@
                         </button>
                         <button type="button" class="btn btn-default " data-dismiss="modal">Cerrar</button>
                     </div>
-
-
                 </div>
-
             </div>
         </div>
         <!-- /.Ventana modal-->
     </section>
     <!-- /.content -->
-
-
 </div>
-
 <!-- Bootstrap 3.3.6 -->
 <script src="../../bootstrap/js/bootstrap.min.js"></script>

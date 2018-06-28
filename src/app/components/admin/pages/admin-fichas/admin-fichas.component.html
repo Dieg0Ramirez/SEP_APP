@@ -1,51 +1,47 @@
 <div class="content-wrapper">
     <section class="content">
-
-            <h1>Fichas</h1>
-            <div>
-                <h3>Listado de Fichas</h3>
-            </div>
-
-            <div>
-
-                <table class="table table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
-                    <thead>
-                        <tr>
-                            <th>Ficha</th>
-                            <th>Programa</th>
-                            <th>Nivel</th>
-                            <th>Fecha de inicio</th>
-                            <th>Fecha de fin</th>
-                            <th>Modalidad</th>
-                            <th>Centro</th>
-                            <th>Estado</th>
-                            <th>Opciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let ficha of ficha">
-                            <td>{{ ficha.ficha }}</td>
-                            <td>{{ ficha.programa }}</td>
-                            <td>{{ ficha.nivel }}</td>
-                            <td>{{ ficha.fechaInicio }}</td>
-                            <td>{{ ficha.fechaFin }}</td>
-                            <td>{{ ficha.modalidad }}</td>
-                            <td>{{ ficha.centro }}</td>
-                            <td>{{ ficha.estado }}</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <button type="button" class="btn btn-info btn-block">Editar</button>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <button type="button" class="btn btn-default btn-block">Activar-Inactivar</button>
-                                    </div>
+        <h1>Fichas</h1>
+        <div>
+            <h3>Listado de Fichas</h3>
+        </div>
+        <div>
+            <table class="table table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                <thead>
+                    <tr>
+                        <th>Ficha</th>
+                        <th>Programa</th>
+                        <th>Nivel</th>
+                        <th>Fecha de inicio</th>
+                        <th>Fecha de fin</th>
+                        <th>Modalidad</th>
+                        <th>Centro</th>
+                        <th>Estado</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let ficha of ficha">
+                        <td>{{ ficha.ficha }}</td>
+                        <td>{{ ficha.programa }}</td>
+                        <td>{{ ficha.nivel }}</td>
+                        <td>{{ ficha.fechaInicio }}</td>
+                        <td>{{ ficha.fechaFin }}</td>
+                        <td>{{ ficha.modalidad }}</td>
+                        <td>{{ ficha.centro }}</td>
+                        <td>{{ ficha.estado }}</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-info btn-block">Editar</button>
                                 </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-default btn-block">Activar-Inactivar</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </section>
 </div>

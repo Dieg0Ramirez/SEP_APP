@@ -50,8 +50,7 @@ export class AdminExcelContratosComponent implements OnInit {
 
     this._nivelFormacionServices.listarNivelFormacion().subscribe((res: any) => {
 
-      console.log(res);
-      //this.nivelFormacion = res.nivelFormacion;
+      // this.nivelFormacion = res.nivelFormacion;
       this.dtTrigger.next();
     });
   }

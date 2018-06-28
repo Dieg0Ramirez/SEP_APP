@@ -73,60 +73,189 @@
                     </div>
                 </div>
                 <!-- /.box-body -->
-
                 <div class=" box-footer ">
                     <button class="btn btn-success" type="submit">Crear</button>
                 </div>
             </form>
 
-            <div class="box-header">
-                <h3 class="box-title">Listado de cadenas</h3>
-            </div>
-
-            <div class="box-body">
-
-                <table class="table table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
-                    <thead>
-                        <tr>
-                            <th>Tipo de documento</th>
-                            <th>Número de documento</th>
-                            <th>Nombre</th>
-                            <th>Apellidos</th>
-                            <th>Celular</th>
-                            <th>Telefono</th>
-                            <th>Correo</th>
-                            <th>Ficha</th>
-                            <th>Estado</th>
-                            <th>Alternativa practica</th>
-                            <th>Opciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let filtros of filtros">
-                            <td>{{ filtros.tipoDocumento.nombre }}</td>
-                            <td>{{ filtros.numeroDocumento }}</td>
-                            <td>{{ filtros.nombre }}</td>
-                            <td>{{ filtros.apellido }}</td>
-                            <td>{{ filtros.celular }}</td>
-                            <td>{{ filtros.telefono }}</td>
-                            <td>{{ filtros.correo }}</td>
-                            <td>{{ filtros.ficha.numeroFicha }}</td>
-                            <td>{{ filtros.estado.nombre }}</td>
-                            <td>{{ filtros.alternativa.nombre }}</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#myModal">Editar</button>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <button type="button" class="btn btn-default ">Actival-Inactivar</button>
-                                    </div>
+        </div>
+        <div class="box-header">
+            <h3 class="box-title">Listado de aprendices</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table class="table table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                <thead>
+                    <tr>
+                        <th>Tipo de documento</th>
+                        <th>Número de documento</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Ficha</th>
+                        <th>Estado</th>
+                        <th>Nivel Formación</th>
+                        <th>Programa</th>
+                        <th>Alternativa práctica</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let filtros of filtros">
+                        <td>{{ filtros.tipoDocumento }}</td>
+                        <td>{{ filtros.numeroDocumento }}</td>
+                        <td>{{ filtros.nombre }}</td>
+                        <td>{{ filtros.apellidos }}</td>
+                        <td>{{ filtros.ficha }}</td>
+                        <td>{{ filtros.nivelFormacion }}</td>
+                        <td>{{ filtros.programa }}</td>
+                        <td>{{ filtros.alternativaPractica }}</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#myModal">Editar</button>
                                 </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-default ">Activar-Inactivar</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Ventana modal -->
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Actualizar filtro</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="">
+                            <div class="col-xs-12">
+                                <input name="tipoDocumento" class="form-control" type="text" required placeholder="Tipo documento">
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-xs-12">
+                                <input name="documento" class="form-control" type="text" required placeholder="Documento">
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-xs-12">
+                                <input name="nombre" class="form-control" type="text" required placeholder="Nombre">
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-xs-12">
+                                <input name="apellidos" class="form-control" type="text" required placeholder="Apellidos">
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-xs-12">
+                                <input name="ficha" class="form-control" type="text" required placeholder="Ficha">
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-xs-12">
+                                <input name="estado" class="form-control" type="text" required placeholder="Estado">
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-xs-12">
+                                <input name="nivelFormacion" class="form-control" type="text" required placeholder="Nivel de formación">
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-xs-12">
+                                <input name="programa" class="form-control" type="text" required placeholder="Programa">
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-xs-12">
+                                <input name="alternativaPractica" class="form-control" type="text" required placeholder="Alternativa práctica">
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-xs-12">
+                                <input name="apellidos" class="form-control" type="text" required placeholder="Apellidos">
+                            </div>
+                            <br>
+                            <br>
+                            <div class="modal-footer">
+                                <button class="btn btn-info" type="submit">
+                                    Actualizar usuario
+                                </button>&nbsp;&nbsp;&nbsp;
+                                <button type="button" class="btn btn-default " data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </form>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="modal-footer">
+                        <button class="btn btn-info" type="submit">
+                            Actualizar usuario
+                        </button>&nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-default " data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
             </div>
+        </div>
+
+
+        <div class="box-header">
+            <h3 class="box-title">Listado de cadenas</h3>
+        </div>
+
+        <div class="box-body">
+
+            <table class="table table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                <thead>
+                    <tr>
+                        <th>Tipo de documento</th>
+                        <th>Número de documento</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Celular</th>
+                        <th>Telefono</th>
+                        <th>Correo</th>
+                        <th>Ficha</th>
+                        <th>Estado</th>
+                        <th>Alternativa practica</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let filtros of filtros">
+                        <td>{{ filtros.tipoDocumento.nombre }}</td>
+                        <td>{{ filtros.numeroDocumento }}</td>
+                        <td>{{ filtros.nombre }}</td>
+                        <td>{{ filtros.apellido }}</td>
+                        <td>{{ filtros.celular }}</td>
+                        <td>{{ filtros.telefono }}</td>
+                        <td>{{ filtros.correo }}</td>
+                        <td>{{ filtros.ficha.numeroFicha }}</td>
+                        <td>{{ filtros.estado.nombre }}</td>
+                        <td>{{ filtros.alternativa.nombre }}</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#myModal">Editar</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-default ">Actival-Inactivar</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="box-header">
+            <h3 class="box-title">Listado de aprendices</h3>
         </div>
     </section>
 </div>
