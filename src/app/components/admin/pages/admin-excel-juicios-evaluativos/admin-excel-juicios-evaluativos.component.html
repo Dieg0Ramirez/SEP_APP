@@ -1,109 +1,100 @@
 <div class="content-wrapper">
-
-  <section class="content">
-
-    <div class="box box-primary">
-      <div class="box-header">
-        <h4> Subir excel de Juicios Evaluativos </h4>
-      </div>
-      <div class="box-body">
-        <form ngNativeValidate [formGroup]="excelForm" (ngSubmit)="subir()" id="excelForm">
-          <div class="form-group">
-            <label for="nivelFormacion">Nivel de formación:</label>
-            <select formControlName="nivelFormacion" name="nivelFormacion" id="nivelFormacion" class="form-control">
+    <section class="content">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h4> Subir excel de Juicios Evaluativos </h4>
+            </div>
+            <div class="box-body">
+                <form ngNativeValidate [formGroup]="excelForm" (ngSubmit)="subir()" id="excelForm">
+                    <div class="form-group">
+                        <label for="nivelFormacion">Nivel de formación:</label>
+                        <select formControlName="nivelFormacion" name="nivelFormacion" id="nivelFormacion" class="form-control">
               <option *ngFor="let nivel of nivelFormacion">
                 {{nivel.nombre}}
               </option>
             </select>
-          </div>
-          <div class="form-group">
-            <label for="excel">Archivo de excel</label>
-            <input id="excel" name="excel" type="file" class="form-control" (change)="fileChangeEvent($event)">
-            <p *ngIf="validExcelExtension==1" style="white-space: normal; color:red">El archivo debe ser formato xls o xlsx</p>
-            <p *ngIf="validExcelExtension==2" style="white-space: normal; color:red">El archivo es demasiado grande</p>
-          </div>
-          <div>
-            <button id="btnCrear" type="submit" class="btn btn-primary">Subir y sincronizar</button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <div class="box" *ngIf="displayData">
-      <div class="box-header">
-        <h4> Excel sincronizado </h4>
-      </div>
-      <div class="box-body">
-
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>Ficha de caracterización:</label>
-              <br>
-              <span>{{informacionGeneral.ficha}}</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="excel">Archivo de excel</label>
+                        <input id="excel" name="excel" type="file" class="form-control" (change)="fileChangeEvent($event)">
+                        <p *ngIf="validExcelExtension==1" style="white-space: normal; color:red">El archivo debe ser formato xls o xlsx</p>
+                        <p *ngIf="validExcelExtension==2" style="white-space: normal; color:red">El archivo es demasiado grande</p>
+                    </div>
+                    <div>
+                        <button id="btnCrear" type="submit" class="btn btn-primary">Subir y sincronizar</button>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-              <label>Fecha de inicio:</label>
-              <br>
-              <span>{{informacionGeneral.fechaInicio | date:'dd/MM/yyyy' }}</span>
-            </div>
-            <div class="form-group">
-              <label>Modalidad:</label>
-              <br>
-              <span>{{informacionGeneral.modalidad}}</span>
-            </div>
-          </div>
-          <div class="col-md-6">
-
-            <div class="form-group">
-              <label>Programas:</label>
-              <br>
-              <span>{{informacionGeneral.programa}}</span>
-            </div>
-            <div class="form-group">
-              <label>Fecha de fin:</label>
-              <br>
-              <span>{{informacionGeneral.fechaFin | date:'dd/MM/yyyy' }}</span>
-            </div>
-            <div class="form-group">
-              <label>Centro de formación:</label>
-              <br>
-              <span>{{informacionGeneral.centro}}</span>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-
-    <div class="box" *ngIf="displayData">
-      <div class="box-header">
-        <h3 class="box-title">Listado de aprendices</h3>
-      </div>
-      <div class="box-body">
-
-        <table class="table table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
-          <thead>
-            <tr>
-              <th>Tipo de documento</th>
-              <th>Número de documento</th>
-              <th>Nombre</th>
-              <th>Apellidos</th>
-              <th>Estado Formación</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let aprendiz of aprendices">
-              <td>{{ aprendiz.A }}</td>
-              <td>{{ aprendiz.B }}</td>
-              <td>{{ aprendiz.C }}</td>
-              <td>{{ aprendiz.D }}</td>
-              <td>{{ aprendiz.E }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-    </div>
-
-  </section>
+        <div class="box" *ngIf="displayData">
+            <div class="box-header">
+                <h4> Excel sincronizado </h4>
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Ficha de caracterización:</label>
+                            <br>
+                            <span>{{informacionGeneral.ficha}}</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Fecha de inicio:</label>
+                            <br>
+                            <span>{{informacionGeneral.fechaInicio | date:'dd/MM/yyyy' }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Modalidad:</label>
+                            <br>
+                            <span>{{informacionGeneral.modalidad}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Programas:</label>
+                            <br>
+                            <span>{{informacionGeneral.programa}}</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Fecha de fin:</label>
+                            <br>
+                            <span>{{informacionGeneral.fechaFin | date:'dd/MM/yyyy' }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Centro de formación:</label>
+                            <br>
+                            <span>{{informacionGeneral.centro}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box" *ngIf="displayData">
+            <div class="box-header">
+                <h3 class="box-title">Listado de aprendices</h3>
+            </div>
+            <div class="box-body">
+                <table class="table table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                    <thead>
+                        <tr>
+                            <th>Tipo de documento</th>
+                            <th>Número de documento</th>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>Estado Formación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let aprendiz of aprendices">
+                            <td>{{ aprendiz.A }}</td>
+                            <td>{{ aprendiz.B }}</td>
+                            <td>{{ aprendiz.C }}</td>
+                            <td>{{ aprendiz.D }}</td>
+                            <td>{{ aprendiz.E }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
 </div>
