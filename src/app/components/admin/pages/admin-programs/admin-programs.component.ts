@@ -60,7 +60,6 @@ export class AdminProgramsComponent implements OnInit, OnDestroy {
     };
 
     this._nivelFormacionServices.listarNivelFormacion().subscribe((res: any) => {
-
       this.nivelFormacionn = res.nivelFormacion;
     });
 

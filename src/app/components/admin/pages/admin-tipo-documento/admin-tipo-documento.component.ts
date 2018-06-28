@@ -3,13 +3,11 @@ import {FormGroup, FormControl, Validators, FormControlName} from '@angular/form
 
 import { Subject } from 'rxjs';
 import { spanish } from '../../../../interfaces/dataTables.es';
-
-import swal from 'sweetalert';
-
 import { TipoDocumentoService } from '../../../../services/services.index';
 import { TipoDocumento } from '../../../../models/tipoDocumento.Models';
 import { Router } from '@angular/router';
 import { DataTableDirective } from 'angular-datatables';
+
 
 declare var AdminLTE: any;
 
@@ -42,19 +40,7 @@ export class AdminTipoDocumentoComponent implements OnInit {
     this.dtOptions = {
       // pagingType: 'full_numbers',
       pageLength: 10,
-      language: this.dtLanguage,
-      // Declare the use of the extension in the dom parameter
-      // dom: 'lfBrtip',
-
-      // // Configure the buttons
-      // buttons: [
-      //   { extend: 'colvis', text: 'Ocultar/Mostrar Columnas' },
-      //   {
-      //     extend: 'copy', text: 'Copiar al portapapeles'
-      //   },
-      //   { extend: 'print', text: 'Imprimir' },
-      //   { extend: 'excel', text: 'Exportar a Excel' },
-      // ]
+      language: this.dtLanguage
     };
 
     this.cargarTipoDocumento();
@@ -107,7 +93,6 @@ export class AdminTipoDocumentoComponent implements OnInit {
             this.cargarTipoDocumento();
           });
         } );
-
   }
 }
 actualizarDisponibilidad(tipoDocumento: TipoDocumento) {
@@ -131,10 +116,8 @@ actualizarDisponibilidad(tipoDocumento: TipoDocumento) {
 
 }
 limpiar() {
-  this._id = '';
-  this.nombre = '';
+  this.forma.reset();
 }
-
 
 
 }
