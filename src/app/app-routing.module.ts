@@ -18,6 +18,8 @@ import { AdminFichasComponent } from './components/admin/pages/admin-fichas/admi
 import { AdminExcelContratosComponent } from './components/admin/pages/admin-excel-contratos/admin-excel-contratos.component';
 // tslint:disable-next-line:max-line-length
 import { AdminExcelJuiciosEvaluativosComponent } from './components/admin/pages/admin-excel-juicios-evaluativos/admin-excel-juicios-evaluativos.component';
+// tslint:disable-next-line:max-line-length
+import { AdminAlternativaPracticaComponent } from './components/admin/pages/admin-alternativa-practica/admin-alternativa-practica.component';
 
 
 const routes: Routes = [
@@ -76,6 +78,10 @@ const routes: Routes = [
       {
         path: 'admin-nivelFormacion',
         component: AdmiNivelFormacionComponent
+      },
+      {
+        path: 'admin-alternativa-practica',
+        component: AdminAlternativaPracticaComponent
       },
       {
         path: 'admin-editar-aprendices',

@@ -2,15 +2,14 @@
     <section class="content">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Nivel de formación</h3>
+                <h3 class="box-title">Alternativas de práctica</h3>
             </div>
             <div class="box-body">
-                <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registarNivelFormacion()" class="form-horizontal form-material" id="loginform" action="index.html">
+                <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registarAlternativa()" class="form-horizontal form-material" id="loginform" action="index.html">
                     <div class="box-body">
-                        <h4> Crear nivel de formacion </h4>
                         <div class="form-group col-md-6">
-                            <label>Ingrese el nombre del nivel de formacion:</label>
-                            <input formControlName="nombreNivelFormacion" name="nombreNivelFormacion" type="text" class="form-control" id="nombreNivelFormacion" style="width: 350px" required>
+                            <label>Ingrese nombre de la alternativa de práctica:</label>
+                            <input formControlName="nombrealternativa" name="nombrealternativa" type="text" class="form-control" id="nombrealternativa" style="width: 350px" required>
                         </div>
                     </div>
 
@@ -20,7 +19,7 @@
                 </form>
             </div>
             <div class="box-header">
-                <h3 class="box-title">Listado de los niveles de formacion</h3>
+                <h3 class="box-title">Listado de alternativas de práctica</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -34,19 +33,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let niv of nivelFormacion">
-                            <td>{{ niv.nombre }}</td>
+                        <tr *ngFor="let alternativa of alternativa">
+                            <td>{{ alternativa.nombre }}</td>
                             <td>
-                                <label *ngIf="niv.disponible" class="label label-info">Activo</label>
-                                <label *ngIf="!niv.disponible" class="label label-danger">Inactivo</label>
+                                <label *ngIf="alternativa.disponible" class="label label-info">Activo</label>
+                                <label *ngIf="!alternativa.disponible" class="label label-danger">Inactivo</label>
                             </td>
                             <td>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <button type="button" class="btn btn-info btn-block" data-toggle="modal" (click)="llenarDatos(niv)" data-target="#myModal">Editar</button>
+                                        <button type="button" class="btn btn-info btn-block" data-toggle="modal" (click)="llenarDatos(alternativa)" data-target="#myModal">Editar</button>
                                     </div>
                                     <div class="col-md-6">
-                                        <button type="button" (click)="actualizarDisponibilidad(niv)" class="btn btn-default btn-block">Actival-Inactivar</button>
+                                        <button type="button" (click)="actualizarDisponibilidad(alternativa)" class="btn btn-default btn-block">Actival-Inactivar</button>
                                     </div>
                                 </div>
                             </td>
@@ -67,13 +66,13 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"></button>
-                        <h4 class="modal-title">Actualizar Nivel de formacion</h4>
+                        <h4 class="modal-title">Actualizar alternativa de práctica</h4>
                     </div>
                     <div class="modal-body">
                         <form action="">
                             <input [(ngModel)]="_id" name="_id" id="_id" class="form-control" type="hidden">
                             <div class="col-xs-12">
-                                <input [(ngModel)]="nombre" name="nombre" class="form-control" type="text" required placeholder="nombre nivel de formacion">
+                                <input [(ngModel)]="nombre" name="nombre" class="form-control" type="text" required>
                             </div>
                             <br>
 
@@ -82,9 +81,9 @@
                     <br>
                     <br>
                     <div class="modal-footer">
-                        <button class="btn btn-info" type="submit" (click)="actualizarNivelFormacion(nivelFormacion)">
-                                    Actualizar nivel de formacion
-                                </button>
+                        <button class="btn btn-info" type="submit" data-dismiss="modal" (click)="actualizarAlternativa(alternativa)">
+                          Actualizar Alternativa
+                      </button>
                         <button type="button" class="btn btn-default " data-dismiss="modal">Cerrar</button>
                     </div>
 
@@ -93,6 +92,5 @@
 
             </div>
         </div>
-
     </section>
 </div>
