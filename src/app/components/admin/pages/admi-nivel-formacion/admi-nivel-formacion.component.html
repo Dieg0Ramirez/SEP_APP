@@ -9,22 +9,20 @@
                     <div class="box-body">
                         <h4> Crear nivel de formacion </h4>
                         <div class="form-group col-md-6">
-                            <label>Ingrese el nombre del nivel de formacion:</label>
+                            <label>Ingrese el nombre del nivel de formación:</label>
                             <input formControlName="nombreNivelFormacion" name="nombreNivelFormacion" type="text" class="form-control" id="nombreNivelFormacion" style="width: 350px" required>
                         </div>
                     </div>
-
                     <div class=" box-footer ">
                         <button style="width: 150px" type="submit " class="btn btn-success ">Crear</button>
                     </div>
                 </form>
             </div>
             <div class="box-header">
-                <h3 class="box-title">Listado de los niveles de formacion</h3>
+                <h3 class="box-title">Listado de los niveles de formación</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-
                 <table class="table table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
                     <thead>
                         <tr>
@@ -46,7 +44,7 @@
                                         <button type="button" class="btn btn-info btn-block" data-toggle="modal" (click)="llenarDatos(niv)" data-target="#myModal">Editar</button>
                                     </div>
                                     <div class="col-md-6">
-                                        <button type="button" (click)="actualizarDisponibilidad(niv)" class="btn btn-default btn-block">Actival-Inactivar</button>
+                                        <button type="button" (click)="actualizarDisponibilidad(niv)" class="btn btn-default btn-block">Activar-Inactivar</button>
                                     </div>
                                 </div>
                             </td>
@@ -55,28 +53,23 @@
                 </table>
             </div>
         </div>
-
         <!-- Ventana modal -->
-
-
         <!-- Modal -->
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
-
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"></button>
-                        <h4 class="modal-title">Actualizar Nivel de formacion</h4>
+                        <h4 class="modal-title">Actualizar Nivel de formación</h4>
                     </div>
                     <div class="modal-body">
                         <form action="">
                             <input [(ngModel)]="_id" name="_id" id="_id" class="form-control" type="hidden">
                             <div class="col-xs-12">
-                                <input [(ngModel)]="nombre" name="nombre" class="form-control" type="text" required placeholder="nombre nivel de formacion">
+                                <input [(ngModel)]="nombre" name="nombre" class="form-control" type="text" required placeholder="nombre nivel de formación">
                             </div>
                             <br>
-
                         </form>
                     </div>
                     <br>
@@ -87,12 +80,8 @@
                                 </button>
                         <button type="button" class="btn btn-default " data-dismiss="modal">Cerrar</button>
                     </div>
-
-
                 </div>
-
             </div>
         </div>
-
     </section>
 </div>
