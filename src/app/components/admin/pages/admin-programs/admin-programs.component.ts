@@ -61,7 +61,6 @@ export class AdminProgramsComponent implements OnInit, OnDestroy {
 
     this._nivelFormacionServices.listarNivelFormacion().subscribe((res: any) => {
 
-      console.log(res);
       this.nivelFormacionn = res.nivelFormacion;
     });
 
@@ -85,7 +84,6 @@ export class AdminProgramsComponent implements OnInit, OnDestroy {
   cargarProgramas() {
     this._programsServices.listarPrograms().subscribe((res: any) => {
 
-      console.log(res);
       this.programs = res.programas;
       this.dtTrigger.next();
     });
@@ -96,8 +94,6 @@ export class AdminProgramsComponent implements OnInit, OnDestroy {
       this.forma.value.nombre,
       this.forma.value.nivelFormacion
     );
-
-  console.log(programs);
 
     this._programsServices.crearPrograms(programs)
       .subscribe(() => {
@@ -136,7 +132,6 @@ export class AdminProgramsComponent implements OnInit, OnDestroy {
         nombre: this.nombre,
         nivelFormacion: this.nivelFormacion
       };
-      console.log(newPrograms);
 
       this._programsServices.actualizarPrograms(newPrograms)
         .subscribe(() => {

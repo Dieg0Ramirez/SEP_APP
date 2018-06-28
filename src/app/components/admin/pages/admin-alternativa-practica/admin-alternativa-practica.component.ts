@@ -61,7 +61,6 @@ export class AdminAlternativaPracticaComponent implements OnInit, OnDestroy {
 
   cargarAlternativas() {
     this._alternativaServices.listarAlternativa().subscribe((res: any) => {
-      console.log(res);
       this.alternativa = res.alternativas;
       this.dtTrigger.next();
     });

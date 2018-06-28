@@ -13,7 +13,6 @@
                             <input formControlName="nombreTipoD" name="nombreTipoD" type="text" class="form-control" id="nombrecadena" style="width: 350px" required>
                         </div>
                     </div>
-
                     <div class=" box-footer ">
                         <button style="width: 150px" type="submit " class="btn btn-success ">Crear</button>
                     </div>
@@ -46,7 +45,7 @@
                                         <button type="button" (click)="llenarDatos(tipo)" class="btn btn-info btn-block" data-toggle="modal" data-target="#myModal">Editar</button>
                                     </div>
                                     <div class="col-md-6">
-                                        <button type="button" (click)="actualizarDisponibilidad(tipo)" class="btn btn-default btn-block">Actival-Inactivar</button>
+                                        <button type="button" (click)="actualizarDisponibilidad(tipo)" class="btn btn-default btn-block">Activar-Inactivar</button>
                                     </div>
                                 </div>
                             </td>
@@ -57,7 +56,6 @@
         </div>
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
-
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
@@ -71,7 +69,6 @@
                                 <input [(ngModel)]="nombre" name="nombre" class="form-control" type="text" required placeholder="nombre cadena">
                             </div>
                             <br>
-
                         </form>
                     </div>
                     <br>
@@ -82,13 +79,8 @@
                             </button>
                         <button type="button" class="btn btn-default " data-dismiss="modal">Cerrar</button>
                     </div>
-
-
                 </div>
-
             </div>
         </div>
-
     </section>
-
 </div>

@@ -63,7 +63,6 @@ export class CadenasComponent implements OnInit, OnDestroy {
   cargarCadenas() {
     this._cadenaServices.listarCadena().subscribe((res: any) => {
 
-      console.log(res);
       this.cadena = res.cadenas;
       this.dtTrigger.next();
     });
