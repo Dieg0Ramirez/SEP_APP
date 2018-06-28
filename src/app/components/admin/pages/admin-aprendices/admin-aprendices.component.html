@@ -61,13 +61,13 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Ficha</label>
+                                <label>Alternativa</label>
                                 <br>
-                                <!-- <select style="width: 150px" class="form-control" formControlName="ficha" name="ficha" id="ficha" style="width: 50%">
-                                    <option *ngFor="let ficha of fichas" [value]="ficha._id">
-                                        {{ficha.nombre}}
+                                <select style="width: 150px" class="form-control" formControlName="alternativaPractica" name="alternativaPractica" id="alternativaPractica" style="width: 50%">
+                                    <option *ngFor="let alternativa of alternativaPractica" [value]="alternativa._id">
+                                        {{alternativa.nombre}}
                                     </option>
-                                </select> -->
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -92,24 +92,27 @@
                             <th>Número de documento</th>
                             <th>Nombre</th>
                             <th>Apellidos</th>
+                            <th>Celular</th>
+                            <th>Telefono</th>
+                            <th>Correo</th>
                             <th>Ficha</th>
                             <th>Estado</th>
-                            <th>Nivel Formación</th>
-                            <th>Programa</th>
                             <th>Alternativa practica</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let filtros of filtros">
-                            <td>{{ filtros.tipoDocumento }}</td>
+                            <td>{{ filtros.tipoDocumento.nombre }}</td>
                             <td>{{ filtros.numeroDocumento }}</td>
                             <td>{{ filtros.nombre }}</td>
-                            <td>{{ filtros.apellidos }}</td>
-                            <td>{{ filtros.ficha }}</td>
-                            <td>{{ filtros.nivelFormacion }}</td>
-                            <td>{{ filtros.programa }}</td>
-                            <td>{{ filtros.alternativaPractica }}</td>
+                            <td>{{ filtros.apellido }}</td>
+                            <td>{{ filtros.celular }}</td>
+                            <td>{{ filtros.telefono }}</td>
+                            <td>{{ filtros.correo }}</td>
+                            <td>{{ filtros.ficha.numeroFicha }}</td>
+                            <td>{{ filtros.estado.nombre }}</td>
+                            <td>{{ filtros.alternativa.nombre }}</td>
                             <td>
                                 <div class="row">
                                     <div class="col-md-6">
@@ -124,10 +127,6 @@
                     </tbody>
                 </table>
             </div>
-        </div>
-
-        <div class="box-header">
-            <h3 class="box-title">Listado de aprendices</h3>
         </div>
     </section>
 </div>

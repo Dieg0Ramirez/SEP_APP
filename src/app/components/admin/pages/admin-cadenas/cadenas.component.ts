@@ -65,7 +65,6 @@ export class CadenasComponent implements OnInit, OnDestroy {
 
       console.log(res);
       this.cadena = res.cadenas;
-      this.dtTrigger.next();
     });
   }
 

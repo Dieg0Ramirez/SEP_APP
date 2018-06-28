@@ -9,6 +9,9 @@ import { CadenaService } from '../../../../services/cadena/cadena.service';
 import { ProgramaService } from '../../../../services/programa/programa.service';
 import { EstadoService } from '../../../../services/estado/estado.service';
 import { FichasService } from '../../../../services/fichas/fichas.service';
+import { AlternativaService } from '../../../../services/alternativa/alternativa.service';
+import { AprendizService } from '../../../../services/aprendiz/aprendiz.service';
+import { Aprendiz } from '../../../../models/aprendiz.models';
 
 declare var AdminLTE: any;
 
@@ -28,13 +31,17 @@ export class AdminAprendicesComponent implements OnInit, OnDestroy {
   programa: any;
   estado: any;
   fichas: any;
+  alternativaPractica: any;
+  filtros: Aprendiz[] = [];
 
   constructor(
+    public _apredizServices: AprendizService,
     public _cadenaServices: CadenaService,
     public _nivelFormacionServices: NivelFormacionService,
     public _programaServices: ProgramaService,
     public _estadoServices: EstadoService,
     public _fichaServices: FichasService,
+    public _alternativaP: AlternativaService,
     public router: Router
   ) { }
 
@@ -63,18 +70,25 @@ export class AdminAprendicesComponent implements OnInit, OnDestroy {
       programa: new FormControl(null, Validators.required),
       nivelFormacion: new FormControl(null, Validators.required),
       ficha: new FormControl(null, Validators.required),
-      estado: new FormControl(null, Validators.required)
-
+      estado: new FormControl(null, Validators.required),
+      alternativaPractica: new FormControl(null, Validators.required)
     });
 
-
+    this.listarAprendiz();
     this.listarNivelF();
     this.listarCadena();
     this.listarprograma();
     this.listarEstado();
     this.listarFicha();
+    this.listarAlternatica();
   }
-
+  listarAprendiz() {
+    this._apredizServices.listarApredices().subscribe((res: any) => {
+      console.log(res);
+      this.filtros = res.aprendiz;
+      this.dtTrigger.next();
+    });
+  }
 
   listarNivelF() {
     this._nivelFormacionServices.listarNivelFormacion().subscribe((res: any) => {
@@ -100,6 +114,11 @@ export class AdminAprendicesComponent implements OnInit, OnDestroy {
   listarFicha() {
     this._fichaServices.listarFicha().subscribe((res: any) => {
       this.fichas = res.fichas;
+    });
+  }
+  listarAlternatica() {
+    this._alternativaP.listarAlternativa().subscribe((res: any) => {
+      this.alternativaPractica = res.alternativas;
     });
   }
 
