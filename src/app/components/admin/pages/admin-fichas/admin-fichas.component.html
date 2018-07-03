@@ -21,14 +21,17 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let ficha of ficha">
-                        <td>{{ ficha.ficha }}</td>
-                        <td>{{ ficha.programa }}</td>
+                        <td>{{ ficha.numeroFicha }}</td>
+                        <td>{{ ficha.programa.nombre }}</td>
                         <td>{{ ficha.nivel }}</td>
                         <td>{{ ficha.fechaInicio }}</td>
                         <td>{{ ficha.fechaFin }}</td>
                         <td>{{ ficha.modalidad }}</td>
                         <td>{{ ficha.centro }}</td>
-                        <td>{{ ficha.estado }}</td>
+                        <td>
+                            <label *ngIf="ficha.disponible" class="label label-info">Activo</label>
+                            <label *ngIf="!ficha.disponible" class="label label-danger">Inactivo</label>
+                        </td>
                         <td>
                             <div class="row">
                                 <div class="col-md-6">

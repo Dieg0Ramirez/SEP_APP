@@ -38,7 +38,8 @@ export class AdminExcelJuiciosEvaluativosComponent implements OnInit, OnDestroy 
     fechaInicio: '',
     ficha: '',
     modalidad: '',
-    programa: ''
+    programa: '',
+    NivelFormacion: ''
   };
   connection;
 

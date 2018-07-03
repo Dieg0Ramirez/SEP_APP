@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { spanish } from '../../../../interfaces/dataTables.es';
 import { DataTableDirective } from 'angular-datatables';
-import { NivelFormacionService } from '../../../../services/services.index';
+import { NivelFormacionService, FichasService } from '../../../../services/services.index';
 
 declare var AdminLTE: any;
 
@@ -20,9 +20,10 @@ export class AdminFichasComponent implements OnInit, OnDestroy {
 
   dtLanguage: any = spanish;
   dtTrigger: Subject<any> = new Subject();
+  ficha: any;
 
   constructor(
-    public _nivelFormacionServices: NivelFormacionService,
+    public _fichaServices: FichasService,
     public router: Router
   ) { }
 
@@ -47,9 +48,9 @@ export class AdminFichasComponent implements OnInit, OnDestroy {
       ]
     };
 
-    this._nivelFormacionServices.listarNivelFormacion().subscribe((res: any) => {
-
-      // this.nivelFormacion = res.nivelFormacion;
+    this._fichaServices.listarFicha().subscribe((res: any) => {
+    console.log(res);
+      this.ficha = res.fichas;
       this.dtTrigger.next();
     });
 

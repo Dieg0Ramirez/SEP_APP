@@ -9,7 +9,7 @@
                     <div class="form-group">
                         <label for="nivelFormacion">Nivel de formación:</label>
                         <select formControlName="nivelFormacion" name="nivelFormacion" id="nivelFormacion" class="form-control">
-              <option *ngFor="let nivel of nivelFormacion">
+              <option *ngFor="let nivel of nivelFormacion"  [value]="nivel._id">
                 {{nivel.nombre}}
               </option>
             </select>

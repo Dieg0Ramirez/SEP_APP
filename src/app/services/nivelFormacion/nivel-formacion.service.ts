@@ -35,7 +35,7 @@ export class NivelFormacionService {
   }
 
   actualizarNivelFormacion( nivelFormacion: NivelFormacion ) {
-    let url = URL_API + '/nivelFormacion' + nivelFormacion._id;
+    let url = URL_API + '/nivelFormacion/' + nivelFormacion._id;
     url += '?token=' + this._usuarioServices.token;
     return this.http.put(url, nivelFormacion ).pipe(
       map((resp: any) => {
