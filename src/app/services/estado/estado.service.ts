@@ -31,7 +31,13 @@ export class EstadoService {
   actualizarEstado(estado: Estado) {
     let url = URL_API + '/estado/' + estado._id;
     url += '?token=' + this._usuarioServices.token;
-    return this.http.put(url , estado );
+    return this.http.put(url , estado ).pipe(
+      map((resp: any) => {
+        this.alertify.success('Estado actualizado con éxito');
+        swal('Cadena actualizada', estado.nombre, 'success' );
+        return resp.Cadena;
+      })
+    );
   }
 
   listarEstado() {

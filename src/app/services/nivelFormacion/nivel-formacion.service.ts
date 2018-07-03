@@ -29,8 +29,9 @@ export class NivelFormacionService {
     url += '/?token=' + this._usuarioServices.token;
     return this.http.post(url , nivelFormacion).pipe(
       map((resp: any) => {
-        this.alertify.success('nivel de formacion creado con exito');
-        return resp.Usuario;
+        this.alertify.success('Nivel de formación creado con éxito');
+        swal('Nivel de formación actualizado', nivelFormacion.nombre, 'success' );
+        return resp.NivelFormacion;
     }));
   }
 
@@ -39,8 +40,9 @@ export class NivelFormacionService {
     url += '?token=' + this._usuarioServices.token;
     return this.http.put(url, nivelFormacion ).pipe(
       map((resp: any) => {
-        this.alertify.success('nivel de formacion actualizado con exito');
-        return resp.Usuario;
+        this.alertify.success('nivel de formacion actualizado con éxito');
+        swal('Nivel de formación actualizado', nivelFormacion.nombre, 'success' );
+        return resp.NivelFormacion;
       }));
   }
 

@@ -19,13 +19,15 @@ export class TipoDocumentoService {
     public _usuarioServices: UsuarioService,
     public alertify: AlertifyService
   ) {}
+
   creartipoDocumento( tipoDocumento: TipoDocumento) {
     let url = URL_API + '/tipoDocumento';
     url += '?token=' + this._usuarioServices.token;
     return this.http.post(url , tipoDocumento).pipe(
       map((resp: any) => {
       this.alertify.success('Tipo documento creada con éxito');
-      return resp.Usuario;
+      swal('Tipo documento creado', tipoDocumento.nombre, 'success' );
+      return resp.tipoDocumento;
     }));
   }
 
@@ -34,8 +36,9 @@ export class TipoDocumentoService {
     url += '?token=' + this._usuarioServices.token;
     return this.http.put(url, tipoDocumento ).pipe(
       map((resp: any) => {
-        this.alertify.message('Tipo documento actualizado con éxito');
-      return resp.Usuario;
+        this.alertify.success('Tipo documento actualizado con éxito');
+        swal('Tipo documento actualizado', tipoDocumento.nombre, 'success' );
+        return resp.TipoDocumento;
       }));
   }
   actualizarDisponibilidad(tipoDocumento: TipoDocumento) {
@@ -44,7 +47,7 @@ export class TipoDocumentoService {
     return this.http.put(url, tipoDocumento ).pipe(
       map((resp: any) => {
         this.alertify.success('disponibilidad actualizada');
-      return resp.tipoDocumento;
+        return resp.tipoDocumento;
       }));
   }
 

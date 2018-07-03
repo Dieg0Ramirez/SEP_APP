@@ -22,8 +22,10 @@ crearAlternativa( alternativa: Alternativa) {
 
   return this.http.post(url , alternativa).pipe(
     map((resp: any) => {
-      console.log(resp);
-      this.alertify.success('Alternativa creada con éxito');
+        console.log(resp);
+        this.alertify.success('Alternativa creada con éxito');
+        swal('Alternativa actualizada', alternativa.nombre, 'success' );
+        return resp.Alternativa;
     }));
 
   }
@@ -35,6 +37,8 @@ crearAlternativa( alternativa: Alternativa) {
       map((resp: any) => {
         console.log(resp);
         this.alertify.success('Alternativa actualizada con éxito');
+        swal('Alternativa actualizada', alternativa.nombre, 'success' );
+        return resp.Alternativa;
       }));
   }
 
