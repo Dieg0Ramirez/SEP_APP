@@ -24,6 +24,8 @@ crearCadena( cadena: Cadena) {
     map((resp: any) => {
       console.log(resp);
       this.alertify.success('Cadena creada con éxito');
+      swal('Cadena creada', cadena.nombre, 'success' );
+      return resp.Cadena;
     }));
 
   }
@@ -31,7 +33,13 @@ crearCadena( cadena: Cadena) {
   actualizarCadena(cadena: Cadena) {
     let url = URL_API + '/cadena/' + cadena._id;
     url += '?token=' + this._usuarioServices.token;
-    return this.http.put(url , cadena );
+    return this.http.put(url , cadena ).pipe(
+      map((resp: any) => {
+        this.alertify.success('Cadena actualizada con éxito');
+        swal('Cadena actualizada', cadena.nombre, 'success' );
+        return resp.Cadena;
+      })
+    );
   }
 
   listarCadena() {
