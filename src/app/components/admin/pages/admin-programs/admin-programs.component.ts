@@ -123,7 +123,7 @@ export class AdminProgramsComponent implements OnInit, OnDestroy {
     }
   }
 
-  actualizarPrograms(programs: Programs, nivelFormacion: NivelFormacion) {
+  actualizarPrograms() {
     const response = confirm('¿Deseas actualizar esta información');
     if (response) {
       const newPrograms = {
