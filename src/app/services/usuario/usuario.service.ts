@@ -73,8 +73,7 @@ export class UsuarioService {
     url += '/?token=' + this.token;
     return this.http.post(url , usuario).pipe(
       map((resp: any) => {
-      swal('Usuario creado', usuario.email, 'success' );
-      return resp.Usuario;
+        this.alertify.success('Usuario creado con éxito');
     }));
   }
 
@@ -83,8 +82,7 @@ export class UsuarioService {
     url += '?token=' + this.token;
     return this.http.put(url, usuario ).pipe(
       map((resp: any) => {
-      swal('Usuario actualizado', usuario.email, 'success' );
-      return resp.Usuario;
+        this.alertify.success('Usuario actualizado con éxito');
       }));
   }
 
