@@ -69,6 +69,7 @@ export class AdminTipoDocumentoComponent implements OnInit {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
           dtInstance.destroy();
           this.cargarTipoDocumento();
+          this.limpiar();
         });
       });
   }
@@ -118,6 +119,5 @@ actualizarDisponibilidad(tipoDocumento: TipoDocumento) {
 limpiar() {
   this.forma.reset();
 }
-
 
 }
