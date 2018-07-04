@@ -26,8 +26,6 @@ export class TipoDocumentoService {
     return this.http.post(url , tipoDocumento).pipe(
       map((resp: any) => {
       this.alertify.success('Tipo documento creada con éxito');
-      swal('Tipo documento creado', tipoDocumento.nombre, 'success' );
-      return resp.tipoDocumento;
     }));
   }
 
@@ -37,8 +35,6 @@ export class TipoDocumentoService {
     return this.http.put(url, tipoDocumento ).pipe(
       map((resp: any) => {
         this.alertify.success('Tipo documento actualizado con éxito');
-        swal('Tipo documento actualizado', tipoDocumento.nombre, 'success' );
-        return resp.TipoDocumento;
       }));
   }
   actualizarDisponibilidad(tipoDocumento: TipoDocumento) {

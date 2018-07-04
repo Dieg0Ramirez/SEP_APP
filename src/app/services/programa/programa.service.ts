@@ -23,8 +23,7 @@ export class ProgramaService {
 
     return this.http.post(url, programs).pipe(
       map((resp: any) => {
-      swal('Programa creado', programs.nombre, 'success' );
-      return resp.Usuario;
+        this.alertify.success('Programa creado con éxito');
     }));
   }
 
@@ -33,8 +32,7 @@ export class ProgramaService {
     url += '?token=' + this._usuarioServices.token;
     return this.http.put(url, programs).pipe(
       map((resp: any) => {
-      swal('Programa actualizado', programs.nombre, 'success' );
-      return resp.Usuario;
+        this.alertify.success('Programa actualizado con éxito');
       }));
   }
 
@@ -50,7 +48,7 @@ export class ProgramaService {
     return this.http.put(url, program ).pipe(
       map((resp: any) => {
         this.alertify.success('disponibilidad actualizada');
-      return resp.Programs;
+        return resp.Programs;
       }));
   }
 }

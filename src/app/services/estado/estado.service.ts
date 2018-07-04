@@ -22,8 +22,7 @@ export class EstadoService {
 
   return this.http.post(url , estado).pipe(
     map((resp: any) => {
-      console.log(resp);
-      swal('Estado creado', estado.nombre, 'success' );
+      this.alertify.success('Estado creado con éxito');
     }));
 
   }
@@ -34,8 +33,6 @@ export class EstadoService {
     return this.http.put(url , estado ).pipe(
       map((resp: any) => {
         this.alertify.success('Estado actualizado con éxito');
-        swal('Cadena actualizada', estado.nombre, 'success' );
-        return resp.Cadena;
       })
     );
   }
@@ -53,7 +50,7 @@ export class EstadoService {
     return this.http.put(url, estado ).pipe(
       map((resp: any) => {
         this.alertify.success('disponibilidad actualizada');
-      return resp.Estado;
+        return resp.Estado;
       }));
   }
 }
