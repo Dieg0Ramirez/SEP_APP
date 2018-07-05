@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormControlName } from '@angular/forms';
-import { ProgramaService, NivelFormacionService } from '../../../../services/services.index';
+import { ProgramaService, NivelFormacionService, CadenaService } from '../../../../services/services.index';
 import { Router } from '@angular/router';
 import { Programs } from '../../../../models/programs.models';
 import { Subject } from 'rxjs';
 import { spanish } from '../../../../interfaces/dataTables.es';
 import { DataTableDirective } from 'angular-datatables';
 import { NivelFormacion } from './../../../../models/nivelFormacion.models';
+import { Cadena } from '../../../../models/cadena.models';
 
 
 declare var AdminLTE: any;
@@ -20,6 +21,7 @@ export class AdminProgramsComponent implements OnInit, OnDestroy {
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
   nivelFormacion: string;
+  cadena: string;
   nombre: string;
   _id: string;
 
@@ -33,10 +35,12 @@ export class AdminProgramsComponent implements OnInit, OnDestroy {
 
   programs: Programs[] = [];
   nivelFormacionn: NivelFormacion[] = [];
+  cadenaa: Cadena[] = [];
 
   constructor(
     public _programsServices: ProgramaService,
     public _nivelFormacionServices: NivelFormacionService,
+    public _cadenaServices: CadenaService,
     public router: Router
   ) { }
 
@@ -63,16 +67,22 @@ export class AdminProgramsComponent implements OnInit, OnDestroy {
       this.nivelFormacionn = res.nivelFormacion;
     });
 
+    this._cadenaServices.listarCadena().subscribe((res: any) => {
+      this.cadenaa = res.cadenas;
+    });
+
     this.cargarProgramas();
 
     this.forma = new FormGroup({
       nombre: new FormControl(null, Validators.required),
-      nivelFormacion: new FormControl(null, Validators.required)
+      nivelFormacion: new FormControl(null, Validators.required),
+      cadena: new FormControl(null, Validators.required)
     });
 
     this.forma1 = new FormGroup({
       nombre1: new FormControl(null, Validators.required),
-      nivelFormacion1: new FormControl(null, Validators.required)
+      nivelFormacion1: new FormControl(null, Validators.required),
+      cadena1: new FormControl(null, Validators.required)
     });
   }
 
@@ -91,7 +101,8 @@ export class AdminProgramsComponent implements OnInit, OnDestroy {
   registrarPrograms() {
     const programs = new Programs(
       this.forma.value.nombre,
-      this.forma.value.nivelFormacion
+      this.forma.value.nivelFormacion,
+      this.forma.value.cadena
     );
 
     this._programsServices.crearPrograms(programs)
@@ -129,7 +140,8 @@ export class AdminProgramsComponent implements OnInit, OnDestroy {
       const newPrograms = {
         _id: this._id,
         nombre: this.nombre,
-        nivelFormacion: this.nivelFormacion
+        nivelFormacion: this.nivelFormacion,
+        cadena: this.cadena
       };
 
       this._programsServices.actualizarPrograms(newPrograms)
@@ -142,10 +154,11 @@ export class AdminProgramsComponent implements OnInit, OnDestroy {
     }
   }
 
-  llenarDatos(programs: Programs) {
+  llenarDatos(programs: any) {
     this._id = programs._id;
     this.nombre = programs.nombre;
-    this.nivelFormacion = programs.nivelFormacion;
+    this.nivelFormacion = programs.nivelFormacion._id;
+    this.cadena = programs.cadena._id;
   }
 
   ngOnDestroy(): void {

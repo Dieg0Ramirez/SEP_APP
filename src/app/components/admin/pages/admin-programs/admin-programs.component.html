@@ -8,16 +8,21 @@
                 <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registrarPrograms()" class="form-horizontal form-material" id="loginform" action="index.html">
                     <div class="box-body">
                         <h4> Crear programa </h4>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12">
                             <label>Ingrese nombre del programa:</label>
                             <input formControlName="nombre" name="nombre" type="text" class="form-control" style="width: 350px" required>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12">
                             <label>Nivel de formación:</label>
-                            <br>
                             <select style="width: 150px" class="form-control" formControlName="nivelFormacion" name="nivelFormacion">
                                 <option *ngFor="let nivel of nivelFormacionn" [value]="nivel._id">
                                     {{nivel.nombre}}
+                                </option>
+                            </select>
+                            <label>Cadena:</label>
+                            <select style="width: 150px" class="form-control" formControlName="cadena" name="cadena">
+                                <option *ngFor="let cad of cadenaa" [value]="cad._id">
+                                    {{cad.nombre}}
                                 </option>
                             </select>
                         </div>
@@ -39,6 +44,7 @@
                         <tr>
                             <th>Nombre</th>
                             <th>Nivel de Formación</th>
+                            <th>Cadena</th>
                             <th>Disponibilidad</th>
                             <th>Opciones</th>
                         </tr>
@@ -47,6 +53,7 @@
                         <tr *ngFor="let programs of programs">
                             <td>{{ programs.nombre }}</td>
                             <td>{{ programs.nivelFormacion?.nombre }}</td>
+                            <td>{{ programs.cadena?.nombre }}</td>
                             <td>
                                 <label *ngIf="programs.disponible" class="label label-info">Activo</label>
                                 <label *ngIf="!programs.disponible" class="label label-danger">Inactivo</label>
@@ -89,8 +96,17 @@
                             <br>
                             <div class="col-xs-12">
                                 <select [(ngModel)]="nivelFormacion" name="nivelFormacion" id="nivelFormacion" class="form-control" required>
-                                    <option *ngFor="let nivel of nivelFormacionn">
+                                    <option *ngFor="let nivel of nivelFormacionn" [value]="nivel._id">
                                         {{nivel.nombre}}
+                                    </option>
+                                </select>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-xs-12">
+                                <select [(ngModel)]="cadena" name="cadena" id="cadena" class="form-control" required>
+                                    <option *ngFor="let cad of cadenaa" [value]="cad._id">
+                                        {{cad.nombre}}
                                     </option>
                                 </select>
                             </div>
@@ -101,7 +117,7 @@
                     <br>
                     <br>
                     <div class="modal-footer">
-                        <button class="btn btn-info" type="submit" (click)="actualizarPrograms(programs)">
+                        <button class="btn btn-info" type="submit" data-dismiss="modal" (click)="actualizarPrograms(programs)">
                             Actualizar programa
                         </button>&nbsp;&nbsp;&nbsp;
                         <button type="button" class="btn btn-default " data-dismiss="modal">Cerrar</button>
