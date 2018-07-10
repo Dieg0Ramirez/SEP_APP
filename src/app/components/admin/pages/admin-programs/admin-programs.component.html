@@ -10,21 +10,28 @@
                         <h4> Crear programa </h4>
                         <div class="form-group col-md-12">
                             <label>Ingrese nombre del programa:</label>
-                            <input formControlName="nombre" name="nombre" type="text" class="form-control" style="width: 350px" required>
+                            <input formControlName="nombre" name="nombre" type="text" class="form-control" style="width: 380px" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label>Nivel de formación:</label>
-                            <select style="width: 150px" class="form-control" formControlName="nivelFormacion" name="nivelFormacion">
-                                <option *ngFor="let nivel of nivelFormacionn" [value]="nivel._id">
-                                    {{nivel.nombre}}
-                                </option>
-                            </select>
-                            <label>Cadena:</label>
-                            <select style="width: 150px" class="form-control" formControlName="cadena" name="cadena">
-                                <option *ngFor="let cad of cadenaa" [value]="cad._id">
-                                    {{cad.nombre}}
-                                </option>
-                            </select>
+
+                            <div class="form-group col-md-3">
+                                <label>Nivel de formación:</label>
+                                <select style="width: 150px" class="form-control" formControlName="nivelFormacion" name="nivelFormacion">
+                                    <option *ngFor="let nivel of nivelFormacionn" [value]="nivel._id">
+                                        {{nivel.nombre}}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>Cadena:</label>
+                                <select style="width: 150px" class="form-control" formControlName="cadena" name="cadena">
+                                    <option *ngFor="let cad of cadenaa" [value]="cad._id">
+                                        {{cad.nombre}}
+                                    </option>
+                                </select>
+                            </div>
+
                         </div>
                     </div>
 

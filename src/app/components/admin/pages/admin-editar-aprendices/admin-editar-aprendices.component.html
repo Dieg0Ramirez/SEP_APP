@@ -14,15 +14,13 @@
                                 <label>Tipo de Documento:</label>
                                 <br>
                                 <select name="TipoDocumento" id="TipoDocumento">
-                                  <option value="Cedula">Cédula de Ciudadanía</option>
-                                  <option value="TarjetaIdentidad">Tarjeta de Identidad</option>
-                                  <option value="Pasaporte">Pasaporte</option>
+                                  <option [value]="TipoDocumento">{{TipoDocumento}}</option>
                               </select>
                             </div>
                             <div class="form-group">
                                 <label>Nombre:</label>
                                 <br>
-                                <input type="text" id="nombre" style="width: 50%" required>
+                                <input type="text" id="nombre" style="width: 50%" required placeholder="{{nombre}}">
                             </div>
                             <div class="form-group">
                                 <label>Teléfono:</label>

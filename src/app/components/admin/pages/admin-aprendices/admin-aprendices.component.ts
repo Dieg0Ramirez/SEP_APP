@@ -34,6 +34,16 @@ export class AdminAprendicesComponent implements OnInit, OnDestroy {
   alternativaPractica: any;
   filtros: Aprendiz[] = [];
 
+  editTipoDocumento_id: any;
+  editNumeroDocumento: any;
+  editFicha_id: any;
+  editNombre: any;
+  editApellido: any;
+  editGenero: any;
+  editTelefono: any;
+  editCelular: any;
+  editCorreo: any;
+
   constructor(
     public _apredizServices: AprendizService,
     public _cadenaServices: CadenaService,
@@ -82,6 +92,7 @@ export class AdminAprendicesComponent implements OnInit, OnDestroy {
     this.listarFicha();
     this.listarAlternatica();
   }
+
   listarAprendiz() {
     this._apredizServices.listarApredices().subscribe((res: any) => {
       console.log(res);
@@ -120,6 +131,15 @@ export class AdminAprendicesComponent implements OnInit, OnDestroy {
     this._alternativaP.listarAlternativa().subscribe((res: any) => {
       this.alternativaPractica = res.alternativas;
     });
+  }
+
+  llenarDatos(aprendiz: any) {
+    this.editTipoDocumento_id = aprendiz.tipoDocumento._id;
+    this.editNombre = aprendiz.nombre;
+  }
+  editarEstudiante(aprendiz: any) {
+    this.llenarDatos(aprendiz);
+    this.router.navigate(['/admin/admin-editar-aprendices']);
   }
 
   ngOnDestroy(): void {

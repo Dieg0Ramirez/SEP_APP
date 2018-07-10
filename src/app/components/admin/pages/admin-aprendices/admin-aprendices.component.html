@@ -5,7 +5,7 @@
                 <h4 class="box-title">Filtros</h4>
             </div>
 
-            <form ngNativeValidate [formGroup]="forma" id="filtoAprendiz" action="index.html">
+            <form ngNativeValidate [formGroup]="forma" id="filtroAprendiz" action="index.html">
                 <div class="box-body">
                     <div class="row">
                         <div class="col-sm-6">
@@ -173,13 +173,10 @@
                         <th>Número de documento</th>
                         <th>Nombre</th>
                         <th>Apellidos</th>
-                        <th>Celular</th>
-                        <th>Telefono</th>
-                        <th>Correo</th>
                         <th>Ficha</th>
                         <th>Estado</th>
                         <th>Alternativa practica</th>
-                        <th>Edición</th>
+                        <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -188,16 +185,18 @@
                         <td>{{ filtros.numeroDocumento }}</td>
                         <td>{{ filtros.nombre }}</td>
                         <td>{{ filtros.apellido }}</td>
-                        <td>{{ filtros.celular }}</td>
-                        <td>{{ filtros.telefono }}</td>
-                        <td>{{ filtros.correo }}</td>
                         <td>{{ filtros.ficha.numeroFicha }}</td>
                         <td>{{ filtros.estado.nombre }}</td>
                         <td>{{ filtros.alternativa.nombre }}</td>
                         <td>
                             <div class="row">
-                                <div class="col-md-6">
-                                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#myModal">Editar</button>
+                                <div>
+                                    <button type="button" class="btn btn-info btn-block" (click)="editarEstudiante(filtros)">
+                                        Editar
+                                    </button>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-default btn-block" (click)="seguimiento()">Seguimiento</button>
                                 </div>
                             </div>
                         </td>
