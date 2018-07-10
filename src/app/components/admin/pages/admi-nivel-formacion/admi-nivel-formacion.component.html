@@ -7,14 +7,14 @@
             <div class="box-body">
                 <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registarNivelFormacion()" class="form-horizontal form-material" id="loginform" action="index.html">
                     <div class="box-body">
-                        <h4> Crear nivel de formacion </h4>
+                        <h4> Crear nivel de formación </h4>
                         <div class="form-group col-md-6">
                             <label>Ingrese el nombre del nivel de formación:</label>
                             <input formControlName="nombreNivelFormacion" name="nombreNivelFormacion" type="text" class="form-control" id="nombreNivelFormacion" style="width: 350px" required>
                         </div>
                     </div>
                     <div class=" box-footer ">
-                        <button style="width: 150px" type="submit " class="btn btn-success ">Crear</button>
+                        <button style="width: 150px" type="submit " class="btn btn-primary">Crear</button>
                     </div>
                 </form>
             </div>
@@ -76,7 +76,7 @@
                     <br>
                     <div class="modal-footer">
                         <button class="btn btn-info" type="submit" data-dismiss="modal" (click)="actualizarNivelFormacion(nivelFormacion)">
-                                    Actualizar nivel de formacion
+                                    Actualizar nivel de formación
                                 </button>
                         <button type="button" class="btn btn-default " data-dismiss="modal">Cerrar</button>
                     </div>
