@@ -13,10 +13,7 @@ export class AdminEditarAprendicesComponent implements OnInit {
   TipoDocumento: any;
   nombre: any;
 
-  llenarDatos() {
-    this.TipoDocumento = this.aprendiz.editTipoDocumento_id;
-    this.nombre = this.aprendiz.editNombre;
-  }
+  
 
   constructor() { }
 

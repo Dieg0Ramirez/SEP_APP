@@ -53,7 +53,7 @@
                                 <label>Estado</label>
                                 <br>
                                 <select style="width: 150px" class="form-control" formControlName="estado" name="estado" id="estado" style="width: 50%">
-                                    <option *ngFor="let estado of estado" [value]="estado._id">
+                                    <option *ngFor="let estado of estados" [value]="estado._id">
                                         {{estado.nombre}}
                                     </option>
                                 </select>
@@ -63,8 +63,9 @@
                             <div class="form-group">
                                 <label>Alternativa</label>
                                 <br>
-                                <select style="width: 150px" class="form-control" formControlName="alternativaPractica" name="alternativaPractica" id="alternativaPractica" style="width: 50%">
-                                    <option *ngFor="let alternativa of alternativaPractica" [value]="alternativa._id">
+                                <select style="width: 150px" class="form-control" formControlName="alternativaPractica" name="alternativaPractica" id="alternativaPractica"
+                                    style="width: 50%">
+                                    <option *ngFor="let alternativa of alternativas" [value]="alternativa._id">
                                         {{alternativa.nombre}}
                                     </option>
                                 </select>
@@ -81,87 +82,6 @@
         </div>
         <div class="box-header">
             <h3 class="box-title">Listado de aprendices</h3>
-        </div>
-        <!-- Ventana modal -->
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Actualizar filtro</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form action="">
-                            <div class="col-xs-12">
-                                <input name="tipoDocumento" class="form-control" type="text" required placeholder="Tipo documento">
-                            </div>
-                            <br>
-                            <br>
-                            <div class="col-xs-12">
-                                <input name="documento" class="form-control" type="text" required placeholder="Documento">
-                            </div>
-                            <br>
-                            <br>
-                            <div class="col-xs-12">
-                                <input name="nombre" class="form-control" type="text" required placeholder="Nombre">
-                            </div>
-                            <br>
-                            <br>
-                            <div class="col-xs-12">
-                                <input name="apellidos" class="form-control" type="text" required placeholder="Apellidos">
-                            </div>
-                            <br>
-                            <br>
-                            <div class="col-xs-12">
-                                <input name="ficha" class="form-control" type="text" required placeholder="Ficha">
-                            </div>
-                            <br>
-                            <br>
-                            <div class="col-xs-12">
-                                <input name="estado" class="form-control" type="text" required placeholder="Estado">
-                            </div>
-                            <br>
-                            <br>
-                            <div class="col-xs-12">
-                                <input name="nivelFormacion" class="form-control" type="text" required placeholder="Nivel de formación">
-                            </div>
-                            <br>
-                            <br>
-                            <div class="col-xs-12">
-                                <input name="programa" class="form-control" type="text" required placeholder="Programa">
-                            </div>
-                            <br>
-                            <br>
-                            <div class="col-xs-12">
-                                <input name="alternativaPractica" class="form-control" type="text" required placeholder="Alternativa práctica">
-                            </div>
-                            <br>
-                            <br>
-                            <div class="col-xs-12">
-                                <input name="apellidos" class="form-control" type="text" required placeholder="Apellidos">
-                            </div>
-                            <br>
-                            <br>
-                            <div class="modal-footer">
-                                <button class="btn btn-info" type="submit">
-                                    Actualizar usuario
-                                </button>&nbsp;&nbsp;&nbsp;
-                                <button type="button" class="btn btn-default " data-dismiss="modal">Cerrar</button>
-                            </div>
-                        </form>
-                    </div>
-                    <br>
-                    <br>
-                    <div class="modal-footer">
-                        <button class="btn btn-info" type="submit">
-                            Actualizar usuario
-                        </button>&nbsp;&nbsp;&nbsp;
-                        <button type="button" class="btn btn-default " data-dismiss="modal">Cerrar</button>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="box-body">
@@ -191,7 +111,7 @@
                         <td>
                             <div class="row">
                                 <div>
-                                    <button type="button" class="btn btn-info btn-block" (click)="editarEstudiante(filtros)">
+                                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#myModal" (click)="llenarAprendiz(filtros)">
                                         Editar
                                     </button>
                                 </div>
@@ -203,6 +123,83 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+
+        <!-- Ventana modal -->
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Actualizar aprendiz</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="">
+                            <input [(ngModel)]="_id" name="_id" id="_id" class="form-control" type="hidden">
+                            <div class="col-xs-12">
+                                <select [(ngModel)]="tipoDocumento" name="tipoDocumento" id="tipoDocumento" class="form-control" required>
+                                    <option *ngFor="let tipo of tipodocument" [value]="tipo._id">
+                                        {{tipo.nombre}}
+                                    </option>
+                                </select>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-xs-12">
+                                <input [(ngModel)]="numeroDocumento" name="numeroDocumento" id="numeroDocumento" class="form-control" type="text" required
+                                    placeholder="Documento">
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-xs-12">
+                                <input [(ngModel)]="nombre" name="nombre" id="nombre" class="form-control" type="text" required placeholder="Nombre">
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-xs-12">
+                                <input [(ngModel)]="apellido" name="apellido" id="apellido" class="form-control" type="text" required placeholder="Apellidos">
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-xs-12">
+                                <select [(ngModel)]="ficha" name="ficha" id="ficha" class="form-control" required>
+                                    <option *ngFor="let ficha of fichas" [value]="ficha._id">
+                                        {{ficha.numeroFicha}}
+                                    </option>
+                                </select>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-xs-12">
+                                <select [(ngModel)]="estado" name="estado" id="estado" class="form-control" required>
+                                    <option *ngFor="let estado of estados" [value]="estado._id">
+                                        {{estado.nombre}}
+                                    </option>
+                                </select>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-xs-12">
+                                <select [(ngModel)]="alternativa" name="alternativa" id="alternativa" class="form-control" required>
+                                    <option *ngFor="let alternativa of alternativas" [value]="alternativa._id">
+                                        {{alternativa.nombre}}
+                                    </option>
+                                </select>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="modal-footer">
+                                <button class="btn btn-info" type="submit" (click)="actualizarAprendices(filtros)">
+                                    Actualizar usuario
+                                </button>&nbsp;&nbsp;&nbsp;
+                                <button type="button" class="btn btn-default " data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </div>

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { spanish } from '../../../../interfaces/dataTables.es';
 import { DataTableDirective } from 'angular-datatables';
-import { NivelFormacionService } from '../../../../services/services.index';
+import { NivelFormacionService, TipoDocumentoService } from '../../../../services/services.index';
 import { CadenaService } from '../../../../services/cadena/cadena.service';
 import { ProgramaService } from '../../../../services/programa/programa.service';
 import { EstadoService } from '../../../../services/estado/estado.service';
@@ -12,6 +12,7 @@ import { FichasService } from '../../../../services/fichas/fichas.service';
 import { AlternativaService } from '../../../../services/alternativa/alternativa.service';
 import { AprendizService } from '../../../../services/aprendiz/aprendiz.service';
 import { Aprendiz } from '../../../../models/aprendiz.models';
+import { TipoDocumento } from '../../../../models/tipoDocumento.Models';
 
 declare var AdminLTE: any;
 
@@ -21,28 +22,37 @@ declare var AdminLTE: any;
   styleUrls: ['./admin-aprendices.component.css']
 })
 export class AdminAprendicesComponent implements OnInit, OnDestroy {
+  alternavivaPractica: any;
+  correo: any;
+  telefono: any;
+  celular: any;
   @ViewChild (DataTableDirective) dtElement: DataTableDirective;
+  
+  //Datos
+  alternativa: string;
+  estado: string;
+  ficha: string;
+  apellido: string;
+  nombre: string;
+  numeroDocumento: string;
+  tipoDocumento: string;
+  _id: string;
+  
   forma: FormGroup;
   dtOptions: any = {};
-  cadenaFormacion: string;
   dtLanguage: any = spanish;
   dtTrigger: Subject<any> = new Subject();
+  
+  alternativas: any;
+  fichas: any;
+  estados: any;
+  tipodocument: any;
+  
+  cadenaFormacion: any;
   nivelFormacion: any;
   programa: any;
-  estado: any;
-  fichas: any;
-  alternativaPractica: any;
-  filtros: Aprendiz[] = [];
-
-  editTipoDocumento_id: any;
-  editNumeroDocumento: any;
-  editFicha_id: any;
-  editNombre: any;
-  editApellido: any;
-  editGenero: any;
-  editTelefono: any;
-  editCelular: any;
-  editCorreo: any;
+  
+  filtros: Aprendiz[] = [];  
 
   constructor(
     public _apredizServices: AprendizService,
@@ -52,6 +62,7 @@ export class AdminAprendicesComponent implements OnInit, OnDestroy {
     public _estadoServices: EstadoService,
     public _fichaServices: FichasService,
     public _alternativaP: AlternativaService,
+    public _tipoDocumento: TipoDocumentoService,
     public router: Router
   ) { }
 
@@ -91,6 +102,7 @@ export class AdminAprendicesComponent implements OnInit, OnDestroy {
     this.listarEstado();
     this.listarFicha();
     this.listarAlternatica();
+    this.listarTipoDocumento();
   }
 
   listarAprendiz() {
@@ -119,7 +131,7 @@ export class AdminAprendicesComponent implements OnInit, OnDestroy {
   }
   listarEstado() {
     this._estadoServices.listarEstado().subscribe((res: any) => {
-      this.estado = res.estados;
+      this.estados = res.estados;
     });
   }
   listarFicha() {
@@ -129,17 +141,57 @@ export class AdminAprendicesComponent implements OnInit, OnDestroy {
   }
   listarAlternatica() {
     this._alternativaP.listarAlternativa().subscribe((res: any) => {
-      this.alternativaPractica = res.alternativas;
+      this.alternativas = res.alternativas;
     });
   }
 
-  llenarDatos(aprendiz: any) {
-    this.editTipoDocumento_id = aprendiz.tipoDocumento._id;
-    this.editNombre = aprendiz.nombre;
+  listarTipoDocumento() {
+    this._tipoDocumento.listartipoDocumento().subscribe((res: any) => {
+      this.tipodocument = res.tipoDocumento;
+    });
   }
-  editarEstudiante(aprendiz: any) {
-    this.llenarDatos(aprendiz);
-    this.router.navigate(['/admin/admin-editar-aprendices']);
+
+  actualizarAprendices() {
+    const response = confirm('¿Deseas actualizar esta información');
+    if (response) {
+      const newAprendiz = {
+        _id: this._id,
+        tipoDocumento: this.tipoDocumento,
+        numeroDocumento: this.numeroDocumento,
+        nombre: this.nombre,
+        apellido: this.apellido,
+        ficha: this.ficha,
+        estado: this.estado,
+        alternativa: this.alternativa,
+
+        //Agregue las siguientes variables por que si no me salia error en (this._apredizServices.actualizarAprendices(newAprendiz))
+        celular: this.celular,
+        telefono: this.telefono,
+        correo: this.correo,
+        nivelFormacion: this.nivelFormacion,
+        programa: this.programa,
+        alternativaPractica: this.alternavivaPractica
+      };
+
+      this._apredizServices.actualizarAprendices(newAprendiz)
+        .subscribe(() => {
+          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            dtInstance.destroy();
+            this.listarAprendiz();
+          });
+        });
+    }
+  }
+
+  llenarAprendiz(filtros: any) {
+    this._id = filtros._id;
+    this.tipoDocumento = filtros.tipoDocumento._id;
+    this.numeroDocumento = filtros.numeroDocumento;
+    this.nombre = filtros.nombre;
+    this.apellido = filtros.apellido;
+    this.ficha = filtros.ficha._id; 
+    this.estado = filtros.estado._id;
+    this.alternativa = filtros.alternativa._id;
   }
 
   ngOnDestroy(): void {
